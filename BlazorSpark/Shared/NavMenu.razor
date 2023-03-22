@@ -1,0 +1,64 @@
+﻿<nav class="absolute top-0 left-0 w-full" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
+    <div class="py-2 px-8 max-w-6xl mx-auto">
+		<div class="flex justify-between items-center">
+			<div>
+				<a href="/">
+					<ApplicationLogo />
+				</a>
+			</div>
+			<div class="flex-wrap items-center w-auto hidden md:flex space-x-4">
+				<AuthorizeView>
+					<Authorized>
+						<!-- Profile dropdown -->
+						<div class="relative ml-3">
+							<div>
+								<button x-on:mouseover="desktopMenuOpen = true" type="button" class="flex rounded-full bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+									<span class="sr-only">Open user menu</span>
+									<img class="h-8 w-8 rounded-full" src="/images/anonymous-user.png" alt="User Avatar">
+								</button>
+							</div>
+							<div x-cloak x-on:click.outside="desktopMenuOpen = false" x-show="desktopMenuOpen" class="absolute right-0 z-50 mt-2 w-48 origin-top-right shadow-2xl bg-white py-1 border border-gray-600" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+								<div>
+									<a href="/dashboard" @click="desktopMenuOpen = false" class="block px-4 py-4 text-base text-gray-600 hover:text-black hover:bg-gray-100 font-semibold" role="menuitem">Dashboard</a>
+									<a href="/account" @click="desktopMenuOpen = false" class="block px-4 py-4 text-base text-gray-600 hover:text-black hover:bg-gray-100 font-semibold" role="menuitem">Account</a>
+									<a href="/logout" @click="desktopMenuOpen = false" class="block px-4 py-4 text-base text-gray-600 hover:text-black hover:bg-gray-100 font-semibold" role="menuitem">Logout</a>
+									<p class="text-sm p-2 border-t">@context.User.Identity.Name</p>
+								</div>
+							</div>
+						</div>
+					</Authorized>
+					<NotAuthorized>
+						<a class="font-medium" href="/login">Login</a>
+						<a class="px-4 py-2 bg-purple-600 text-white rounded-md font-medium" href="/register">Register</a>
+					</NotAuthorized>
+				</AuthorizeView>
+			</div>
+			<div class="w-auto md:hidden">
+				<button x-on:click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-600 hover:text-black hover:bg-gray-100 bg-transparent p-2">
+					<svg x-show="!mobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+					<svg x-show="mobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+						<path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div x-cloak x-show="mobileMenuOpen" class="lg:hidden bg-white drop-shadow-lg z-50 mb-12" id="mobile-menu">
+		<div class="pb-3 space-y-1 px-4 md:px-12">
+				<AuthorizeView>
+					<Authorized>
+						<a x-on:click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/dashboard">Dashboard</a>
+						<a x-on:click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/account">Account</a>
+						<a x-on:click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/logout">Logout</a>
+						<p class="text-sm px-4 py-2 border-t">@context.User.Identity.Name</p>
+					</Authorized>
+					<NotAuthorized>
+						<a x-on:click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/login">Login</a>
+						<a x-on:click="mobileMenuOpen = false" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/register">Register</a>
+					</NotAuthorized>
+				</AuthorizeView>
+		</div>
+	</div>
+</nav>

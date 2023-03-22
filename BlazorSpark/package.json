@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "tailwind": "cross-env NODE_ENV=development ./node_modules/tailwindcss/lib/cli.js -i ./Resources/css/input.css -o ./wwwroot/css/output.css --watch"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.3",
+        "@tailwindcss/line-clamp": "^0.4.2",
+        "cross-env": "^7.0.3",
+        "tailwindcss": "^3.2.7"
+    }
+}
