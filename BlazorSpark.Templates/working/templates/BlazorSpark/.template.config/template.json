@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Weston Walker",
+    "classifications": [ "Blazor", "Web", "BlazorSpark" ],
+    "identity": "BlazorSpark",
+    "name": "BlazorSpark",
+    "description": "A project template for creating a Blazor Spark web app. Provides a starting point for Blazor Server apps with database and user auth out of the box.",
+    "shortName": "blazorspark",
+    "sourceName": "BlazorSpark",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    }
+  }

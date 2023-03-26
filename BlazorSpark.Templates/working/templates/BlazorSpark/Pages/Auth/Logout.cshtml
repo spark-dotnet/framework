@@ -1,0 +1,17 @@
+﻿@page "/logout"
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Identity
+
+@functions
+{
+    public async Task<IActionResult> OnGet()
+    {
+        if (HttpContext.User != null)
+        {
+            <p>You Successfuly logout</p>
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+        return Redirect("~/");
+    }
+}
