@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using BlazorSpark.Shared;
+using System;
 
 namespace BlazorSpark.Startup
 {
@@ -28,10 +29,9 @@ namespace BlazorSpark.Startup
 			services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
 			if (databaseType== DatabaseTypes.sqlite)
 			{
-				var folder = Environment.SpecialFolder.LocalApplicationData;
 				var databaseName = Environment.GetEnvironmentVariable("DB_DATABASE");
-				var path = Environment.GetFolderPath(folder);
-				var dbPath = System.IO.Path.Join(path, databaseName);
+				var folder = Directory.GetCurrentDirectory();
+				var dbPath = System.IO.Path.Join(folder, databaseName);
 				services.AddDbContextFactory<ApplicationDbContext>(options =>
 				{
 					options.UseSqlite(
@@ -61,7 +61,7 @@ namespace BlazorSpark.Startup
 			}
 			else
 			{
-				throw new Exception("Invalid database driver. Check your .env file and make sure the DB_CONNECTION variable is set to mysql or mssql.");
+				throw new Exception("Invalid database driver. Check your .env file and make sure the DB_CONNECTION variable is set to mysql, sqlite, or mssql.");
 			}
 			services.AddAuthorization(options =>
 			{

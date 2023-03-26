@@ -3,12 +3,12 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageTags>Blazor, BlazorSpark, Templates, Framework, UI</PackageTags>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>0.1.1</PackageVersion>
     <PackageId>BlazorSpark.Templates</PackageId>
     <Title>BlazorSpark Templates</Title>
     <Authors>Weston Walker</Authors>
     <Description>Templates for Blazor Spark Web Framework.</Description>
-    <PackageTags>dotnet-new;templates;contoso</PackageTags>
+    <PackageTags>dotnet-new;templates</PackageTags>
 
     <TargetFramework>netstandard2.0</TargetFramework>
 
@@ -22,6 +22,9 @@
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
   </ItemGroup>
 
 </Project>

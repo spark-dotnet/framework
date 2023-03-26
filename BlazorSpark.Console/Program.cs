@@ -19,7 +19,7 @@ if (command == "install")
 	return;
 }
 
-// spark create project
+// spark new <ProjectName>
 if (command == "new")
 {
 	if (args.Length != 2)
@@ -29,6 +29,25 @@ if (command == "new")
 	}
 	var projectName = args[1];
 	await CreateProject(projectName);
+	return;
+}
+
+// spark make:migration <MigrationName>
+if (command == "make:migration")
+{
+	if (args.Length != 2)
+	{
+		Console.WriteLine($"spark make:migration requires a migration name. Ex: spark make:migration <MigrationName>");
+		return;
+	}
+	var name = args[1];
+	await CreateMigration(name);
+	return;
+}
+
+if (command == "run:migration")
+{
+	await RunMigration();
 	return;
 }
 
@@ -57,4 +76,27 @@ async Task CreateProject(string projectName)
 	await proc.WaitForExitAsync();
 	Console.WriteLine($"Spark project {projectName} successfully created.");
 	Console.WriteLine($"Application ready! Build something amazing.");
+}
+
+async Task CreateMigration(string name)
+{
+	var psi = new ProcessStartInfo
+	{
+		FileName = "dotnet",
+		Arguments = $"ef migrations add {name}"
+	};
+
+	using var proc = Process.Start(psi)!;
+	await proc.WaitForExitAsync();
+}
+async Task RunMigration()
+{
+	var psi = new ProcessStartInfo
+	{
+		FileName = "dotnet",
+		Arguments = $"ef database update"
+	};
+
+	using var proc = Process.Start(psi)!;
+	await proc.WaitForExitAsync();
 }
