@@ -1,4 +1,10 @@
-﻿namespace BlazorSpark.Lib.Database
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BlazorSpark.Library.Database
 {
 	public class DatabaseTypes
 	{

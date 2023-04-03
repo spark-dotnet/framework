@@ -6,6 +6,12 @@
 	<PackAsTool>true</PackAsTool>
 	<ToolCommandName>spark</ToolCommandName>
 	<PackageOutputPath>./nupkg</PackageOutputPath>
+	<PackageVersion>0.0.1</PackageVersion>
+	<PackageId>BlazorSpark.Console</PackageId>
+	<Title>BlazorSpark CLI</Title>
+	<Authors>Weston Walker</Authors>
+	<Description>Blazor Spark CLI tool for creating and using Blazor Spark applications.</Description>
+	<PackageTags>dotnet-new;templates</PackageTags>
 
   </PropertyGroup>
 

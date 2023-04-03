@@ -55,9 +55,9 @@ namespace BlazorSpark.Startup
 				//		});
 				//});
 			}
-			else if (databaseType == DatabaseTypes.mssql)
+			else if (databaseType == DatabaseTypes.postgres)
 			{
-				throw new NotImplementedException("MSSQL is not yet implemented");
+				throw new NotImplementedException("Postgres is not yet implemented");
 			}
 			else
 			{
