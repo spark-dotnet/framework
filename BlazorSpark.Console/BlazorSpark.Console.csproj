@@ -6,7 +6,7 @@
 	<PackAsTool>true</PackAsTool>
 	<ToolCommandName>spark</ToolCommandName>
 	<PackageOutputPath>./nupkg</PackageOutputPath>
-	<PackageVersion>0.0.1</PackageVersion>
+	<PackageVersion>0.0.2</PackageVersion>
 	<PackageId>BlazorSpark.Console</PackageId>
 	<Title>BlazorSpark CLI</Title>
 	<Authors>Weston Walker</Authors>
@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+	<None Update="LICENSE.txt">
+		<Pack>True</Pack>
+		<PackagePath>\</PackagePath>
+	</None>
     <None Update="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
