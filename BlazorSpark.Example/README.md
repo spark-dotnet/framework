@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="800" alt="Laravel Logo"></a></p>
+﻿<p align="center"><a href="https://blazorspark.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="400" alt="Blazor Spark Logo"></a></p>
 
 ## Example
 This project serves as an example project used for hacking on new features. It should not be used for real world projects.
