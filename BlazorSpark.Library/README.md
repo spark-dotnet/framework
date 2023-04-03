@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/logo.png" width="800" alt="Laravel Logo"></a></p>
+﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="800" alt="Laravel Logo"></a></p>
 
 ## Library
 This project serves as the library containing the core code for Blazor Spark services like logging and auth.

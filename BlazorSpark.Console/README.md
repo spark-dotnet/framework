@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/logo.png" width="800" alt="Laravel Logo"></a></p>
+﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="800" alt="Laravel Logo"></a></p>
 
 ## Console
 This project serves as the console application for Blazor Spark. Spark comes with a custom CLI that makes some of the clunkier .NET CLI commands and makes them easier to use. It's also required to install the Spark templates and creating Spark projects.
