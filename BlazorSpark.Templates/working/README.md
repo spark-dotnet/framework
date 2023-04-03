@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/logo.png" width="100" alt="Laravel Logo"></a></p>
+﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/logo.png" width="800" alt="Laravel Logo"></a></p>
 
 ## Templates
 This project serves as the base template used when creating a Blazor Spark project.

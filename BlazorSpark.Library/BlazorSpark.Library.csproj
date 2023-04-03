@@ -10,6 +10,9 @@
     <PackageProjectUrl>https://blazorspark.com/</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/blazor-spark/blazor-spark</RepositoryUrl>
+	<PackageVersion>0.0.1</PackageVersion>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,11 +22,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\Media\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="2.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
