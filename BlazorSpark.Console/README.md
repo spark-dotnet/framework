@@ -1,7 +1,7 @@
 ﻿<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://blazorspark.com/logo.png" width="100" alt="Laravel Logo"></a></p>
 
-## Templates
-This project serves as the base template used when creating a Blazor Spark project.
+## Console
+This project serves as the console application for Blazor Spark. Spark comes with a custom CLI that makes some of the clunkier .NET CLI commands and makes them easier to use. It's also required to install the Spark templates and creating Spark projects.
 
 ## About Blazor Spark
 Spark is a web application framework built on top of .NET Blazor. It takes the pain out of developing .NET Blazor apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
