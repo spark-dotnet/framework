@@ -4,6 +4,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>BlazorSpark Library</Title>
+    <Authors>Weston Walker</Authors>
+    <Description>Blazor Spark library containing the core code for Spark.</Description>
+    <PackageProjectUrl>https://blazorspark.com/</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/blazor-spark/blazor-spark</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +21,13 @@
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="2.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
