@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
@@ -19,6 +19,7 @@
     <NoDefaultExcludes>true</NoDefaultExcludes>
     <PackageProjectUrl>https://blazorspark.com/</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/blazor-spark/blazor-spark</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
