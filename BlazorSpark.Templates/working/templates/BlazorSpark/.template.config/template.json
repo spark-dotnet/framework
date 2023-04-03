@@ -8,7 +8,16 @@
     "shortName": "blazorspark",
     "sourceName": "BlazorSpark.Default",
     "tags": {
-      "language": "C#",
-      "type": "project"
-    }
-  }
+        "language": "C#",
+        "type": "project"
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [ ".vs/**" ]
+                }
+            ]
+        }
+    ]
+}
