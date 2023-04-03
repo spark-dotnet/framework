@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace BlazorSpark.Lib.Auth
+namespace BlazorSpark.Default.Services.Auth
 {
 	public interface ICookieService
 	{

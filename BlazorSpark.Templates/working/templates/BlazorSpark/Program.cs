@@ -1,16 +1,17 @@
-using BlazorSpark.Data;
+using BlazorSpark.Default.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
-using BlazorSpark.Helpers;
-using BlazorSpark.Services;
-using BlazorSpark.Startup;
+using BlazorSpark.Default.Helpers;
+using BlazorSpark.Default.Services;
+using BlazorSpark.Default.Startup;
 using Tailwind;
+using BlazorSpark.Library.Settings;
 
-DotNetEnv.Env.Load();
+Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

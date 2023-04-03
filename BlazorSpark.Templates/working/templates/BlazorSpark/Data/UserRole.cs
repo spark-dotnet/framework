@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace BlazorSpark.Data
+namespace BlazorSpark.Default.Data
 {
     public class UserRole
     {

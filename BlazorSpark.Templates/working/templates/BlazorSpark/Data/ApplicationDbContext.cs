@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
-namespace BlazorSpark.Data
+namespace BlazorSpark.Default.Data
 {
     public class ApplicationDbContext : DbContext
 	{

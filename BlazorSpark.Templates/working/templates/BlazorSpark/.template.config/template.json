@@ -6,7 +6,7 @@
     "name": "BlazorSpark",
     "description": "A project template for creating a Blazor Spark web app. Provides a starting point for Blazor Server apps with database and user auth out of the box.",
     "shortName": "blazorspark",
-    "sourceName": "BlazorSpark",
+    "sourceName": "BlazorSpark.Default",
     "tags": {
       "language": "C#",
       "type": "project"

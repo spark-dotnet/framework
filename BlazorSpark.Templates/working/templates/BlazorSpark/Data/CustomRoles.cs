@@ -1,4 +1,4 @@
-﻿namespace BlazorSpark.Data
+﻿namespace BlazorSpark.Default.Data
 {
     public static class CustomRoles
     {

@@ -1,9 +1,9 @@
-﻿using BlazorSpark.Data;
+﻿using BlazorSpark.Default.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace BlazorSpark.Lib.Auth
+namespace BlazorSpark.Default.Services.Auth
 {
     public class UsersService
     {

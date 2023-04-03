@@ -1,9 +1,8 @@
-﻿using BlazorSpark.Services;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 
-namespace BlazorSpark.Lib.Auth
+namespace BlazorSpark.Default.Services.Auth
 {
 	public class CookieService : ICookieService
 	{

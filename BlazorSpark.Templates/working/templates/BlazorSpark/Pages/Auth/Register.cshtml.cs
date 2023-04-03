@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Security.Claims;
-using BlazorSpark.Lib.Auth;
-using BlazorSpark.Data;
+using BlazorSpark.Default.Data;
+using BlazorSpark.Default.Services.Auth;
 
 namespace BlazorSpark.Pages.Auth
 {
-    public class RegisterModel : PageModel
+	public class RegisterModel : PageModel
 	{
 		private readonly IConfiguration _configuration;
 		private readonly RolesService _rolesService;

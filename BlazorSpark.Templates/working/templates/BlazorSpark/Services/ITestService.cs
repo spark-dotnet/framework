@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace BlazorSpark.Services
+namespace BlazorSpark.Default.Services
 {
 	public interface ITestService
 	{

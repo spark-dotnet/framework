@@ -1,4 +1,4 @@
-﻿namespace BlazorSpark.Services
+﻿namespace BlazorSpark.Default.Services
 {
 	public class TestService : ITestService
 	{
