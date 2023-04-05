@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
-using BlazorSpark.Example.Helpers;
-using BlazorSpark.Example.Services;
 using Tailwind;
 using BlazorSpark.Example.Startup;
-using BlazorSpark.Example.Data;
 using BlazorSpark.Library.Settings;
+using BlazorSpark.Library.Logging;
+using Serilog;
 
 Env.Load();
+LogManager.Setup();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
