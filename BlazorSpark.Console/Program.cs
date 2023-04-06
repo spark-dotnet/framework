@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 if (args.Length == 0)
 {
@@ -17,6 +16,14 @@ if (command == "install")
 {
 	await InstallTemplate();
 	return;
+}
+
+
+// spark update
+if (command == "update")
+{
+    await Update();
+    return;
 }
 
 // spark new <ProjectName>
@@ -61,6 +68,29 @@ async Task InstallTemplate()
 
 	using var proc = Process.Start(psi)!;
 	await proc.WaitForExitAsync();
+}
+
+async Task Update()
+{
+    Console.WriteLine($"Updating Spark CLI");
+    var psi = new ProcessStartInfo
+    {
+        FileName = "dotnet",
+        Arguments = "tool update BlazorSpark.Console --global"
+    };
+
+    using var proc = Process.Start(psi)!;
+	await proc.WaitForExitAsync();
+
+    Console.WriteLine($"Updating Spark Templates");
+    var psi2 = new ProcessStartInfo
+    {
+        FileName = "dotnet",
+        Arguments = "new install BlazorSpark.Templates"
+    };
+
+    using var proc2 = Process.Start(psi2)!;
+    await proc2.WaitForExitAsync();
 }
 
 async Task CreateProject(string projectName)
