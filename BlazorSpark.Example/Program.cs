@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Tailwind;
 using BlazorSpark.Example.Startup;
-using BlazorSpark.Library.Settings;
+using BlazorSpark.Library.Environment;
 using BlazorSpark.Library.Logging;
 using Serilog;
 
-Env.Load();
+EnvManager.Setup();
 LogManager.Setup();
 
 var builder = WebApplication.CreateBuilder(args);

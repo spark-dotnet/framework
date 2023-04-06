@@ -1,13 +1,13 @@
-﻿using BlazorSpark.Library.Logging;
-using Serilog;
+﻿using Serilog;
+using BlazorSpark.Library.Logging;
 
-namespace BlazorSpark.Example.Startup
+namespace BlazorSpark.Default.Startup
 {
     public static class Log
     {
         public static IServiceCollection Setup(IServiceCollection services)
         {
-            services.AddScoped<Library.Logging.ILogger, Logger>();
+            services.AddScoped<BlazorSpark.Library.Logging.ILogger, Logger>();
             services.AddLogging(loggingBuilder =>
                 loggingBuilder.AddSerilog(dispose: true));
 

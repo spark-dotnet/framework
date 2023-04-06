@@ -9,9 +9,12 @@ using BlazorSpark.Default.Helpers;
 using BlazorSpark.Default.Services;
 using BlazorSpark.Default.Startup;
 using Tailwind;
-using BlazorSpark.Library.Settings;
+using BlazorSpark.Library.Environment;
+using BlazorSpark.Library.Logging;
 
-Env.Load();
+EnvManager.Setup();
+LogManager.Setup();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

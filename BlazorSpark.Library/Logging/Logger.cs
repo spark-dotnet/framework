@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorSpark.Library.Logging
 {
-	public class SparkLogger : ISparkLogger
+	public class Logger : ILogger
 	{
 		public void Fatal(string message)
 		{
@@ -31,11 +31,6 @@ namespace BlazorSpark.Library.Logging
 		public void Debug(string message)
 		{
 			Serilog.Log.Debug(message);
-		}
-
-		public void Verbose(string message)
-		{
-			Serilog.Log.Verbose(message);
 		}
 	}
 }

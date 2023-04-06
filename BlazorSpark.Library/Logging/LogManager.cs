@@ -1,4 +1,5 @@
-﻿using BlazorSpark.Library.Settings;
+﻿using BlazorSpark.Library.Database;
+using BlazorSpark.Library.Environment;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
@@ -20,10 +21,10 @@ namespace BlazorSpark.Library.Logging
 			
 			switch (logChannel)
             {
-                case "file":
+                case LogChannels.file:
                     logConfig.WriteTo.File("Storage/Logging/spark.log", rollingInterval: RollingInterval.Day);
                     break;
-                case "console":
+                case LogChannels.console:
 					logConfig.WriteTo.Console();
                     break;
                 default:
@@ -33,22 +34,19 @@ namespace BlazorSpark.Library.Logging
 
 			switch (logLevel) 
 			{
-				case "verbose":
-					logConfig.MinimumLevel.Verbose();
-					break;
-				case "debug":
+				case LogLevels.debug:
 					logConfig.MinimumLevel.Debug();
 					break;
-				case "information":
+				case LogLevels.information:
 					logConfig.MinimumLevel.Information();
 					break;
-				case "warning":
+				case LogLevels.warning:
 					logConfig.MinimumLevel.Warning();
 					break;
-				case "error":
+				case LogLevels.error:
 					logConfig.MinimumLevel.Error();
 					break;
-				case "fatal":
+				case LogLevels.fatal:
 					logConfig.MinimumLevel.Fatal();
 					break;
 				default:

@@ -16,7 +16,8 @@ namespace BlazorSpark.Default.Startup
 			services.AddScoped<ITestService, TestService>();
 			services.AddScoped<ICookieService, CookieService>();
 			services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
-			services = Database.Setup(services);
+            services = Log.Setup(services);
+            services = Database.Setup(services);
 			services = Auth.Setup(services);
 			return services;
 		}

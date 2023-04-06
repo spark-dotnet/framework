@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace BlazorSpark.Library.Logging
 {
-	public interface ISparkLogger
+	public interface ILogger
 	{
 		void Fatal(string message);
 		void Error(string message);
 		void Warning(string message);
 		void Information(string message);
 		void Debug(string message);
-		void Verbose(string message);
 	}
 }

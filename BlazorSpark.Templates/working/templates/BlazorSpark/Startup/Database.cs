@@ -1,7 +1,6 @@
 ﻿using BlazorSpark.Default.Data;
 using BlazorSpark.Default.Helpers;
 using BlazorSpark.Library.Database;
-using BlazorSpark.Library.Settings;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorSpark.Default.Startup

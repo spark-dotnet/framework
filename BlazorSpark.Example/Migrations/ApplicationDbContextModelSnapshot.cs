@@ -9,32 +9,30 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlazorSpark.Example.Migrations
 {
-	[DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
-            modelBuilder.Entity("BlazorSpark.Data.Role", b =>
+            modelBuilder.Entity("BlazorSpark.Example.Data.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(450)
-                        .HasColumnType("varchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -58,36 +56,36 @@ namespace BlazorSpark.Example.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BlazorSpark.Data.User", b =>
+            modelBuilder.Entity("BlazorSpark.Example.Data.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(450)
-                        .HasColumnType("varchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("EmailVerifiedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RemeberToken")
-                        .HasColumnType("longtext");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -97,13 +95,13 @@ namespace BlazorSpark.Example.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BlazorSpark.Data.UserRole", b =>
+            modelBuilder.Entity("BlazorSpark.Example.Data.UserRole", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -114,15 +112,15 @@ namespace BlazorSpark.Example.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("BlazorSpark.Data.UserRole", b =>
+            modelBuilder.Entity("BlazorSpark.Example.Data.UserRole", b =>
                 {
-                    b.HasOne("BlazorSpark.Data.Role", "Role")
+                    b.HasOne("BlazorSpark.Example.Data.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BlazorSpark.Data.User", "User")
+                    b.HasOne("BlazorSpark.Example.Data.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -133,12 +131,12 @@ namespace BlazorSpark.Example.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BlazorSpark.Data.Role", b =>
+            modelBuilder.Entity("BlazorSpark.Example.Data.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("BlazorSpark.Data.User", b =>
+            modelBuilder.Entity("BlazorSpark.Example.Data.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

@@ -1,4 +1,4 @@
-﻿using BlazorSpark.Library.Settings;
+﻿using BlazorSpark.Library.Environment;
 
 namespace BlazorSpark.Default.Helpers
 {

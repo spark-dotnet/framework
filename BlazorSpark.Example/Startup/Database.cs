@@ -1,6 +1,6 @@
 ﻿using BlazorSpark.Example.Data;
 using BlazorSpark.Library.Database;
-using BlazorSpark.Library.Settings;
+using BlazorSpark.Library.Environment;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorSpark.Example.Startup
