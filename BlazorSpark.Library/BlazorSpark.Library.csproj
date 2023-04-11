@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Auth\" />
+    <Folder Include="Mail\Providers\" />
     <Folder Include="Setup\" />
   </ItemGroup>
 
