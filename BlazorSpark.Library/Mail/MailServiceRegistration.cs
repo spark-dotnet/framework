@@ -47,10 +47,10 @@ namespace BlazorSpark.Library.Mail
             RazorRenderer renderer = RazorRendererFactory.MakeInstance(config);
             IMailer mailer = new SmtpMailer(
                 renderer,
-                config.GetValue<string>("Coravel:Mail:Host", ""),
-                config.GetValue<int>("Coravel:Mail:Port", 0),
-                config.GetValue<string>("Coravel:Mail:Username", null),
-                config.GetValue<string>("Coravel:Mail:Password", null),
+                config.GetValue<string>("Spark:Mail:Host", ""),
+                config.GetValue<int>("Spark:Mail:Port", 0),
+                config.GetValue<string>("Spark:Mail:Username", null),
+                config.GetValue<string>("Spark:Mail:Password", null),
                 globalFrom,
                 null
             );
