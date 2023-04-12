@@ -13,6 +13,7 @@ EnvManager.Setup();
 LogManager.Setup();
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
 builder.Services.RegisterServices();
