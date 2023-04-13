@@ -8,15 +8,18 @@ using BlazorSpark.Example.Startup;
 using BlazorSpark.Library.Environment;
 using BlazorSpark.Library.Logging;
 using Serilog;
+using Coravel;
 
 EnvManager.Setup();
 LogManager.Setup();
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables();
+var test = builder.Configuration.GetValue<string>("Coravel:Mail:Host");
 
 // Add services to the container.
 builder.Services.RegisterServices();
+builder.Services.AddScheduler();
 
 var app = builder.Build();
 
@@ -44,5 +47,12 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.Services.UseScheduler(scheduler =>
+{
+	scheduler.Schedule(
+		() => Console.WriteLine("runn this job now")
+	).EveryMinute();
+});
 
 app.Run();

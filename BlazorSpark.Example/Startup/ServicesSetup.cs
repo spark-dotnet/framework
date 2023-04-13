@@ -5,6 +5,7 @@ using BlazorSpark.Example.Services;
 using BlazorSpark.Example.Services.Auth;
 using BlazorSpark.Library.Logging;
 using Serilog;
+using BlazorSpark.Library.Scheduling;
 
 namespace BlazorSpark.Example.Startup
 {
@@ -23,6 +24,7 @@ namespace BlazorSpark.Example.Startup
 			services = Log.Setup(services);
             services = Database.Setup(services);
 			services = Auth.Setup(services);
+			services = ScheduleManager.Setup(services);
             return services;
 		}
 	}
