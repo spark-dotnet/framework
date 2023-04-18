@@ -72,16 +72,6 @@ async Task InstallTemplate()
 
 async Task Update()
 {
-    Console.WriteLine($"Updating Spark CLI");
-    var psi = new ProcessStartInfo
-    {
-        FileName = "dotnet",
-        Arguments = "tool update BlazorSpark.Console --global"
-    };
-
-    using var proc = Process.Start(psi)!;
-	await proc.WaitForExitAsync();
-
     Console.WriteLine($"Updating Spark Templates");
     var psi2 = new ProcessStartInfo
     {
@@ -113,10 +103,10 @@ async Task CreateMigration(string name)
 	var psi = new ProcessStartInfo
 	{
 		FileName = "dotnet",
-		Arguments = $"ef migrations add {name}"
+		Arguments = $"ef migrations add {name} -o Application/Database/Migrations"
 	};
 
-	using var proc = Process.Start(psi)!;
+    using var proc = Process.Start(psi)!;
 	await proc.WaitForExitAsync();
 }
 async Task RunMigration()

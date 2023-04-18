@@ -8,7 +8,7 @@ namespace BlazorSpark.Library.Environment
 {
     public static class EnvManager
     {
-        public static void Setup()
+        public static void LoadConfig()
         {
             var root = Directory.GetCurrentDirectory();
             var filePath = Path.Combine(root, ".env");

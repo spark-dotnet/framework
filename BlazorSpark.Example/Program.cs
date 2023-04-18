@@ -1,22 +1,14 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Tailwind;
-using BlazorSpark.Example.Startup;
 using BlazorSpark.Library.Environment;
-using BlazorSpark.Library.Logging;
-using Serilog;
+using BlazorSpark.Example.Application.Startup;
 
-EnvManager.Setup();
-LogManager.Setup();
+EnvManager.LoadConfig();
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables();
 
-// Add services to the container.
-builder.Services.RegisterServices();
+// Add all services to the container.
+builder.Services.AddAppServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -44,5 +36,8 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.Services.RegisterScheduledJobs();
+app.Services.RegisterEvents();
 
 app.Run();

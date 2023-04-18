@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Security.Claims;
-using BlazorSpark.Example.Services.Auth;
-using BlazorSpark.Example.Data;
+using BlazorSpark.Example.Application.Models;
+using BlazorSpark.Example.Application.Services.Auth;
+using BlazorSpark.Example.Application.Events;
+using Coravel.Events.Interfaces;
 
 namespace BlazorSpark.Pages.Auth
 {
-	public class RegisterModel : PageModel
+    public class RegisterModel : PageModel
 	{
 		private readonly IConfiguration _configuration;
 		private readonly RolesService _rolesService;
 		private readonly UsersService _usersService;
+        private IDispatcher _dispatcher;
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -24,12 +27,14 @@ namespace BlazorSpark.Pages.Auth
         public RegisterModel(
 			UsersService usersService,
 			RolesService rolesService,
-			IConfiguration configuration)
+			IConfiguration configuration,
+			IDispatcher dispatcher)
 		{
 			_usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
 			_rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
 			_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-		}
+            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+        }
 
         public void OnGet()
         {
@@ -56,7 +61,11 @@ namespace BlazorSpark.Pages.Auth
 
 			var newUser = await _usersService.CreateUserAsync(userForm);
 
-			var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
+            // broadcast user created event
+            var userCreated = new UserCreated(newUser);
+            await _dispatcher.Broadcast(userCreated);
+
+            var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
 			var loginCookieExpirationDays = 30;
 			var cookieClaims = await createCookieClaimsAsync(user);

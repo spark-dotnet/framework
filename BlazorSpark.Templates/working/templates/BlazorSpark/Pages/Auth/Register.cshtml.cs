@@ -6,30 +6,33 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Security.Claims;
-using BlazorSpark.Default.Data;
-using BlazorSpark.Default.Services.Auth;
+using BlazorSpark.Default.Application.Models;
+using BlazorSpark.Default.Application.Services.Auth;
+using Coravel.Events.Interfaces;
+using Microsoft.Extensions.Configuration;
+using BlazorSpark.Default.Application.Events;
 
 namespace BlazorSpark.Pages.Auth
 {
-	public class RegisterModel : PageModel
+    public class RegisterModel : PageModel
 	{
-		private readonly IConfiguration _configuration;
 		private readonly RolesService _rolesService;
 		private readonly UsersService _usersService;
+        private IDispatcher _dispatcher;
 
         [BindProperty]
         public InputModel Input { get; set; }
         public string ReturnUrl { get; set; }
 
         public RegisterModel(
-			UsersService usersService,
-			RolesService rolesService,
-			IConfiguration configuration)
-		{
-			_usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
-			_rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
-			_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-		}
+            UsersService usersService,
+            RolesService rolesService,
+            IDispatcher dispatcher)
+        {
+            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+            _rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
+            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+        }
 
         public void OnGet()
         {
@@ -56,7 +59,11 @@ namespace BlazorSpark.Pages.Auth
 
 			var newUser = await _usersService.CreateUserAsync(userForm);
 
-			var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
+            // broadcast user created event
+            var userCreated = new UserCreated(newUser);
+            await _dispatcher.Broadcast(userCreated);
+
+            var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
 			var loginCookieExpirationDays = 30;
 			var cookieClaims = await createCookieClaimsAsync(user);
