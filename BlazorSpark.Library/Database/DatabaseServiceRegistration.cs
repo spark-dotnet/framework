@@ -19,7 +19,6 @@ namespace BlazorSpark.Library.Database
             var dbName = config.GetValue<string>("DB_DATABASE");
             var dbUser = config.GetValue<string>("DB_USERNAME");
             var dbPassword = config.GetValue<string>("DB_PASSWORD");
-            var connectionString = $"server={dbHost};port={dbPort};database={dbName};user={dbUser};password={dbPassword};";
             if (dbType == DatabaseTypes.sqlite)
             {
                 var folder = Directory.GetCurrentDirectory();
@@ -28,26 +27,28 @@ namespace BlazorSpark.Library.Database
                 {
                     options.UseSqlite(
                         $"Data Source={dbPath}"
-                    );
+                    ).UseSnakeCaseNamingConvention();
                 });
             }
             else if (dbType == DatabaseTypes.mysql)
             {
+                var connectionString = $"server={dbHost};port={dbPort};database={dbName};user={dbUser};password={dbPassword};";
                 services.AddDbContextFactory<T>(options =>
                 {
                     options.UseMySql(
                         connectionString,
                         ServerVersion.AutoDetect(connectionString)
-                    );
+                    ).UseSnakeCaseNamingConvention();
                 });
             }
             else if (dbType == DatabaseTypes.postgres)
             {
+                var connectionString = $"Server={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPassword};";
                 services.AddDbContextFactory<T>(options =>
                 {
                     options.UseNpgsql(
                         connectionString
-                    );
+                    ).UseSnakeCaseNamingConvention();
                 });
             }
             else
