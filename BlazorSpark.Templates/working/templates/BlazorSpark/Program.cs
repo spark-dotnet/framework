@@ -1,4 +1,3 @@
-using Tailwind;
 using BlazorSpark.Library.Environment;
 using BlazorSpark.Default.Application.Startup;
 
@@ -22,7 +21,6 @@ if (!app.Environment.IsDevelopment())
 
 if (app.Environment.IsDevelopment())
 {
-    app.RunTailwind("tailwind", "./");
 }
 
 app.UseHttpsRedirection();

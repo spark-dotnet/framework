@@ -13,12 +13,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Tailwind.Extensions.AspNetCore" Version="1.0.0-beta3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Application\Database\Migrations\" />
     <Folder Include="Application\Services\Auth\" />
+    <Folder Include="Resources\css\" />
   </ItemGroup>
 
 </Project>
