@@ -72,7 +72,7 @@ namespace BlazorSpark.Pages.Auth
 				cookieClaims,
 				new AuthenticationProperties
 				{
-					IsPersistent = true, // "Remember Me"
+					IsPersistent = true, // TODO: "Remember Me"
 					IssuedUtc = DateTimeOffset.UtcNow,
 					ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
 				});

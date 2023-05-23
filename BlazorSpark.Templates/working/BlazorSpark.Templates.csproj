@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageTags>Blazor, BlazorSpark, Templates, Framework, UI</PackageTags>
-    <PackageVersion>0.1.81</PackageVersion>
+    <PackageVersion>0.2.0</PackageVersion>
     <PackageId>BlazorSpark.Templates</PackageId>
     <Title>BlazorSpark Templates</Title>
     <Authors>Weston Walker</Authors>

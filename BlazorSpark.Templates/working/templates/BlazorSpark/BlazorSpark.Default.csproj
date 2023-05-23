@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BlazorSpark.Library" Version="0.1.2" />
+    <PackageReference Include="BlazorSpark.Library" Version="0.2.1" />
     <PackageReference Include="Coravel" Version="4.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -18,7 +18,8 @@
   <ItemGroup>
     <Folder Include="Application\Database\Migrations\" />
     <Folder Include="Application\Services\Auth\" />
-    <Folder Include="Resources\css\" />
+	<Folder Include="Storage\Mail\" />
+	<Folder Include="Storage\Logging\" />
   </ItemGroup>
 
 </Project>

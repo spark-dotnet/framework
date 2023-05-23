@@ -21,18 +21,18 @@ if (!app.Environment.IsDevelopment())
 
 if (app.Environment.IsDevelopment())
 {
+	// Do something only in dev environments
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.Services.RegisterScheduledJobs();
+app.Services.RegisterEvents();
 
 app.Run();

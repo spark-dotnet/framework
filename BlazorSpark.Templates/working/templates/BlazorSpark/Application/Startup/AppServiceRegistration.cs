@@ -9,6 +9,7 @@ using Coravel;
 using Microsoft.AspNetCore.Components.Authorization;
 using BlazorSpark.Library.Auth;
 using BlazorSpark.Default.Application.Tasks;
+using BlazorSpark.Library.Mail;
 
 namespace BlazorSpark.Default.Application.Startup
 {
@@ -28,6 +29,7 @@ namespace BlazorSpark.Default.Application.Startup
             services.AddQueue();
             services.AddEventServices();
             services.AddEvents();
+            services.AddMailer(config);
             return services;
         }
 
