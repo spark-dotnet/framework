@@ -1,5 +1,4 @@
-﻿using BlazorSpark.Library.Mail.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +23,8 @@ namespace BlazorSpark.Library.Mail
 		private List<Attachment> _attachments;
 
 		private string _html;
+
+		public virtual void Build() { }
 
 		public Mailable<T> From(MailRecipient recipient)
 		{
@@ -119,8 +120,10 @@ namespace BlazorSpark.Library.Mail
 		}
 
 		internal async Task SendAsync(IMailer mailer)
-		{
-			if (this._to == null)
+        {
+            this.Build();
+
+            if (this._to == null)
 			{
 				throw new Exception("No to email set.");
 			}

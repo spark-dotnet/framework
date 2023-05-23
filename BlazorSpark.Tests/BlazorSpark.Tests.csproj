@@ -29,4 +29,9 @@
     <ProjectReference Include="..\BlazorSpark.Library\BlazorSpark.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Storage\Logging\" />
+    <Folder Include="Storage\Mail\" />
+  </ItemGroup>
+
 </Project>

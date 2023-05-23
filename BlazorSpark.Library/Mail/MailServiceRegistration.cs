@@ -1,5 +1,4 @@
-﻿using BlazorSpark.Library.Mail.Interfaces;
-using BlazorSpark.Library.Mail.Mailers;
+﻿using BlazorSpark.Library.Mail.Mailers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 // Link to Coravel Mailer: https://github.com/jamesmh/coravel/tree/master/Src/Coravel.Mailer
 namespace BlazorSpark.Library.Mail
 {
-	public static class MailServiceRegistration
+    public static class MailServiceRegistration
 	{
 		public static IServiceCollection AddMailer(this IServiceCollection services, IConfiguration config)
 		{

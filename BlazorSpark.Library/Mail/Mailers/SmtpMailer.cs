@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MimeKit;
 using MailKit.Net.Smtp;
-using BlazorSpark.Library.Mail.Interfaces;
 using System.Net.Security;
 
 namespace BlazorSpark.Library.Mail.Mailers

@@ -16,5 +16,7 @@ Spark is a web application framework built on top of .NET Blazor. It takes the p
 ## Learning Blazor Spark
 Spark has thorough documentation making it simple to get started with. It's also built on top of .NET Blazor. So if your familiar with it getting started with Spark will be easy.
 
+[Documentation](https://blazorspark.com/)
+
 ## License
 The Spark framework is open-sourced software licenced under the MIT license.

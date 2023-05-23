@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Application\Database\Migrations\" />
+    <Folder Include="Storage\Mail\" />
   </ItemGroup>
 
   <ItemGroup>

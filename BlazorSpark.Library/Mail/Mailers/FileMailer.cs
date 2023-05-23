@@ -1,5 +1,4 @@
 ﻿using BlazorSpark.Library.Mail.Helpers;
-using BlazorSpark.Library.Mail.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazorSpark.Library.Mail.Mailers
 {
-	public class FileMailer : IMailer
+    public class FileMailer : IMailer
 	{
 		private string FilePath = "Storage/Mail/mail.log";
 		private MailRecipient _globalFrom;
@@ -22,9 +21,10 @@ namespace BlazorSpark.Library.Mail.Mailers
 		{
 			from = this._globalFrom ?? from;
 
-			using (var writer = File.CreateText(FilePath))
+			using (var writer = File.AppendText(FilePath))
 			{
 				await writer.WriteAsync($@"
+{DateTime.Now}
 ---------------------------------------------
 Subject: {subject}
 To: {CommaSeparated(to)}    

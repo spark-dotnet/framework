@@ -9,6 +9,7 @@ using BlazorSpark.Example.Application.Services.Auth;
 using BlazorSpark.Example.Application.Services;
 using BlazorSpark.Example.Application.Tasks;
 using BlazorSpark.Example.Application.Events.Listeners;
+using BlazorSpark.Library.Mail;
 
 namespace BlazorSpark.Example.Application.Startup
 {
@@ -28,7 +29,8 @@ namespace BlazorSpark.Example.Application.Startup
             services.AddQueue();
             services.AddEventServices();
             services.AddEvents();
-            return services;
+			services.AddMailer(config);
+			return services;
         }
 
         private static IServiceCollection AddCustomServices(this IServiceCollection services)
