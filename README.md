@@ -1,4 +1,4 @@
-<p align="center"><a href="https://blazorspark.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="400" alt="Blazor Spark Logo"></a></p>
+![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
 
 ## About Blazor Spark
 Spark is a web application framework built on top of .NET Blazor. It takes the pain out of developing .NET Blazor apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
