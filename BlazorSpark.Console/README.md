@@ -1,4 +1,4 @@
-﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
+﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 
 ## Console
 This project serves as the console application for Blazor Spark. Spark comes with a custom CLI that makes some of the clunkier .NET CLI commands and makes them easier to use. It's also required to install the Spark templates and creating Spark projects.

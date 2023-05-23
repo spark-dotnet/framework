@@ -1,4 +1,4 @@
-﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
+﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 
 ## Example
 This project serves as an example project used for hacking on new features. It should not be used for real world projects.

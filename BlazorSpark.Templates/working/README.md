@@ -1,4 +1,4 @@
-﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
+﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 
 ## Templates
 This project serves as the base template used when creating a Blazor Spark project.

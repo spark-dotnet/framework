@@ -1,4 +1,4 @@
-﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
+﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 
 ## Library
 This project serves as the library containing the core code for Blazor Spark services like logging and auth.
