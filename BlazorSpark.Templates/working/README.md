@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://blazorspark.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="400" alt="Blazor Spark Logo"></a></p>
+﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
 
 ## Templates
 This project serves as the base template used when creating a Blazor Spark project.

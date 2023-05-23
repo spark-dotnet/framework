@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://blazorspark.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="400" alt="Blazor Spark Logo"></a></p>
+﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
 
 ## Example
 This project serves as an example project used for hacking on new features. It should not be used for real world projects.

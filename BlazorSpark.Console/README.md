@@ -1,4 +1,4 @@
-﻿<p align="center"><a href="https://blazorspark.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="400" alt="Blazor Spark Logo"></a></p>
+﻿![Blazor Spark Logo](https://blazorspark.com/spark-full-logo.png "Blazor Spark")
 
 ## Console
 This project serves as the console application for Blazor Spark. Spark comes with a custom CLI that makes some of the clunkier .NET CLI commands and makes them easier to use. It's also required to install the Spark templates and creating Spark projects.
@@ -11,7 +11,9 @@ Spark is a web application framework built on top of .NET Blazor. It takes the p
 - Authentication
 - Authorization
 - Logging
-- Background Jobs
+- Events and Cron Jobs
+- Mail
+- CLI Commands
 
 ## Learning Blazor Spark
 Spark has thorough documentation making it simple to get started with. It's also built on top of .NET Blazor. So if your familiar with it getting started with Spark will be easy.
