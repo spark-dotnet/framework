@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorSpark.Console\BlazorSpark.Console.csproj" />
     <ProjectReference Include="..\BlazorSpark.Library\BlazorSpark.Library.csproj" />
   </ItemGroup>
 
