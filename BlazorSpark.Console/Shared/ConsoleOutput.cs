@@ -46,6 +46,15 @@ namespace BlazorSpark.Console.Shared
             System.Console.WriteLine("");
         }
 
+        public static void WarningAlert(List<string> outputs)
+        {
+            System.Console.WriteLine("");
+            System.Console.ForegroundColor = ConsoleColor.Yellow;
+            WriteStringsToConsole(outputs);
+            System.Console.ResetColor();
+            System.Console.WriteLine("");
+        }
+
         public static void ErrorAlert(List<string> outputs)
         {
             System.Console.WriteLine("");

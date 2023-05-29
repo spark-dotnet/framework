@@ -1,6 +1,12 @@
 ﻿using BlazorSpark.Console.Commands;
+using BlazorSpark.Console.Commands.Events;
+using BlazorSpark.Console.Commands.Mail;
 using BlazorSpark.Console.Commands.Migrations;
+using BlazorSpark.Console.Commands.Models;
+using BlazorSpark.Console.Commands.Pages;
 using BlazorSpark.Console.Commands.Project;
+using BlazorSpark.Console.Commands.Services;
+using BlazorSpark.Console.Commands.Tasks;
 using McMaster.Extensions.CommandLineUtils;
 using System;
 using System.Diagnostics;
@@ -65,20 +71,110 @@ namespace BlazorSpark.Console
                 )
             );
 
-            app.Command("make:migration", config =>
+            app.Command("make", config =>
             {
-                config.Description = "Create a new migration.";
-                var migrationName = config.Argument<string>("name", "Name of the Migration to generate.");
                 config.OnExecute(() =>
                 {
-                    string migration = migrationName.Value ?? Guid.NewGuid().ToString();
-                    new CreateMigration().Execute(migration);
+                    config.ShowHelp();
+                    return 1;
                 });
+
+                config.Command("migration", migrationConfig =>
+                {
+
+                    migrationConfig.Description = "Create a new migration.";
+                    var migrationName = migrationConfig.Argument<string>("name", "Name of the Migration to generate.");
+                    migrationConfig.OnExecute(() =>
+                    {
+                        string migration = migrationName.Value ?? Guid.NewGuid().ToString();
+                        new CreateMigrationCommand().Execute(migration);
+                    });
+                });
+
+                config.Command("event", eventConfig =>
+                {
+                    eventConfig.Description = "Create a new Event and Listener.";
+                    var eventName = eventConfig.Argument<string>("eventName", "Name of the Event to generate.").IsRequired();
+                    var listenerName = eventConfig.Argument<string>("listenerName", "Name of the Listener to generate.").IsRequired();
+                    eventConfig.OnExecute(() =>
+                    {
+                        new CreateEventCommand().Execute(eventName.Value, listenerName.Value);
+                    });
+                });
+
+                config.Command("mail", mailConfig =>
+                {
+                    mailConfig.Description = "Create a new Mailable.";
+                    var mailableName = mailConfig.Argument<string>("mailableName", "Name of the Mailable to generate.").IsRequired();
+                    mailConfig.OnExecute(() =>
+                    {
+                        new CreateMailableCommand().Execute(mailableName.Value);
+                    });
+                });
+
+                config.Command("model", modelConfig =>
+                {
+                    modelConfig.Description = "Create a new Model.";
+                    var modelName = modelConfig.Argument<string>("modelName", "Name of the Model to generate.").IsRequired();
+                    modelConfig.OnExecute(() =>
+                    {
+                        new CreateModelCommand().Execute(modelName.Value);
+                    });
+                });
+
+                config.Command("service", serviceConfig =>
+                {
+                    serviceConfig.Description = "Create a new Service.";
+                    var serviceName = serviceConfig.Argument<string>("serviceName", "Name of the Service to generate.").IsRequired();
+                    serviceConfig.OnExecute(() =>
+                    {
+                        new CreateServiceCommand().Execute(serviceName.Value);
+                    });
+                });
+
+                config.Command("task", taskConfig =>
+                {
+                    taskConfig.Description = "Create a new Task.";
+                    var taskName = taskConfig.Argument<string>("taskName", "Name of the Task to generate.").IsRequired();
+                    taskConfig.OnExecute(() =>
+                    {
+                        new CreateTaskCommand().Execute(taskName.Value);
+                    });
+                });
+
+                config.Command("page", pageConfig =>
+                {
+                    pageConfig.Description = "Create a new Blazor Page.";
+                    var pageName = pageConfig.Argument<string>("pageName", "Name of the Page to generate.").IsRequired();
+                    pageConfig.OnExecute(() =>
+                    {
+                        new CreatePageCommand().Execute(pageName.Value);
+                    });
+                });
+
+                config.Command("component", componentConfig =>
+                {
+                    componentConfig.Description = "Create a new Blazor Component.";
+                    var componentName = componentConfig.Argument<string>("pageName", "Name of the Component to generate.").IsRequired();
+                    componentConfig.OnExecute(() =>
+                    {
+                        new CreateComponentCommand().Execute(componentName.Value);
+                    });
+                });
+
+                // make migration DONE
+                // make event DONE
+                // make mail DONE
+                // make model DONE
+                // make service DONE
+                // make task DONE
+                // make page
+                // make component
             });
 
             app.Command("migrate", config =>
                 config.OnExecute(() =>
-                    new RunMigrations().Execute()
+                    new RunMigrationsCommand().Execute()
                 )
             );
 
