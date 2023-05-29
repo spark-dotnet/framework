@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorSpark.Console.Commands.Migrations
 {
-    public class RunMigrations
+    public class RunMigrationsCommand
     {
         public void Execute()
         {
