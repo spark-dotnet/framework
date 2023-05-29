@@ -1,4 +1,4 @@
-# Blazor Spark - The .NET Web Framework for Makers
+# Blazor Spark - The .NET Blazor Framework for Makers
 ![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 
 Welcome to Blazor Spark, a robust, open-source web application framework built on .NET Blazor, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
@@ -7,6 +7,7 @@ Welcome to Blazor Spark, a robust, open-source web application framework built o
 Before creating your first spark project, you should ensure that your local machine has:
 - [.NET 7](https://dotnet.microsoft.com/download)
 - [Entity Framework Core tools](https://learn.microsoft.com/en-us/ef/core/cli/)
+- [Node JS](https://nodejs.org/en/download) "For executing styles provided by Tailwind CSS" 
 
 ## Quick Start
 Get up and running with Spark in under a minute. Here's how:
@@ -14,9 +15,9 @@ Get up and running with Spark in under a minute. Here's how:
 ```
 dotnet tool install --global BlazorSpark.Console
 spark install
-spark new MyFirstApp
+spark new MyApp
 ```
-That's it! Now dive into our comprehensive documentation for next steps and deeper insights.
+That's it! Now dive into our comprehensive [documentation](https://blazorspark.com/docs/introduction/) for next steps and deeper insights.
 
 # Documentation
 
@@ -37,10 +38,10 @@ Interested in contributing to Blazor Spark? Check out our [discussions board](ht
 Join the community of makers today and bring your visions to life with Blazor Spark!
 
 # Resources
-- Stay up to date with Blazor Spark on [Twitter](https://twitter.com/wes_walke) or subscribe to our [Newsletter](https://blazorspark.com/newsletter/).
+- Stay up to date with Blazor Spark on [Twitter](https://twitter.com/wes_walke) 
+- Subscribe to our [Newsletter](https://blazorspark.com/newsletter/).
 - Looking for .NET jobs? Check out [Dotnet Jobs](https://dotnet-jobs.com/) for weekly job postings.
 
 # License
 
 The Spark framework is open-source software licensed under the [MIT license](https://en.wikipedia.org/wiki/MIT_License). You're free to use, modify, and distribute it as per the terms of the license.
-
