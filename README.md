@@ -1,5 +1,5 @@
-# Blazor Spark - The Blazor Server Framework for Makers
 ![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
+# Blazor Spark - The .NET Web Framework for Makers
 
 Welcome to Blazor Spark, a robust, open-source web application framework built on Blazor Server, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
 

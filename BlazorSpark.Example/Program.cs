@@ -1,4 +1,3 @@
-using Tailwind;
 using BlazorSpark.Library.Environment;
 using BlazorSpark.Example.Application.Startup;
 
@@ -22,18 +21,14 @@ if (!app.Environment.IsDevelopment())
 
 if (app.Environment.IsDevelopment())
 {
-	app.RunTailwind("tailwind", "./");
+	// Do something only in dev environments
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 

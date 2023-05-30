@@ -8,16 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Coravel" Version="4.2.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Tailwind.Extensions.AspNetCore" Version="1.0.0-beta3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Application\Database\Migrations\" />
-    <Folder Include="Storage\Mail\" />
+    <Folder Include="Application\Services\Auth\" />
+	<Folder Include="Storage\Mail\" />
+	<Folder Include="Storage\Logging\" />
   </ItemGroup>
 
   <ItemGroup>

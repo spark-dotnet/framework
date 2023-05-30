@@ -1,7 +1,7 @@
-﻿using BlazorSpark.Example.Application.Events;
-using BlazorSpark.Example.Application.Events.Listeners;
-using Coravel;
+﻿using BlazorSpark.Example.Application.Events.Listeners;
+using BlazorSpark.Example.Application.Events;
 using Coravel.Events.Interfaces;
+using Coravel;
 
 namespace BlazorSpark.Example.Application.Startup
 {

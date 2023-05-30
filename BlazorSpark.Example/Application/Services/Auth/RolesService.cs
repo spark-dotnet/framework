@@ -1,5 +1,6 @@
 ﻿using BlazorSpark.Example.Application.Database;
 using BlazorSpark.Example.Application.Models;
+using BlazorSpark.Example.Application.Startup; 
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorSpark.Example.Application.Services.Auth

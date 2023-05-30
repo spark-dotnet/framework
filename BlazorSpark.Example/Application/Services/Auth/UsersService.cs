@@ -1,8 +1,6 @@
 ﻿using BlazorSpark.Example.Application.Database;
-using BlazorSpark.Example.Application.Events;
 using BlazorSpark.Example.Application.Models;
-using Coravel.Events.Interfaces;
-using Microsoft.AspNetCore.Components.Authorization;
+using BlazorSpark.Example.Application.Startup;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,25 +10,10 @@ namespace BlazorSpark.Example.Application.Services.Auth
     public class UsersService
     {
         private readonly IDbContextFactory<ApplicationDbContext> _factory;
-        private readonly AuthenticationStateProvider _authenticationStateProvider;
 
-        public UsersService(IDbContextFactory<ApplicationDbContext> factory, AuthenticationStateProvider authenticationStateProvider)
+        public UsersService(IDbContextFactory<ApplicationDbContext> factory)
         {
             _factory = factory;
-            _authenticationStateProvider = authenticationStateProvider ??
-                                           throw new ArgumentNullException(nameof(authenticationStateProvider));
-        }
-
-        public async Task<string?> GetUserIdAsync()
-        {
-            var authenticationState = await _authenticationStateProvider.GetAuthenticationStateAsync();
-            return authenticationState.User.Identity?.Name;
-        }
-
-        public async Task<string?> GetUserClaimValueAsync(string claimType)
-        {
-            var authenticationState = await _authenticationStateProvider.GetAuthenticationStateAsync();
-            return authenticationState.User.Claims.FirstOrDefault(x => string.Equals(x.Type, claimType, StringComparison.Ordinal))?.Value;
         }
 
         public async Task<User> FindUserAsync(int userId)
@@ -53,7 +36,6 @@ namespace BlazorSpark.Example.Application.Services.Auth
 
             await context.UserRoles.AddAsync(new UserRole { RoleId = 1, User = user });
             await context.SaveChangesAsync();
-
             return addedUser.Entity;
         }
 

@@ -8,14 +8,14 @@ using System.Globalization;
 using System.Security.Claims;
 using BlazorSpark.Example.Application.Models;
 using BlazorSpark.Example.Application.Services.Auth;
-using BlazorSpark.Example.Application.Events;
 using Coravel.Events.Interfaces;
+using Microsoft.Extensions.Configuration;
+using BlazorSpark.Example.Application.Events;
 
 namespace BlazorSpark.Pages.Auth
 {
     public class RegisterModel : PageModel
 	{
-		private readonly IConfiguration _configuration;
 		private readonly RolesService _rolesService;
 		private readonly UsersService _usersService;
         private IDispatcher _dispatcher;
@@ -25,14 +25,12 @@ namespace BlazorSpark.Pages.Auth
         public string ReturnUrl { get; set; }
 
         public RegisterModel(
-			UsersService usersService,
-			RolesService rolesService,
-			IConfiguration configuration,
-			IDispatcher dispatcher)
-		{
-			_usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
-			_rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
-			_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            UsersService usersService,
+            RolesService rolesService,
+            IDispatcher dispatcher)
+        {
+            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+            _rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
             _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
         }
 
@@ -74,7 +72,7 @@ namespace BlazorSpark.Pages.Auth
 				cookieClaims,
 				new AuthenticationProperties
 				{
-					IsPersistent = true, // "Remember Me"
+					IsPersistent = true, // TODO: "Remember Me"
 					IssuedUtc = DateTimeOffset.UtcNow,
 					ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
 				});

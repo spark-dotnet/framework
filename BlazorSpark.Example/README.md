@@ -1,7 +1,4 @@
-﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
-
-## Example
-This project serves as an example project used for hacking on new features. It should not be used for real world projects.
+﻿<p align="center"><a href="https://blazorspark.com" target="_blank"><img src="https://blazorspark.com/spark-full-logo.png" width="400" alt="Blazor Spark Logo"></a></p>
 
 ## About Blazor Spark
 Spark is a web application framework built on top of .NET Blazor. It takes the pain out of developing .NET Blazor apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
@@ -11,15 +8,10 @@ Spark is a web application framework built on top of .NET Blazor. It takes the p
 - Authentication
 - Authorization
 - Logging
-- Events and Cron Jobs
-- Mail
-- CLI Commands
-
+- Background Jobs
 
 ## Learning Blazor Spark
 Spark has thorough documentation making it simple to get started with. It's also built on top of .NET Blazor. So if your familiar with it getting started with Spark will be easy.
-
-[Documentation](https://blazorspark.com/)
 
 ## License
 The Spark framework is open-sourced software licenced under the MIT license.

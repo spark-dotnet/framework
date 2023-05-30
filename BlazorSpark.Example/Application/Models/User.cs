@@ -15,11 +15,10 @@
 
         public string Password { get; set; }
 
-        public string? RemeberToken { get; set; }
+        public string? RememberToken { get; set; }
 
         public DateTime? EmailVerifiedAt { get; set; }
 
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }
-
 }

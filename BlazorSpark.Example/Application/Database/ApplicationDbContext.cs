@@ -1,5 +1,6 @@
 ﻿using BlazorSpark.Example.Application.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BlazorSpark.Example.Application.Database
 {

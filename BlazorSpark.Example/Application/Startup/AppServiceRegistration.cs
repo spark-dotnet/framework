@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
-using BlazorSpark.Library.Logging;
-using BlazorSpark.Library.Database;
-using BlazorSpark.Library.Auth;
-using Coravel;
+﻿using BlazorSpark.Example.Application.Database;
+using BlazorSpark.Example.Application.Events.Listeners;
 using BlazorSpark.Example.Application.Models;
-using BlazorSpark.Example.Application.Database;
 using BlazorSpark.Example.Application.Services.Auth;
 using BlazorSpark.Example.Application.Services;
+using BlazorSpark.Library.Database;
+using BlazorSpark.Library.Logging;
+using Coravel;
+using Microsoft.AspNetCore.Components.Authorization;
+using BlazorSpark.Library.Auth;
 using BlazorSpark.Example.Application.Tasks;
-using BlazorSpark.Example.Application.Events.Listeners;
 using BlazorSpark.Library.Mail;
 
 namespace BlazorSpark.Example.Application.Startup
@@ -29,8 +29,8 @@ namespace BlazorSpark.Example.Application.Startup
             services.AddQueue();
             services.AddEventServices();
             services.AddEvents();
-			services.AddMailer(config);
-			return services;
+            services.AddMailer(config);
+            return services;
         }
 
         private static IServiceCollection AddCustomServices(this IServiceCollection services)

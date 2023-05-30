@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Templates", "Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Library", "BlazorSpark.Library\BlazorSpark.Library.csproj", "{C776F588-4FAB-4D42-A4EE-0F094BDB0DD7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Example", "BlazorSpark.Example\BlazorSpark.Example.csproj", "{588ACF5F-129E-4C89-A251-D24DAE11078E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Tests", "BlazorSpark.Tests\BlazorSpark.Tests.csproj", "{2161116D-BBFD-45A7-81B4-D62DD0371EA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSpark.Tests", "BlazorSpark.Tests\BlazorSpark.Tests.csproj", "{2161116D-BBFD-45A7-81B4-D62DD0371EA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Example", "BlazorSpark.Example\BlazorSpark.Example.csproj", "{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{C776F588-4FAB-4D42-A4EE-0F094BDB0DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C776F588-4FAB-4D42-A4EE-0F094BDB0DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C776F588-4FAB-4D42-A4EE-0F094BDB0DD7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{588ACF5F-129E-4C89-A251-D24DAE11078E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{588ACF5F-129E-4C89-A251-D24DAE11078E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{588ACF5F-129E-4C89-A251-D24DAE11078E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{588ACF5F-129E-4C89-A251-D24DAE11078E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

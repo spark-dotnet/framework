@@ -1,4 +1,6 @@
-﻿namespace BlazorSpark.Example.Application.Models
+﻿using System.Data;
+
+namespace BlazorSpark.Example.Application.Models
 {
     public class UserRole
     {

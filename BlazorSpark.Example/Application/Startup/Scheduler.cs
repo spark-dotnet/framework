@@ -9,9 +9,10 @@ namespace BlazorSpark.Example.Application.Startup
         {
             services.UseScheduler(scheduler =>
             {
-                scheduler
-                    .Schedule<ExampleTask>()
-                    .EveryFiveMinutes();
+                // example scheduled job
+                //scheduler
+                //    .Schedule<ExampleTask>()
+                //    .EveryFiveMinutes();
             });
             return services;
         }
