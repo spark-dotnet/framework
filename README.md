@@ -1,13 +1,12 @@
-# Blazor Spark - The .NET Blazor Framework for Makers
+# Blazor Spark - The Blazor Server Framework for Makers
 ![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 
-Welcome to Blazor Spark, a robust, open-source web application framework built on .NET Blazor, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
+Welcome to Blazor Spark, a robust, open-source web application framework built on Blazor Server, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
 
 ## Requirements
 Before creating your first spark project, you should ensure that your local machine has:
 - [.NET 7](https://dotnet.microsoft.com/download)
 - [Entity Framework Core tools](https://learn.microsoft.com/en-us/ef/core/cli/)
-- [Node JS](https://nodejs.org/en/download) "For executing styles provided by Tailwind CSS" 
 
 ## Quick Start
 Get up and running with Spark in under a minute. Here's how:
@@ -21,7 +20,7 @@ That's it! Now dive into our comprehensive [documentation](https://blazorspark.c
 
 # Documentation
 
-Blazor Spark has thorough [documentation](https://blazorspark.com/docs/introduction/), making it easy to get started. It's also built on top of [.NET Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor), so if you're familiar with it, you'll find Spark incredibly intuitive to use.
+Blazor Spark has thorough [documentation](https://blazorspark.com/docs/introduction/), making it easy to get started. It's also built on top of [Blazor Server](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor), so if you're familiar with it, you'll find Spark incredibly intuitive to use.
 - [Get Started](https://blazorspark.com/docs/introduction/)
 - [The Basics](https://blazorspark.com/docs/configuration/)
 
