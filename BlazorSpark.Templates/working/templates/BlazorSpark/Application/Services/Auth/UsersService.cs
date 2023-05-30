@@ -22,10 +22,16 @@ namespace BlazorSpark.Default.Application.Services.Auth
             return await context.Users.FindAsync(userId);
         }
 
-        public async Task<User> FindUserAsync(string username, string password)
+        public async Task<User?> FindUserAsync(string username, string password)
         {
             using var context = _factory.CreateDbContext();
             return await context.Users.FirstOrDefaultAsync(x => x.Email == username && x.Password == password);
+        }
+
+        public async Task<User?> FindUserByEmailAsync(string email)
+        {
+            using var context = _factory.CreateDbContext();
+            return await context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task<User> CreateUserAsync(User user)

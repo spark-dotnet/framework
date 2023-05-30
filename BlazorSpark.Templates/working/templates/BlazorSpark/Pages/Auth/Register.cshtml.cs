@@ -6,40 +6,40 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Security.Claims;
-using BlazorSpark.Default.Application.Models;
-using BlazorSpark.Default.Application.Services.Auth;
 using Coravel.Events.Interfaces;
 using Microsoft.Extensions.Configuration;
 using BlazorSpark.Default.Application.Events;
+using BlazorSpark.Default.Application.Models;
+using BlazorSpark.Default.Application.Services.Auth;
 
 namespace BlazorSpark.Pages.Auth
 {
-    public class RegisterModel : PageModel
+	public class RegisterModel : PageModel
 	{
 		private readonly RolesService _rolesService;
 		private readonly UsersService _usersService;
-        private IDispatcher _dispatcher;
+		private IDispatcher _dispatcher;
 
-        [BindProperty]
-        public InputModel Input { get; set; }
-        public string ReturnUrl { get; set; }
+		[BindProperty]
+		public InputModel Input { get; set; }
+		public string ReturnUrl { get; set; }
 
-        public RegisterModel(
-            UsersService usersService,
-            RolesService rolesService,
-            IDispatcher dispatcher)
-        {
-            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
-            _rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
-            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
-        }
+		public RegisterModel(
+			UsersService usersService,
+			RolesService rolesService,
+			IDispatcher dispatcher)
+		{
+			_usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+			_rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
+			_dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+		}
 
-        public void OnGet()
-        {
-            ReturnUrl = Url.Content("~/");
-        }
+		public void OnGet()
+		{
+			ReturnUrl = Url.Content("~/");
+		}
 
-        public async Task<IActionResult> OnPost()
+		public async Task<IActionResult> OnPost()
 		{
 
 			if (!ModelState.IsValid)
@@ -49,21 +49,30 @@ namespace BlazorSpark.Pages.Auth
 			{
 				return BadRequest("user is not set.");
 			}
+
+			var existingUser = await _usersService.FindUserByEmailAsync(Input.Email);
+
+			if (existingUser != null)
+			{
+				ModelState.AddModelError("EmailExists", "Email already in use by another account.");
+				return Page();
+			}
+
 			var userForm = new User()
 			{
 				Name = Input.Name,
 				Email = Input.Email,
 				Password = _usersService.GetSha256Hash(Input.Password),
-				CreatedAt = DateTime.Now
+				CreatedAt = DateTime.UtcNow
 			};
 
 			var newUser = await _usersService.CreateUserAsync(userForm);
 
-            // broadcast user created event
-            var userCreated = new UserCreated(newUser);
-            await _dispatcher.Broadcast(userCreated);
+			// broadcast user created event
+			var userCreated = new UserCreated(newUser);
+			await _dispatcher.Broadcast(userCreated);
 
-            var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
+			var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
 			var loginCookieExpirationDays = 30;
 			var cookieClaims = await createCookieClaimsAsync(user);

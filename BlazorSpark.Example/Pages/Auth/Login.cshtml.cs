@@ -47,14 +47,21 @@ namespace BlazorSpark.Pages.Auth
 
             var user = await _usersService.FindUserAsync(loginUser.Email, _usersService.GetSha256Hash(loginUser.Password));
 
+            if (user == null)
+            {
+                ModelState.AddModelError("FailedLogin", "Login Failed: Your email or password was incorrect");
+                return Page();
+            }
+
             var loginCookieExpirationDays = _configuration.GetValue("LoginCookieExpirationDays", 30);
             var cookieClaims = await createCookieClaimsAsync(user);
+
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 cookieClaims,
                 new AuthenticationProperties
                 {
-                    IsPersistent = true, // "Remember Me"
+                    IsPersistent = loginUser.RememberMe,
                     IssuedUtc = DateTimeOffset.UtcNow,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
                 });
@@ -89,6 +96,8 @@ namespace BlazorSpark.Pages.Auth
             [Required(ErrorMessage = "Invalid password")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
-        }
+            public bool RememberMe { get; set; } = false;
+
+		}
     }
 }

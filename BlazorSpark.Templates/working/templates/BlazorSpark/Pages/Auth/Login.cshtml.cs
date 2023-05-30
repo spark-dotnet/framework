@@ -10,85 +10,94 @@ using BlazorSpark.Default.Application.Services.Auth;
 
 namespace BlazorSpark.Pages.Auth
 {
-    public class LoginModel : PageModel
-    {
-        private readonly IConfiguration _configuration;
-        private readonly RolesService _rolesService;
-        private readonly UsersService _usersService;
+	public class LoginModel : PageModel
+	{
+		private readonly IConfiguration _configuration;
+		private readonly RolesService _rolesService;
+		private readonly UsersService _usersService;
 
-        public LoginModel(
-            UsersService usersService,
-            RolesService rolesService,
-            IConfiguration configuration)
-        {
-            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
-            _rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        }
+		public LoginModel(
+			UsersService usersService,
+			RolesService rolesService,
+			IConfiguration configuration)
+		{
+			_usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+			_rolesService = rolesService ?? throw new ArgumentNullException(nameof(rolesService));
+			_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+		}
 
-        [BindProperty]
-        public LoginForm loginUser { get; set; }
+		[BindProperty]
+		public LoginForm loginUser { get; set; }
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
+		}
 
-        public async Task<IActionResult> OnPost()
-        {
+		public async Task<IActionResult> OnPost()
+		{
 
-            if (!ModelState.IsValid)
-                return Page();
+			if (!ModelState.IsValid)
+				return Page();
 
-            if (loginUser == null)
-            {
-                return BadRequest("user is not set.");
-            }
+			if (loginUser == null)
+			{
+				return BadRequest("user is not set.");
+			}
 
-            var user = await _usersService.FindUserAsync(loginUser.Email, _usersService.GetSha256Hash(loginUser.Password));
+			var user = await _usersService.FindUserAsync(loginUser.Email, _usersService.GetSha256Hash(loginUser.Password));
 
-            var loginCookieExpirationDays = _configuration.GetValue("LoginCookieExpirationDays", 30);
-            var cookieClaims = await createCookieClaimsAsync(user);
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                cookieClaims,
-                new AuthenticationProperties
-                {
-                    IsPersistent = true, // "Remember Me"
-                    IssuedUtc = DateTimeOffset.UtcNow,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
-                });
+			if (user == null)
+			{
+				ModelState.AddModelError("FailedLogin", "Login Failed: Your email or password was incorrect");
+				return Page();
+			}
 
-            return Redirect("~/dashboard");
-        }
+			var loginCookieExpirationDays = _configuration.GetValue("LoginCookieExpirationDays", 30);
+			var cookieClaims = await createCookieClaimsAsync(user);
 
-        private async Task<ClaimsPrincipal> createCookieClaimsAsync(User user)
-        {
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.Email));
-            identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
+			await HttpContext.SignInAsync(
+				CookieAuthenticationDefaults.AuthenticationScheme,
+				cookieClaims,
+				new AuthenticationProperties
+				{
+					IsPersistent = loginUser.RememberMe,
+					IssuedUtc = DateTimeOffset.UtcNow,
+					ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
+				});
 
-            // add roles
-            var roles = await _rolesService.FindUserRolesAsync(user.Id);
-            foreach (var role in roles)
-            {
-                identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
-            }
+			return Redirect("~/dashboard");
+		}
 
-            return new ClaimsPrincipal(identity);
-        }
+		private async Task<ClaimsPrincipal> createCookieClaimsAsync(User user)
+		{
+			var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+			identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)));
+			identity.AddClaim(new Claim(ClaimTypes.Name, user.Email));
+			identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
 
-        public class LoginForm
-        {
-            [Display(Name = "Email")]
-            [Required(ErrorMessage = "Please enter a valid email address")]
-            public string Email { get; set; }
+			// add roles
+			var roles = await _rolesService.FindUserRolesAsync(user.Id);
+			foreach (var role in roles)
+			{
+				identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+			}
 
-            [Display(Name = "Password")]
-            [Required(ErrorMessage = "Invalid password")]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-        }
-    }
+			return new ClaimsPrincipal(identity);
+		}
+
+		public class LoginForm
+		{
+			[Display(Name = "Email")]
+			[Required(ErrorMessage = "Please enter a valid email address")]
+			public string Email { get; set; }
+
+			[Display(Name = "Password")]
+			[Required(ErrorMessage = "Invalid password")]
+			[DataType(DataType.Password)]
+			public string Password { get; set; }
+			public bool RememberMe { get; set; } = false;
+
+		}
+	}
 }

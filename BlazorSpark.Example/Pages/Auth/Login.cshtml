@@ -13,6 +13,9 @@
 			Login to your account
 		</h1>
 		<form method="post" enctype="multipart/form-data" class="mt-6 flex flex-col py-8 px-4 sm:px-10 bg-white sm:mx-auto sm:w-full sm:max-w-md shadow-lg rounded-md">
+			<div class="mb-1 text-red-500 text-sm">
+				@Html.ValidationSummary()
+			</div>
 			<div>
 				<label asp-for="loginUser.Email" class="block font-medium text-sm text-gray-700">Email address</label>
 				<div class="mt-1">
@@ -33,7 +36,7 @@
 			</div>
 			<div class="mt-8">
 				<label for="remember_me" class="inline-flex items-center">
-					<input id="remember_me" type="checkbox" class="rounded border-gray-300 text-purple-600 shadow-sm focus:ring-purple-500" name="remember">
+					<input asp-for="loginUser.RememberMe" type="checkbox" class="rounded border-gray-300 text-purple-600 shadow-sm focus:ring-purple-500">
 					<span class="ml-2 text-sm text-gray-600">Remember me</span>
 				</label>
 			</div>

@@ -1,4 +1,5 @@
-﻿using BlazorSpark.Library.Auth;
+﻿using BlazorSpark.Default.Application.Services.Auth;
+using BlazorSpark.Library.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;

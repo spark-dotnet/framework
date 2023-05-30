@@ -4,7 +4,9 @@
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
                     <div class="min-h-screen flex w-full justify-center items-center">
-                        <p class="text-lg">Sorry, you do not have access to this page</p>
+                        <p class="text-lg">
+                            Sorry, you do not have access to this page. Please <a href="/login" class="font-bold underline">login</a> →
+                        </p>
                     </div>
                 </NotAuthorized>
             </AuthorizeRouteView>

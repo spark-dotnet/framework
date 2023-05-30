@@ -49,12 +49,21 @@ namespace BlazorSpark.Pages.Auth
 			{
 				return BadRequest("user is not set.");
 			}
+
+			var existingUser = await _usersService.FindUserByEmailAsync(Input.Email);
+
+			if (existingUser != null)
+			{
+				ModelState.AddModelError("EmailExists", "Email already in use by another account.");
+				return Page();
+			}
+
 			var userForm = new User()
 			{
 				Name = Input.Name,
 				Email = Input.Email,
 				Password = _usersService.GetSha256Hash(Input.Password),
-				CreatedAt = DateTime.Now
+				CreatedAt = DateTime.UtcNow
 			};
 
 			var newUser = await _usersService.CreateUserAsync(userForm);

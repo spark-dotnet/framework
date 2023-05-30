@@ -13,6 +13,9 @@
 			Create your account
 		</h1>
 		<form method="post" enctype="multipart/form-data" class="mt-8 flex flex-col py-8 px-4 sm:px-10 bg-white sm:mx-auto sm:w-full sm:max-w-md shadow-lg rounded-md">
+			<div class="mb-1 text-red-500 text-sm">
+				@Html.ValidationSummary()
+			</div>
 			<div>
 				<label asp-for="Input.Name" class="block font-medium text-sm text-gray-700">Name</label>
 				<div class="mt-1">
