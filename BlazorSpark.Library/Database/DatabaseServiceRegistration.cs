@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -47,6 +48,35 @@ namespace BlazorSpark.Library.Database
                 services.AddDbContextFactory<T>(options =>
                 {
                     options.UseNpgsql(
+                        connectionString
+                    ).UseSnakeCaseNamingConvention();
+                });
+            }
+            else if (dbType == DatabaseTypes.sqlserver)
+            {
+                var dbTrustCertificate = config.GetValue<bool>("DB_TRUST_CERTIFICATE");
+                var dbIntegratedSecurity = config.GetValue<bool>("DB_INTEGRATED_SECURITY");
+                string connectionString = string.Empty;
+
+                if (dbIntegratedSecurity)
+                {
+                    connectionString = $"Server={dbHost};Database={dbName};Integrated Security={dbIntegratedSecurity}";
+
+                    if (dbTrustCertificate)                    
+                        connectionString = $"Server={dbHost};Database={dbName};Integrated Security={dbIntegratedSecurity};TrustServerCertificate={dbTrustCertificate}";                    
+                }
+                else if (dbTrustCertificate)
+                {
+                    connectionString = $"Server={dbHost};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate={dbTrustCertificate}";
+                }
+                else 
+                {
+                    connectionString = $"Server={dbHost};Database={dbName};User Id={dbUser};Password={dbPassword};";
+                }
+
+                services.AddDbContextFactory<T>(options =>
+                {
+                    options.UseSqlServer(
                         connectionString
                     ).UseSnakeCaseNamingConvention();
                 });
