@@ -1,11 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle>BlazorSpark</PageTitle>
+<PageTitle>@Env.Get("APP_NAME")</PageTitle>
 
 <NavMenu />
-
+﻿//#if (IsTailwind)
+<main class="container px-6 mx-auto py-20">
+    @Body
+</main>
+//#endif
+﻿//#if (IsPico)
+<main class="container">
+    @Body
+</main>
+//#endif
+﻿//#if (IsBootstrap)
 <main>
     @Body
 </main>
+//#endif
 
 <Footer />

@@ -1,18 +1,61 @@
 ﻿@page "/admin/dashboard"
 @attribute [Authorize]
+
+﻿//#if (IsTailwind)
 <AuthorizeView Roles="@CustomRoles.Admin">
     <Authorized>
-        <section class="max-w-5xl mx-auto py-28 min-h-screen px-4">
-            <article>
-                <h1 class="text-2xl font-bold text-gray-800">
+        <section class="mx-auto max-w-6xl bg-white mb-20">
+            <article class="my-6 sm:my-20 px-6 py-12 sm:py-20 sm:px-12 shadow-lg rounded-lg text-left">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-20">
                     Admin Dashboard
                 </h1>
             </article>
         </section>
     </Authorized>
     <NotAuthorized>
-        <div class="min-h-screen flex w-full justify-center items-center">
-            <p class="text-lg">Sorry, you do not have the proper permissions to access this page.</p>
-        </div>
+        <section class="mx-auto max-w-6xl mb-20">
+            <div class="my-6 sm:my-20 px-6 py-12 sm:py-20 sm:px-12 text-center">
+                <p class="text-base sm:text-xl text-gray-600">Sorry, you do not have the proper permissions to access this page.</p>
+            </div>
+        </section>
     </NotAuthorized>
 </AuthorizeView>
+//#endif
+﻿//#if (IsPico)
+<section>
+    <article>
+        <AuthorizeView Roles="@CustomRoles.Admin">
+            <Authorized>
+                <h1>
+                    Admin Dashboard
+                </h1>
+            </Authorized>
+            <NotAuthorized>
+                <p>Sorry, you do not have the proper permissions to access this page.</p>
+            </NotAuthorized>
+        </AuthorizeView>
+    </article>
+</section>
+//#endif
+﻿//#if (IsBootstrap)
+<AuthorizeView Roles="@CustomRoles.Admin">
+    <Authorized>
+        <section class="container py-5 my-5 text-left">
+            <article class="p-5 my-5 shadow rounded text-left bg-white">
+                <h1 class="mb-5 fw-bold">
+                    Admin Dashboard
+                </h1>
+            </article>
+        </section>
+    </Authorized>
+    <NotAuthorized>
+        <section class="container py-5 my-5">
+            <article class="my-5 text-center">
+                <p>
+                    Sorry, you do not have the proper permissions to access this page.
+                </p>
+            </article>
+        </section>
+    </NotAuthorized>
+</AuthorizeView>
+//#endif

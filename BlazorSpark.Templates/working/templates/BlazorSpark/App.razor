@@ -3,20 +3,54 @@
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <div class="min-h-screen flex w-full justify-center items-center">
-                        <p class="text-lg">
-                            Sorry, you do not have access to this page. Please <a href="/login" class="font-bold underline">login</a> →
-                        </p>
-                    </div>
+                    ﻿//#if (IsTailwind)
+                    <section class="mx-auto max-w-6xl mb-20">
+                        <div class="my-20 px-6 py-12 sm:py-20 sm:px-12 text-center">
+                            <p class="text-base sm:text-xl text-gray-600">
+                                Sorry, you do not have access to this page. Please <a href="/login" class="font-bold underline">login</a> →
+                            </p>
+                        </div>
+                    </section>
+                    //#endif
+                    //#if (IsPico)
+                    <p>
+                        Sorry, you do not have access to this page. Please <a href="/login" class="secondary">login</a> →
+                    </p>
+                    //#endif
+                    ﻿//#if (IsBootstrap)
+                    <section class="container py-5 my-5">
+                        <article class="my-5 text-center">
+                            <p>
+                                Sorry, you do not have access to this page. Please <a href="/login" class="fw-bold">login</a> →
+                            </p>
+                        </article>
+                    </section>
+                    //#endif
                 </NotAuthorized>
             </AuthorizeRouteView>
         </Found>
         <NotFound>
             <PageTitle>Not found</PageTitle>
             <LayoutView Layout="@typeof(MainLayout)">
-                <div class="min-h-screen flex w-full justify-center items-center">
-                    <p>Sorry, there's nothing at this address.</p>
-                </div>
+                ﻿//#if (IsTailwind)
+                <section class="mx-auto max-w-6xl mb-20">
+                    <div class="my-20 px-6 py-12 sm:py-20 sm:px-12 text-center">
+                        <p class="text-base sm:text-xl text-gray-600">Sorry, there's nothing at this address.</p>
+                    </div>
+                </section>
+                //#endif
+                //#if (IsPico)
+                <p>Sorry, there's nothing at this address.</p>
+                //#endif
+                ﻿//#if (IsBootstrap)
+                <section class="container py-5 my-5">
+                    <article class="my-5 text-center">
+                        <p>
+                            Sorry, there's nothing at this address.
+                        </p>
+                    </article>
+                </section>
+                //#endif
             </LayoutView>
         </NotFound>
     </Router>
