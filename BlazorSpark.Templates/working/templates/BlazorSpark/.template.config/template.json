@@ -11,6 +11,39 @@
         "language": "C#",
         "type": "project"
     },
+    "symbols": {
+        "Css": {
+            "type": "parameter",
+            "datatype": "choice",
+            "defaultValue": "Tailwind",
+            "choices": [
+                {
+                    "choice": "Tailwind",
+                    "description": "Tailwind CSS"
+                },
+                {
+                    "choice": "Bootstrap",
+                    "description": "Bootstrap CSS"
+                },
+                {
+                    "choice": "Pico",
+                    "description": "Pico"
+                }
+            ]
+        },
+        "IsTailwind": {
+            "type": "computed",
+            "value": "(Css == \"Tailwind\")"
+        },
+        "IsBootstrap": {
+            "type": "computed",
+            "value": "(Css == \"Bootstrap\")"
+        },
+        "IsPico": {
+            "type": "computed",
+            "value": "(Css == \"Pico\")"
+        }
+    },
     "sources": [
         {
             "modifiers": [
@@ -19,5 +52,103 @@
                 }
             ]
         }
-    ]
+    ],
+    "SpecialCustomOperations": {
+        "**/*.razor": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.html": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.cshtml": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.css": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        }
+    }
 }

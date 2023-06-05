@@ -1,3 +1,13 @@
+//#if (IsPico)
+.validation-summary-errors ul li {
+	color: red;
+}
+
+.field-validation-error {
+	color: red;
+}
+//#endif
+
 #blazor-error-ui {
 	background: lightyellow;
 	bottom: 0;

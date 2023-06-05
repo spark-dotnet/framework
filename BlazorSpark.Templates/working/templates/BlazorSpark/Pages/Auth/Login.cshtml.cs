@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using BlazorSpark.Default.Application.Models;
 using BlazorSpark.Default.Application.Services.Auth;
 
-namespace BlazorSpark.Pages.Auth
+namespace BlazorSpark.Default.Pages.Auth
 {
 	public class LoginModel : PageModel
 	{
