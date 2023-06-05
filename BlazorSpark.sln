@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Tests", "Blazor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSpark.Example", "BlazorSpark.Example\BlazorSpark.Example.csproj", "{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSpark.ActiveRecord", "BlazorSpark.ActiveRecord\BlazorSpark.ActiveRecord.csproj", "{2BAFF6BD-4E5E-4E4D-BD39-5AE51AD3BA52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BAFF6BD-4E5E-4E4D-BD39-5AE51AD3BA52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BAFF6BD-4E5E-4E4D-BD39-5AE51AD3BA52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BAFF6BD-4E5E-4E4D-BD39-5AE51AD3BA52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BAFF6BD-4E5E-4E4D-BD39-5AE51AD3BA52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
