@@ -13,7 +13,7 @@ namespace BlazorSpark.Console.Commands
         public void Execute()
         {
             ConsoleOutput.StartAlert(new List<string>() { "Installing Spark" });
-            Process.Start("dotnet", "new install BlazorSpark.Templates").WaitForExit();
+            Process.Start("dotnet", "new --install BlazorSpark.Templates").WaitForExit();
             ConsoleOutput.SuccessAlert(new List<string>() { "Blazor Spark was installed! To learn more visit our offical docs - https://blazorspark.com/" });
         }
     }
