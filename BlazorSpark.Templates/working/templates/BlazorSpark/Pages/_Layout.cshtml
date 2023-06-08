@@ -28,13 +28,6 @@
 </head>
 ﻿//#if (IsTailwind)
 <body class="bg-gray-50">
-//#endif
-﻿//#if (IsPico)
-<body>
-//#endif
-﻿//#if (IsBootstrap)
-<body class="bg-body-tertiary">
-//#endif
     @RenderBody()
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
@@ -48,4 +41,37 @@
     </div>
     <script src="_framework/blazor.server.js"></script>
 </body>
+//#endif
+﻿//#if (IsPico)
+<body>
+    @RenderBody()
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.server.js"></script>
+</body>
+//#endif
+﻿//#if (IsBootstrap)
+<body class="bg-body-tertiary">
+    @RenderBody()
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.server.js"></script>
+</body>
+//#endif
 </html>

@@ -1,10 +1,10 @@
 ![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
 # Blazor Spark - The .NET Web Framework for Makers
 
-Welcome to Blazor Spark, a robust, open-source web application framework built on Blazor Server, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
+Welcome to Blazor Spark, a robust, open-source web application framework built on top of Blazor Server, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
 
 ## Requirements
-Before creating your first spark project, you should ensure that your local machine has:
+Before creating your first Spark project, you should ensure that your local machine has:
 - [.NET 7](https://dotnet.microsoft.com/download)
 - [Entity Framework Core tools](https://learn.microsoft.com/en-us/ef/core/cli/)
 
@@ -20,7 +20,7 @@ That's it! Now dive into our comprehensive [documentation](https://blazorspark.c
 
 # Documentation
 
-Blazor Spark has thorough [documentation](https://blazorspark.com/docs/introduction/), making it easy to get started. It's also built on top of [Blazor Server](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor), so if you're familiar with it, you'll find Spark incredibly intuitive to use.
+Spark has thorough [documentation](https://blazorspark.com/docs/introduction/), making it easy to get started. It's also built on top of [ASP.NET & Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor), so if you're familiar with it, you'll find Spark incredibly intuitive to use.
 - [Get Started](https://blazorspark.com/docs/introduction/)
 - [The Basics](https://blazorspark.com/docs/configuration/)
 
@@ -32,12 +32,12 @@ Blazor Spark has thorough [documentation](https://blazorspark.com/docs/introduct
 
 # Get Involved
 
-Interested in contributing to Blazor Spark? Check out our [discussions board](https://github.com/blazor-spark/blazor-spark/discussions) or take a look at the open [issues](https://github.com/blazor-spark/blazor-spark/issues) to get started. Your contributions are always welcome!
+Interested in contributing to Spark? Check out our [discussions board](https://github.com/blazor-spark/blazor-spark/discussions) or take a look at the open [issues](https://github.com/blazor-spark/blazor-spark/issues) to get started. Your contributions are always welcome!
 
-Join the community of makers today and bring your visions to life with Blazor Spark!
+Join the community of makers today and bring your visions to life with Spark!
 
 # Resources
-- Stay up to date with Blazor Spark on [Twitter](https://twitter.com/wes_walke) 
+- Stay up to date with Spark on [Twitter](https://twitter.com/wes_walke) 
 - Subscribe to our [Newsletter](https://blazorspark.com/newsletter/).
 - Looking for .NET jobs? Check out [Dotnet Jobs](https://dotnet-jobs.com/) for weekly job postings.
 
