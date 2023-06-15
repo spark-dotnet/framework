@@ -1,10 +1,11 @@
 using BlazorSpark.Library.Environment;
+using BlazorSpark.Library.Config;
 using BlazorSpark.Example.Application.Startup;
 
 EnvManager.LoadConfig();
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddEnvironmentVariables();
+builder.Configuration.SetupSparkConfig();
 
 // Add all services to the container.
 builder.Services.AddAppServices(builder.Configuration);

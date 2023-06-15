@@ -16,7 +16,7 @@ namespace BlazorSpark.Library.Mail
 	{
 		public static IServiceCollection AddMailer(this IServiceCollection services, IConfiguration config)
 		{
-			string mailDriver = config.GetValue<string>("MAIL_MAILER", "file");
+			string mailDriver = config.GetValue<string>("Spark:Mail:Default", "file")!;
 
 			if (mailDriver == MailerTypes.file) 
 			{
@@ -36,7 +36,7 @@ namespace BlazorSpark.Library.Mail
 		public static IServiceCollection AddFileMailer(this IServiceCollection services, IConfiguration config)
 		{
 			var globalFrom = GetGlobalFromRecipient(config);
-			var mailer = new FileMailer(globalFrom);
+			var mailer = new FileMailer(globalFrom, config.GetValue<string>("Spark:Mail:Mailers:File:Path", "Storage/Mail/mail.log")!);
 			services.AddSingleton<IMailer>(mailer);
 			return services;
 		}
@@ -45,10 +45,10 @@ namespace BlazorSpark.Library.Mail
 		{
 			var globalFrom = GetGlobalFromRecipient(config);
 			IMailer mailer = new SmtpMailer(
-				config.GetValue<string>("MAIL_HOST", ""),
-				config.GetValue<int>("MAIL_PORT", 0),
-				config.GetValue<string>("MAIL_USERNAME", null),
-				config.GetValue<string>("MAIL_PASSWORD", null),
+                config.GetValue<string>("Spark:Mail:Mailers:Smpt:Host", "")!,
+				config.GetValue<int>("Spark:Mail:Mailers:Smpt:Port", 587),
+				config.GetValue<string>("Spark:Mail:Mailers:Smpt:Username", null)!,
+				config.GetValue<string>("Spark:Mail:Mailers:Smpt:Password", null)!,
 				globalFrom
 			);
 			services.AddSingleton<IMailer>(mailer);
@@ -57,8 +57,8 @@ namespace BlazorSpark.Library.Mail
 
 		private static MailRecipient GetGlobalFromRecipient(IConfiguration config)
 		{
-			string globalFromAddress = config.GetValue<string>("MAIL_FROM_ADDRESS", null);
-			string globalFromName = config.GetValue<string>("MAIL_FROM_NAME", null);
+			string globalFromAddress = config.GetValue<string>("Spark:Mail:From:Address", null);
+			string globalFromName = config.GetValue<string>("Spark:Mail:From:Name", null);
 
 			if (globalFromAddress != null)
 			{

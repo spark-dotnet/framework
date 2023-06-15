@@ -9,19 +9,20 @@ namespace BlazorSpark.Library.Mail.Mailers
 {
     public class FileMailer : IMailer
 	{
-		private string FilePath = "Storage/Mail/mail.log";
+		private string _filePath;
 		private MailRecipient _globalFrom;
 
-		public FileMailer(MailRecipient globalFrom)
+		public FileMailer(MailRecipient globalFrom, string filePath)
 		{
 			this._globalFrom = globalFrom;
-		}
+			this._filePath = filePath;
+        }
 
 		public async Task SendAsync(string message, string subject, IEnumerable<MailRecipient> to, MailRecipient from, MailRecipient replyTo, IEnumerable<MailRecipient> cc, IEnumerable<MailRecipient> bcc, IEnumerable<Attachment> attachments = null)
 		{
 			from = this._globalFrom ?? from;
 
-			using (var writer = File.AppendText(FilePath))
+			using (var writer = File.AppendText(_filePath))
 			{
 				await writer.WriteAsync($@"
 {DateTime.Now}

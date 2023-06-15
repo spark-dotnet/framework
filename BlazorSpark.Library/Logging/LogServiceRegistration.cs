@@ -22,21 +22,27 @@ namespace BlazorSpark.Library.Logging
 
         private static void SetupLogger(IConfiguration config)
         {
-            string logLevel = config.GetValue<string>("LOG_LEVEL");
-            string logChannel = config.GetValue<string>("LOG_CHANNEL");
+            string logChannel = config.GetValue<string>("Spark:Log:Default")!;
+            string logLevel = config.GetValue<string>("Spark:Log:Level")!;
 
             var logConfig = new LoggerConfiguration();
 
             switch (logChannel)
             {
                 case LogChannels.file:
-                    logConfig.WriteTo.File("Storage/Logging/spark.log", rollingInterval: RollingInterval.Day);
+                    logConfig.WriteTo.File(
+                        config.GetValue<string>("Spark:Log:Channels:File:Path","Storage/Logging/Spark.log")!, 
+                        rollingInterval: RollingInterval.Day
+                    );
                     break;
                 case LogChannels.console:
                     logConfig.WriteTo.Console();
                     break;
                 default:
-                    logConfig.WriteTo.File("Storage/Logging/spark.log", rollingInterval: RollingInterval.Day);
+                    logConfig.WriteTo.File(
+                        config.GetValue<string>("Spark:Log:Channels:File:Path", "Storage/Logging/Spark.log")!,
+                        rollingInterval: RollingInterval.Day
+                    );
                     break;
             }
 
