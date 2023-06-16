@@ -1,11 +1,23 @@
 ﻿@inherits LayoutComponentBase
+@inject UsersService userService
 
 <PageTitle>BlazorSpark</PageTitle>
 
-<NavMenu />
+<CascadingValue Value="this">
+	<NavMenu />
 
-<main>
-    @Body
-</main>
+	<main>
+		@Body
+	</main>
 
-<Footer />
+	<Footer />
+</CascadingValue>
+
+@code {
+	public User? User = new User();
+
+	protected override async Task OnInitializedAsync()
+	{
+		User = await userService.GetAuthenticatedUser();
+	}
+}
