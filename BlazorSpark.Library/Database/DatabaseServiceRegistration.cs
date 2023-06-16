@@ -14,11 +14,6 @@ namespace BlazorSpark.Library.Database
         public static IServiceCollection AddDatabase<T>(this IServiceCollection services, IConfiguration config) where T : DbContext
         {
             var dbType = config.GetValue<string>("Spark:Database:Default");
-            //var dbHost = config.GetValue<string>("DB_HOST");
-            //var dbPort = config.GetValue<string>("DB_PORT");
-            //var dbName = config.GetValue<string>("DB_DATABASE");
-            //var dbUser = config.GetValue<string>("DB_USERNAME");
-            //var dbPassword = config.GetValue<string>("DB_PASSWORD");
             if (dbType == DatabaseTypes.sqlite)
             {
                 var folder = Directory.GetCurrentDirectory();

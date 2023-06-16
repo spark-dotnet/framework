@@ -45,10 +45,10 @@ namespace BlazorSpark.Library.Mail
 		{
 			var globalFrom = GetGlobalFromRecipient(config);
 			IMailer mailer = new SmtpMailer(
-                config.GetValue<string>("Spark:Mail:Mailers:Smpt:Host", "")!,
-				config.GetValue<int>("Spark:Mail:Mailers:Smpt:Port", 587),
-				config.GetValue<string>("Spark:Mail:Mailers:Smpt:Username", null)!,
-				config.GetValue<string>("Spark:Mail:Mailers:Smpt:Password", null)!,
+                config.GetValue<string>("Spark:Mail:Mailers:Smtp:Host", "")!,
+				config.GetValue<int>("Spark:Mail:Mailers:Smtp:Port", 587),
+				config.GetValue<string>("Spark:Mail:Mailers:Smtp:Username", null)!,
+				config.GetValue<string>("Spark:Mail:Mailers:Smtp:Password", null)!,
 				globalFrom
 			);
 			services.AddSingleton<IMailer>(mailer);
