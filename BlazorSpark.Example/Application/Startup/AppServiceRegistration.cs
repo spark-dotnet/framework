@@ -20,7 +20,7 @@ namespace BlazorSpark.Example.Application.Startup
             services.AddCustomServices();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddDatabase<ApplicationDbContext>(config);
+            services.AddDatabase<DatabaseContext>(config);
             services.AddLogger(config);
             services.AddAuthorization(config, new string[] { CustomRoles.Admin, CustomRoles.User });
             services.AddAuthentication<ICookieService>(config);

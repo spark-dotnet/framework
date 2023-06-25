@@ -4,14 +4,15 @@ using System.Reflection.Emit;
 
 namespace BlazorSpark.Example.Application.Database
 {
-    public class ApplicationDbContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
 
         public virtual DbSet<User> Users { set; get; }
         public virtual DbSet<Role> Roles { set; get; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<Message> Messages { set; get; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -44,8 +45,8 @@ namespace BlazorSpark.Example.Application.Database
             });
 
             builder.Entity<Role>().HasData(
-                new Role { Id = 1, Name = CustomRoles.User },
-                new Role { Id = 2, Name = CustomRoles.Admin }
+                new Role { Id = 1, Name = CustomRoles.User, CreatedAt = DateTime.UtcNow },
+                new Role { Id = 2, Name = CustomRoles.Admin, CreatedAt = DateTime.UtcNow }
             );
         }
     }

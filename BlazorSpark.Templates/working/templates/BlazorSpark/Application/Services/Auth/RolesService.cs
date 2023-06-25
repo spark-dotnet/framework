@@ -7,9 +7,9 @@ namespace BlazorSpark.Default.Application.Services.Auth
 {
     public class RolesService
     {
-        private readonly IDbContextFactory<ApplicationDbContext> _factory;
+        private readonly IDbContextFactory<DatabaseContext> _factory;
 
-        public RolesService(IDbContextFactory<ApplicationDbContext> factory)
+        public RolesService(IDbContextFactory<DatabaseContext> factory)
         {
             _factory = factory;
         }

@@ -47,7 +47,7 @@
 //#endif
 @code {
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         logger.Information($"Initialized at {DateTime.Now}");
     }

@@ -30,11 +30,13 @@ namespace BlazorSpark.Console.Commands.Models
 
         private bool CreateModelFile(string appName, string modelName)
         {
-            string content = $@"namespace {appName}.Application.Models
+            string content = $@"using BlazorSpark.Library.Database;
+
+namespace {appName}.Application.Models
 {{
     public class {modelName} : BaseModel
     {{
-        public int Id {{ get; set; }}
+
     }}
 }}";
             return Files.WriteFileIfNotCreatedYet(ModelPath, modelName + ".cs", content);

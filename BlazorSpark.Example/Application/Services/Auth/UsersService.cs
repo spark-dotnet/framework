@@ -11,10 +11,10 @@ namespace BlazorSpark.Example.Application.Services.Auth
 {
     public class UsersService
     {
-        private readonly IDbContextFactory<ApplicationDbContext> _factory;
+        private readonly IDbContextFactory<DatabaseContext> _factory;
         private readonly AuthenticationStateProvider _stateProvider;
 
-        public UsersService(IDbContextFactory<ApplicationDbContext> factory, AuthenticationStateProvider stateProvider)
+        public UsersService(IDbContextFactory<DatabaseContext> factory, AuthenticationStateProvider stateProvider)
         {
             _factory = factory;
             _stateProvider = stateProvider;
@@ -48,7 +48,7 @@ namespace BlazorSpark.Example.Application.Services.Auth
             return null;
         }
 
-        public async Task<User> FindUserAsync(int userId)
+        public async Task<User?> FindUserAsync(int userId)
         {
             using var context = _factory.CreateDbContext();
             return await context.Users.FindAsync(userId);

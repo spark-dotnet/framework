@@ -11,10 +11,10 @@ namespace BlazorSpark.Default.Application.Services.Auth
 {
     public class UsersService
     {
-        private readonly IDbContextFactory<ApplicationDbContext> _factory;
+        private readonly IDbContextFactory<DatabaseContext> _factory;
         private readonly AuthenticationStateProvider _stateProvider;
 
-        public UsersService(IDbContextFactory<ApplicationDbContext> factory, AuthenticationStateProvider stateProvider)
+        public UsersService(IDbContextFactory<DatabaseContext> factory, AuthenticationStateProvider stateProvider)
         {
             _factory = factory;
             _stateProvider = stateProvider;

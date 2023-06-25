@@ -59,8 +59,13 @@ namespace BlazorSpark.Library.Database
             }
             else if (dbType == DatabaseTypes.sqlserver)
             {
-                var dbTrustCertificate = config.GetValue<bool>("DB_TRUST_CERTIFICATE");
-                var dbIntegratedSecurity = config.GetValue<bool>("DB_INTEGRATED_SECURITY");
+                var dbHost = config.GetValue<string>("Spark:Database:Drivers:Sqlserver:Host");
+                var dbPort = config.GetValue<string>("Spark:Database:Drivers:Sqlserver:Port");
+                var dbName = config.GetValue<string>("Spark:Database:Drivers:Sqlserver:Database");
+                var dbUser = config.GetValue<string>("Spark:Database:Drivers:Sqlserver:Username");
+                var dbPassword = config.GetValue<string>("Spark:Database:Drivers:Sqlserver:Password");
+                var dbTrustCertificate = config.GetValue<bool>("Spark:Database:Drivers:Sqlserver:DbTrustCertificate");
+                var dbIntegratedSecurity = config.GetValue<bool>("Spark:Database:Drivers:Sqlserver:DbIntegratedSecurity");
                 string connectionString = string.Empty;
 
                 if (dbIntegratedSecurity)

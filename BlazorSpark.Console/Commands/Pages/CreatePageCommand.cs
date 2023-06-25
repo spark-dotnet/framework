@@ -49,7 +49,7 @@ namespace BlazorSpark.Console.Commands.Pages
 
 @code {{
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {{
         
     }}

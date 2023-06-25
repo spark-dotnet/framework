@@ -4,9 +4,9 @@ using System.Reflection.Emit;
 
 namespace BlazorSpark.Default.Application.Database
 {
-    public class ApplicationDbContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
 
         public virtual DbSet<User> Users { set; get; }
