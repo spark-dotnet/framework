@@ -93,7 +93,7 @@ namespace BlazorSpark.Library.Database
             }
             else
             {
-                throw new Exception("Invalid database driver. Check your .env file and make sure the DB_CONNECTION variable is set to mysql, sqlite, or postgres.");
+                throw new Exception("Invalid database driver. Check your .env file and make sure the DB_CONNECTION variable is set to mysql, sqlite, postgres, or sqlserver.");
             }
 
             return services;
