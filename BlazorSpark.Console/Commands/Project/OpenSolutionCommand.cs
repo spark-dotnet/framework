@@ -14,7 +14,8 @@ namespace BlazorSpark.Console.Commands.Project
         public void Execute()
         {
             string appName = UserApp.GetAppName();
-            Process.Start(new ProcessStartInfo($@"{Directory.GetCurrentDirectory()}\{appName}.sln") { UseShellExecute = true });
+            char dirSep = Path.DirectorySeparatorChar;
+            Process.Start(new ProcessStartInfo($@"{Directory.GetCurrentDirectory()}{dirSep}{appName}.sln") { UseShellExecute = true });
         }
     }
 }
