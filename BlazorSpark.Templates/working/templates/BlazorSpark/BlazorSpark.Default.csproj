@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Application\Database\Migrations\" />
     <Folder Include="Application\Services\Auth\" />
-	<Folder Include="Storage\Mail\" />
 	<Folder Include="Storage\Logging\" />
   </ItemGroup>
 
