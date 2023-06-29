@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotNetEnv;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace BlazorSpark.Library.Extensions
 {
 	public static class StringExtensions
 	{
+		public static string Clamp(this string value, int maxChars)
+		{
+			return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+		}
+
 		public static string ToSlug(this string input)
 		{
 			string str = input.RemoveDiacritics().ToLower();

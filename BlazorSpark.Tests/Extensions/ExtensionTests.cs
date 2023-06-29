@@ -1,4 +1,5 @@
 ﻿using BlazorSpark.Library.Extensions;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,16 @@ namespace BlazorSpark.Tests.Extensions
 			var slug = str.ToSlug();
 
 			Assert.AreEqual("this-is-some-string", slug);
-		}
-	}
+        }
+
+        [TestMethod]
+        public void ShouldClampString()
+        {
+            var str = "This is a string";
+
+            var clampedStr = str.Clamp(4);
+
+            Assert.AreEqual("This...", clampedStr);
+        }
+    }
 }
