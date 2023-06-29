@@ -23,11 +23,11 @@ namespace BlazorSpark.Console.Commands.Pages
 
             if (!wasGenerated)
             {
-                ConsoleOutput.WarningAlert(new List<string>() { $"{PagePath}/{pageName}.cs already exists. Nothing done." });
+                ConsoleOutput.WarningAlert(new List<string>() { $"{PagePath}/{pageName}.razor already exists. Nothing done." });
             }
             else
             {
-                ConsoleOutput.SuccessAlert(new List<string>() { $"{PagePath}/{pageName}.cs generated!" });
+                ConsoleOutput.SuccessAlert(new List<string>() { $"{PagePath}/{pageName}.razor generated!" });
             }
         }
 
@@ -54,7 +54,7 @@ namespace BlazorSpark.Console.Commands.Pages
         
     }}
 }}";
-            return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName + ".razor", content);
+            return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".razor", content);
         }
     }
 }
