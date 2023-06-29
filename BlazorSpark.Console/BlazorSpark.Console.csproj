@@ -40,4 +40,7 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorSpark.Library\BlazorSpark.Library.csproj" />
+  </ItemGroup>
 </Project>
