@@ -13,5 +13,8 @@ namespace BlazorSpark.Console.Shared
         {
             return Regex.Replace(value, @"(?<=[a-z])(?=[A-Z])", "-").ToLower();
         }
+
+
+
     }
 }
