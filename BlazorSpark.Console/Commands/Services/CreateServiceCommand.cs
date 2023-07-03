@@ -38,9 +38,9 @@ namespace {appName}.Application.Services
 {{
     public class {serviceName}
     {{
-        private readonly IDbContextFactory<ApplicationDbContext> _factory;
+        private readonly IDbContextFactory<DatabaseContext> _factory;
 
-        public {serviceName}(IDbContextFactory<ApplicationDbContext> factory)
+        public {serviceName}(IDbContextFactory<DatabaseContext> factory)
         {{
             _factory = factory;
         }}

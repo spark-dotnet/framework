@@ -14,6 +14,27 @@ namespace BlazorSpark.Console.Shared
             return Regex.Replace(value, @"(?<=[a-z])(?=[A-Z])", "-").ToLower();
         }
 
+        /// <summary>
+        /// Returns the string with the first letter set to uppercase.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToUpperFirst(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            if (value.Length == 1)
+            {
+                return value.ToUpper();
+            }
+
+            char firstChar = char.ToUpper(value[0]);
+            string restOfString = value[1..];
+            return firstChar + restOfString;
+        }
 
 
     }
