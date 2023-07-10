@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <Title>BlazorSpark Library</Title>
     <Authors>Weston Walker</Authors>
-    <Description>Blazor Spark library containing the core code for Spark.</Description>
-    <PackageProjectUrl>https://blazorspark.com/</PackageProjectUrl>
+    <Description>Spark.NET library containing the core code for Spark.</Description>
+    <PackageProjectUrl>https://spark-framework.net/</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/blazor-spark/blazor-spark</RepositoryUrl>
-	<PackageVersion>0.5.1</PackageVersion>
+    <RepositoryUrl>https://github.com/spark-dotnet/framework</RepositoryUrl>
+	<PackageVersion>0.5.2</PackageVersion>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
