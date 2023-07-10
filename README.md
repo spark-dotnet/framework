@@ -1,7 +1,8 @@
-![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
-# Blazor Spark - The .NET Web Framework for Makers
+![spark dotnet logo](https://github.com/spark-dotnet/framework/assets/66449990/e8accdfe-7504-4999-b013-c7aa98031f2a)
 
-Welcome to Blazor Spark, a robust, open-source web application framework built on top of Blazor Server, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
+# Spark.NET - The .NET Web Framework for Makers
+
+Welcome to Spark.NET, a robust, open-source web application framework built on top of .NET's existing ecosystem, designed for makers like you. With Spark, you can build production-grade, full-stack web applications without breaking a sweat.
 
 ## Requirements
 Before creating your first Spark project, you should ensure that your local machine has:
