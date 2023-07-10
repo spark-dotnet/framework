@@ -1,10 +1,10 @@
-﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
+﻿![Spark.NET Logo](https://i.imgur.com/AlMNK7I.png "Spark.NET")
 
 ## Console
-This project serves as the console application for Blazor Spark. Spark comes with a custom CLI that makes some of the clunkier .NET CLI commands and makes them easier to use. It's also required to install the Spark templates and creating Spark projects.
+This project serves as the console application for Spark.NET. Spark comes with a custom CLI that makes some of the clunkier .NET CLI commands and makes them easier to use. It's also required to install the Spark templates and creating Spark projects.
 
 ## About Blazor Spark
-Spark is a web application framework built on top of .NET Blazor. It takes the pain out of developing .NET Blazor apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
+Spark is a web application framework for .NET. It takes the pain out of developing web apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
 
 - Database integrations
 - Migrations
@@ -15,10 +15,11 @@ Spark is a web application framework built on top of .NET Blazor. It takes the p
 - Mail
 - CLI Commands
 
-## Learning Blazor Spark
-Spark has thorough documentation making it simple to get started with. It's also built on top of .NET Blazor. So if your familiar with it getting started with Spark will be easy.
 
-[Documentation](https://blazorspark.com/)
+## Learning Spark
+Spark has thorough documentation making it simple to get started with.
+
+[Documentation](https://spark-framework.net)
 
 ## License
 The Spark framework is open-sourced software licenced under the MIT license.

@@ -1,10 +1,10 @@
-﻿![Blazor Spark Logo](https://i.imgur.com/kqd8VIg.png "Blazor Spark")
+﻿![Spark.NET Logo](https://i.imgur.com/AlMNK7I.png "Spark.NET")
 
 ## Library
-This project serves as the library containing the core code for Blazor Spark services like logging and auth.
+This project serves as the library containing the core code for Spark.NET services like logging and auth.
 
 ## About Blazor Spark
-Spark is a web application framework built on top of .NET Blazor. It takes the pain out of developing .NET Blazor apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
+Spark is a web application framework for .NET. It takes the pain out of developing web apps by providing a working full stack application and providing out of the box solutions for common tasks such as:
 
 - Database integrations
 - Migrations
@@ -16,10 +16,10 @@ Spark is a web application framework built on top of .NET Blazor. It takes the p
 - CLI Commands
 
 
-## Learning Blazor Spark
-Spark has thorough documentation making it simple to get started with. It's also built on top of .NET Blazor. So if your familiar with it getting started with Spark will be easy.
+## Learning Spark
+Spark has thorough documentation making it simple to get started with.
 
-[Documentation](https://blazorspark.com/)
+[Documentation](https://spark-framework.net)
 
 ## License
 The Spark framework is open-sourced software licenced under the MIT license.
