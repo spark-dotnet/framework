@@ -13,33 +13,33 @@ Before creating your first Spark project, you should ensure that your local mach
 Get up and running with Spark in under a minute. Here's how:
 
 ```
-dotnet tool install --global BlazorSpark.Console
+dotnet tool install --global Spark.CLI
 spark install
 spark new MyApp
 ```
-That's it! Now dive into our comprehensive [documentation](https://blazorspark.com/docs/introduction/) for next steps and deeper insights.
+That's it! Now dive into our comprehensive [documentation](https://spark-framework.net/docs/introduction/) for next steps and deeper insights.
 
 # Documentation
 
-Spark has thorough [documentation](https://blazorspark.com/docs/introduction/), making it easy to get started. It's also built on top of [ASP.NET & Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor), so if you're familiar with it, you'll find Spark incredibly intuitive to use.
-- [Get Started](https://blazorspark.com/docs/introduction/)
-- [The Basics](https://blazorspark.com/docs/configuration/)
+Spark has thorough [documentation](https://spark-framework.net/docs/introduction/), making it easy to get started. It's also built on top of existing ASP.NET technology, so if you're familiar with it, you'll find Spark incredibly intuitive to use.
+- [Get Started](https://spark-framework.net/docs/introduction/)
+- [The Basics](https://spark-framework.net/docs/configuration/)
 
 # Key Features
 
 - **Convention over Configuration:** Spark emphasizes best practices and conventions, allowing you to focus on what matters - building fantastic web applications.
-- **Comprehensive Out-of-the-Box Features:** Spark comes pre-configured with essential features like [authentication](https://blazorspark.com/docs/authentication/), [mailing](https://blazorspark.com/docs/mail/), and [logging](https://blazorspark.com/docs/logging/). Spend less time configuring and more time creating.
-- **Enjoyable Developer Experience:** Spark is built with developer happiness in mind. Our [CLI](https://blazorspark.com/docs/spark-cli/) helps you create applications, run [migrations](https://blazorspark.com/docs/models-and-migrations/), and generate classes effortlessly.
+- **Comprehensive Out-of-the-Box Features:** Spark comes pre-configured with essential features like [authentication](https://spark-framework.net/docs/authentication/), [mailing](https://spark-framework.net/docs/mail/), and [logging](https://spark-framework.net/docs/logging/). Spend less time configuring and more time creating.
+- **Enjoyable Developer Experience:** Spark is built with developer happiness in mind. Our [CLI](https://spark-framework.net/docs/spark-cli/) helps you create applications, run [migrations](https://spark-framework.net/docs/models-and-migrations/), and generate classes effortlessly.
 
 # Get Involved
 
-Interested in contributing to Spark? Check out our [discussions board](https://github.com/blazor-spark/blazor-spark/discussions) or take a look at the open [issues](https://github.com/blazor-spark/blazor-spark/issues) to get started. Your contributions are always welcome!
+Interested in contributing to Spark? Check out our [discussions board](https://github.com/spark-dotnet/framework/discussions) or take a look at the open [issues](https://github.com/spark-dotnet/framework/issues) to get started. Your contributions are always welcome!
 
 Join the community of makers today and bring your visions to life with Spark!
 
 # Resources
 - Stay up to date with Spark on [Twitter](https://twitter.com/wes_walke) 
-- Subscribe to our [Newsletter](https://blazorspark.com/newsletter/).
+- Subscribe to our [Newsletter](spark-framework.net/newsletter/).
 - Looking for .NET jobs? Check out [Dotnet Jobs](https://dotnet-jobs.com/) for weekly job postings.
 
 # License
