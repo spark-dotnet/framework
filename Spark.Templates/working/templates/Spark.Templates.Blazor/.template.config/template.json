@@ -1,0 +1,154 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Weston Walker",
+    "classifications": [ "Blazor", "Web", "Spark" ],
+    "identity": "Spark.Blazor",
+    "name": "Spark.NET Web App (Blazor)",
+    "description": "A project template for creating a Spark web app with Blazor frontend. Provides a starting point for Blazor apps with database and user auth out of the box.",
+    "shortName": "sparkblazor",
+    "sourceName": "Spark.Templates.Blazor",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "symbols": {
+        "Css": {
+            "type": "parameter",
+            "datatype": "choice",
+            "defaultValue": "Tailwind",
+            "choices": [
+                {
+                    "choice": "Tailwind",
+                    "description": "Tailwind CSS"
+                },
+                {
+                    "choice": "Bootstrap",
+                    "description": "Bootstrap CSS"
+                },
+                {
+                    "choice": "Pico",
+                    "description": "Pico"
+                }
+            ]
+        },
+        "IsTailwind": {
+            "type": "computed",
+            "value": "(Css == \"Tailwind\")"
+        },
+        "IsBootstrap": {
+            "type": "computed",
+            "value": "(Css == \"Bootstrap\")"
+        },
+        "IsPico": {
+            "type": "computed",
+            "value": "(Css == \"Pico\")"
+        }
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [ ".vs/**" ]
+                }
+            ]
+        }
+    ],
+    "SpecialCustomOperations": {
+        "**/*.razor": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.html": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.cshtml": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.css": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        }
+    }
+}

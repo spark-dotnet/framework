@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+	<PackAsTool>true</PackAsTool>
+	<ToolCommandName>spark</ToolCommandName>
+	<PackageOutputPath>./nupkg</PackageOutputPath>
+	<PackageVersion>0.5.4</PackageVersion>
+	<PackageId>Spark.CLI</PackageId>
+	<Title>Spark.NET CLI</Title>
+	<Authors>Weston Walker</Authors>
+	<Description>CLI tool for creating and using Spark applications.</Description>
+	<PackageTags>cli;command;spark</PackageTags>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/spark-dotnet/framework</RepositoryUrl>
+	<PackageProjectUrl>https://spark-framework.net/</PackageProjectUrl>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Media\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Update="LICENSE.txt">
+		<Pack>True</Pack>
+		<PackagePath>\</PackagePath>
+	</None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+</Project>
