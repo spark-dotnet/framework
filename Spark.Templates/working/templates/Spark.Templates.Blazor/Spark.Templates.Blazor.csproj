@@ -12,7 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Spark.Library" Version="0.5.2" />
+    <PackageReference Include="Spark.Library" Version="0.6.0" />
   </ItemGroup>
 
   <ItemGroup>
