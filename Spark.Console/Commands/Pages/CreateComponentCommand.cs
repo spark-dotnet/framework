@@ -47,7 +47,7 @@ namespace Spark.Console.Commands.Pages
 
 @code {{
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {{
         
     }}

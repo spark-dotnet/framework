@@ -1,7 +1,7 @@
 ﻿@page "/login"
 @model Spark.Templates.Blazor.Pages.Auth.LoginModel
 @{
-	Layout = "~/Pages/Auth/_AuthLayout.cshtml";
+	Layout = "_AuthLayout";
 	ViewData["Title"] = "Login";
 }
 ﻿//#if (IsTailwind)
@@ -18,26 +18,26 @@
 				@Html.ValidationSummary()
 			</div>
 			<div>
-				<label asp-for="loginUser.Email" class="block font-medium text-sm text-gray-700">Email address</label>
+				<label asp-for="Input.Email" class="block font-medium text-sm text-gray-700">Email address</label>
 				<div class="mt-1">
-					<input asp-for="loginUser.Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Input.Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
-					@Html.ValidationMessageFor(m => m.loginUser.Email)
+					@Html.ValidationMessageFor(m => m.Input.Email)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="loginUser.Password" class="block font-medium text-sm text-gray-700">Password</label>
+				<label asp-for="Input.Password" class="block font-medium text-sm text-gray-700">Password</label>
 				<div class="mt-1">
-					<input asp-for="loginUser.Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Input.Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
-					@Html.ValidationMessageFor(m => m.loginUser.Password)
+					@Html.ValidationMessageFor(m => m.Input.Password)
 				</div>
 			</div>
 			<div class="mt-8">
 				<label for="remember_me" class="inline-flex items-center">
-					<input asp-for="loginUser.RememberMe" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+					<input asp-for="Input.RememberMe" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
 					<span class="ml-2 text-sm text-gray-600">Remember me</span>
 				</label>
 			</div>
@@ -63,23 +63,23 @@
 		<form method="post" enctype="multipart/form-data">
 			@Html.ValidationSummary()
 			<div>
-				<label asp-for="loginUser.Email">
+				<label asp-for="Input.Email">
 					Email address
 				</label>
-				<input asp-for="loginUser.Email" type="email" autocomplete="email" required />
-				<small>@Html.ValidationMessageFor(m => m.loginUser.Email)</small>
+				<input asp-for="Input.Email" type="email" autocomplete="email" required />
+				<small>@Html.ValidationMessageFor(m => m.Input.Email)</small>
 			</div>
 			<div>
-				<label asp-for="loginUser.Password">
+				<label asp-for="Input.Password">
 					Password
 				</label>
-				<input asp-for="loginUser.Password" type="password" autocomplete="current-password" required />
-				<small>@Html.ValidationMessageFor(m => m.loginUser.Password)</small>
+				<input asp-for="Input.Password" type="password" autocomplete="current-password" required />
+				<small>@Html.ValidationMessageFor(m => m.Input.Password)</small>
 			</div>
 			<fieldset>
-				<label asp-for="loginUser.RememberMe" class="inline-flex items-center">
+				<label asp-for="Input.RememberMe" class="inline-flex items-center">
 					Remember me
-					<input asp-for="loginUser.RememberMe" role="switch" type="checkbox">
+					<input asp-for="Input.RememberMe" role="switch" type="checkbox">
 				</label>
 			</fieldset>
 			<div class="grid">
@@ -112,18 +112,18 @@
 				</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="loginUser.Email" class="form-label">Email address</label>
-				<input asp-for="loginUser.Email" type="email" class="form-control" required>
-				<small class="text-danger">@Html.ValidationMessageFor(m => m.loginUser.Email)</small>
+				<label asp-for="Input.Email" class="form-label">Email address</label>
+				<input asp-for="Input.Email" type="email" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Input.Email)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="loginUser.Password" class="form-label">Password</label>
-				<input asp-for="loginUser.Password" type="password" autocomplete="current-password" class="form-control" required>
-				<small class="text-danger">@Html.ValidationMessageFor(m => m.loginUser.Password)</small>
+				<label asp-for="Input.Password" class="form-label">Password</label>
+				<input asp-for="Input.Password" type="password" autocomplete="current-password" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Input.Password)</small>
 			</div>
 			<div class="mb-3 form-check">
-				<input asp-for="loginUser.RememberMe" type="checkbox" class="form-check-input">
-				<label asp-for="loginUser.RememberMe" class="form-check-label">Remember me</label>
+				<input asp-for="Input.RememberMe" type="checkbox" class="form-check-input">
+				<label asp-for="Input.RememberMe" class="form-check-label">Remember me</label>
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
@@ -135,4 +135,3 @@
 	</article>
 </section>
 //#endif
-

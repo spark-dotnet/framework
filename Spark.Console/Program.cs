@@ -57,11 +57,12 @@ namespace Spark.Console
 
                 config.Description = "Create a new Spark project.";
                 var projectName = config.Argument<string>("name", "Name of the project to generate.");
+                var projectType = config.Option("-t|--type <ProjectType>", "Projec type of the new Spark project", CommandOptionType.SingleValue);
                 var cssFramework = config.Option("-c|--css <CSS>", "CSS framework to use in Spark project", CommandOptionType.SingleValue);
                 config.OnExecute(() =>
                 {
                     string project = projectName.Value ?? null;
-                    new CreateProjectCommand().Execute(project, cssFramework.Value());
+                    new CreateProjectCommand().Execute(project, cssFramework.Value(), projectType.Value());
                 });
             });
 

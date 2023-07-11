@@ -13,14 +13,24 @@ namespace Spark.Console.Commands.Project
     {
         private readonly static string ProjectPath = $"./";
 
-        public void Execute(string projectName, string cssFramework)
+        public void Execute(string projectName, string cssFramework, string projectType)
         {
             if (String.IsNullOrEmpty(projectName))
             {
                 ConsoleOutput.ErrorAlert(new List<string>() { $"spark new requires a project name. Ex: spark new [projectName]" });
                 return;
             }
-            var command = $"new sparkblazor -n {projectName} -o {projectName}";
+            var template = "sparkblazor"; // default is blazor
+            if (!String.IsNullOrEmpty(projectType))
+            {
+                if (!ProjectTypes.IsValid(projectType))
+                {
+                    ConsoleOutput.ErrorAlert(new List<string>() { $"Invalid project type. Valid values: blazor, mvc" });
+                    return;
+                }
+                template = ProjectTypes.TranslateProjectTypeToTemplate(projectType);
+            }
+            var command = $"new {template} -n {projectName} -o {projectName}";
             if (!String.IsNullOrEmpty(cssFramework))
             {
                 if (!CssFrameworks.IsValid(cssFramework))

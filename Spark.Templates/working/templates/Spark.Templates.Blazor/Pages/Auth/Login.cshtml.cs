@@ -27,7 +27,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
 		}
 
 		[BindProperty]
-		public LoginForm loginUser { get; set; }
+		public LoginForm Input { get; set; }
 
 		public void OnGet()
 		{
@@ -40,12 +40,12 @@ namespace Spark.Templates.Blazor.Pages.Auth
 			if (!ModelState.IsValid)
 				return Page();
 
-			if (loginUser == null)
+			if (Input == null)
 			{
 				return BadRequest("user is not set.");
 			}
 
-			var user = await _usersService.FindUserAsync(loginUser.Email, _usersService.GetSha256Hash(loginUser.Password));
+			var user = await _usersService.FindUserAsync(Input.Email, _usersService.GetSha256Hash(Input.Password));
 
 			if (user == null)
 			{
@@ -61,7 +61,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
 				cookieClaims,
 				new AuthenticationProperties
 				{
-					IsPersistent = loginUser.RememberMe,
+					IsPersistent = Input.RememberMe,
 					IssuedUtc = DateTimeOffset.UtcNow,
 					ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
 				});
