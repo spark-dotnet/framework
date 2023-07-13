@@ -42,6 +42,9 @@ Join the community of makers today and bring your visions to life with Spark!
 - Subscribe to our [Newsletter](spark-framework.net/newsletter/).
 - Looking for .NET jobs? Check out [Dotnet Jobs](https://dotnet-jobs.com/) for weekly job postings.
 
+# Spark Sponsors
+I'm currently working on the framework full time. I've found a real purpose in building this for the .NET community and don't expect anything in return. However, if you choose to [sponsor](https://github.com/sponsors/westonwalker#sponsors) my work on Spark, I truly appreciate it.
+
 # License
 
 The Spark framework is open-source software licensed under the [MIT license](https://en.wikipedia.org/wiki/MIT_License). You're free to use, modify, and distribute it as per the terms of the license.
