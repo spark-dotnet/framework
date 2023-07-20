@@ -25,7 +25,7 @@ namespace Spark.Console.Commands.Project
             {
                 if (!ProjectTypes.IsValid(projectType))
                 {
-                    ConsoleOutput.ErrorAlert(new List<string>() { $"Invalid project type. Valid values: blazor, mvc" });
+                    ConsoleOutput.ErrorAlert(new List<string>() { $"Invalid project type. Valid values: blazor, mvc, razor" });
                     return;
                 }
                 template = ProjectTypes.TranslateProjectTypeToTemplate(projectType);

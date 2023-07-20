@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageTags>Blazor, MVC, Templates, Framework, UI</PackageTags>
+    <PackageTags>Blazor, MVC, Razor, Templates, Framework, UI</PackageTags>
     <PackageVersion>0.6.1</PackageVersion>
     <PackageId>Spark.Templates</PackageId>
     <Title>Spark.NET Templates</Title>
