@@ -41,7 +41,6 @@ namespace Spark.Templates.Razor.Application.Startup
             services.AddScoped<RolesService>();
             services.AddScoped<IExampleService, ExampleService>();
             services.AddScoped<ICookieService, CookieService>();
-            services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
             return services;
         }
 

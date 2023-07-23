@@ -1,29 +1,38 @@
 ﻿@page "/dashboard"
 @attribute [Authorize]
 ﻿//#if (IsTailwind)
-<section class="mx-auto max-w-6xl bg-white mb-20">
-    <article class="my-6 sm:my-20 px-6 py-12 sm:py-20 sm:px-12 shadow-lg rounded-lg text-left">
-        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-20">
-            User Dashboard for @user.Name
-        </h1>
+<section class="mx-auto max-w-6xl mb-20">
+    <h1 class="text-2xl text-gray-800 font-bold mb-4">
+        Dashboard
+    </h1>
+    <article class="bg-white shadow rounded-lg w-full my-12 p-6">
+        <p class="text-gray-600">
+            You're logged in!
+        </p>
     </article>
 </section>
 //#endif
 ﻿//#if (IsPico)
 <section>
+    <h1>
+        Dashboard
+    </h1>
     <article>
-        <h1>
-            User Dashboard for @user.Name
-        </h1>
+        <p>
+            You're logged in!
+        </p>
     </article>
 </section>
 //#endif
 ﻿//#if (IsBootstrap)
 <section class="container py-5 my-5 text-left">
+    <h1 class="mb-5 fw-bold">
+        Dashboard
+    </h1>
     <article class="p-5 my-5 shadow rounded text-left bg-white">
-        <h1 class="mb-5 fw-bold">
-            User Dashboard for @user.Name
-        </h1>
+        <p>
+            You're logged in!
+        </p>
     </article>
 </section>
 //#endif

@@ -73,8 +73,9 @@ namespace Spark.Templates.Razor.Pages.Auth
 		{
 			var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
 			identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)));
-			identity.AddClaim(new Claim(ClaimTypes.Name, user.Email));
-			identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
+            identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+            identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
 
 			// add roles
 			var roles = await _rolesService.FindUserRolesAsync(user.Id);

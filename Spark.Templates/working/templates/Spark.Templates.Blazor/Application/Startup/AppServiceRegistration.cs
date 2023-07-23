@@ -24,6 +24,7 @@ namespace Spark.Templates.Blazor.Application.Startup
             services.AddLogger(config);
             services.AddAuthorization(config, new string[] { CustomRoles.Admin, CustomRoles.User });
             services.AddAuthentication<ICookieService>(config);
+            services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
             services.AddTaskServices();
             services.AddScheduler();
             services.AddQueue();
@@ -39,8 +40,7 @@ namespace Spark.Templates.Blazor.Application.Startup
             services.AddScoped<UsersService>();
             services.AddScoped<RolesService>();
             services.AddScoped<IExampleService, ExampleService>();
-            services.AddScoped<ICookieService, CookieService>();
-            services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
+            services.AddScoped<ICookieService, AuthService>();
             return services;
         }
 
