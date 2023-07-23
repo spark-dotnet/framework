@@ -12,12 +12,10 @@ namespace Spark.Templates.Blazor.Application.Services.Auth
     {
 
         private readonly RolesService _rolesService;
-        private readonly UsersService _usersService;
 
-        public CookieService(RolesService rolesService, UsersService usersService)
+        public CookieService(RolesService rolesService)
         {
             _rolesService = rolesService;
-            _usersService = usersService;
         }
 
         public async Task<ClaimsPrincipal> CreateCookieClaims(User user)
