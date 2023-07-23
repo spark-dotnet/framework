@@ -17,7 +17,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
 	public class RegisterModel : PageModel
     {
         private readonly UsersService _usersService;
-        private readonly AuthService _authService;
+        private readonly CookieService _cookieService;
         private IDispatcher _dispatcher;
 
         [BindProperty]
@@ -26,11 +26,11 @@ namespace Spark.Templates.Blazor.Pages.Auth
 
         public RegisterModel(
             UsersService usersService,
-            AuthService authService,
+            CookieService cookieService,
             IDispatcher dispatcher)
         {
             _usersService = usersService;
-            _authService = authService;
+            _cookieService = cookieService;
             _dispatcher = dispatcher;
         }
 
@@ -75,7 +75,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
             var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
             var loginCookieExpirationDays = 30;
-            var cookieClaims = await _authService.CreateCookieClaims(user);
+            var cookieClaims = await _cookieService.CreateCookieClaims(user);
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,

@@ -4,6 +4,7 @@
 @inject NavigationManager _navManager
 @inject UsersService _usersService
 
+﻿//#if (IsTailwind)
 <section class="mx-auto max-w-6xl mb-20">
     <h1 class="text-2xl text-gray-800 font-bold mb-4">
         Profile
@@ -100,6 +101,167 @@
         </EditForm>
     </article>
 </section>
+//#endif
+﻿//#if (IsPico)
+<section>
+    <h1>
+        Profile
+    </h1>
+    <article>
+        <h2>
+            Profile Information
+        </h2>
+        <p>
+            Update your account's profile information.
+        </p>
+        <EditForm Model="profileInformationForm" OnValidSubmit="SaveProfileInformation">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div>
+                <label for="name">Name</label>
+                <InputText @bind-Value="profileInformationForm.Name" id="name" />
+                <small>
+                    <ValidationMessage For="() => profileInformationForm.Name" />
+                </small>
+            </div>
+            <div>
+                <label for="email">Email address</label>
+                <InputText @bind-Value="profileInformationForm.Email" type="email" id="email" />
+                <small>
+                    <ValidationMessage For="() => profileInformationForm.Email" />
+                    @if (!String.IsNullOrEmpty(profileFormMessage))
+                    {
+                        @profileFormMessage
+                    }
+                </small>
+            </div>
+            <div class="grid">
+                <button type="submit">
+                    Save
+                </button>
+            </div>
+        </EditForm>
+    </article>
+    <article>
+        <h2>
+            Update Password
+        </h2>
+        <p>
+            Update your accounts current password.
+        </p>
+        <EditForm Model="passwordForm" OnValidSubmit="UpdatePassword">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div>
+                <label for="current-password">Current Password</label>
+                <InputText @bind-Value="passwordForm.CurrentPassword" type="password" id="current-password" />
+                <small>
+                    <ValidationMessage For="() => passwordForm.CurrentPassword" />
+                    @if (!String.IsNullOrEmpty(passwordFormMessage))
+                    {
+                        @passwordFormMessage
+                    }
+                </small>
+            </div>
+            <div>
+                <label for="new-password">New Password</label>
+                <InputText @bind-Value="passwordForm.NewPassword" type="password" id="new-password" />
+                <small>
+                    <ValidationMessage For="() => passwordForm.NewPassword" />
+                </small>
+            </div>
+            <div>
+                <label for="confirm-password">Confirm Password</label>
+                <InputText @bind-Value="passwordForm.ConfirmPassword" type="password" id="confirm-password" />
+                <small>
+                    <ValidationMessage For="() => passwordForm.ConfirmPassword" />
+                </small>
+            </div>
+            <div class="grid">
+                <button type="submit">
+                    Save
+                </button>
+            </div>
+        </EditForm>
+    </article>
+</section>
+//#endif
+﻿//#if (IsBootstrap)
+<section class="container py-5 my-5">
+    <h1 class="mb-5 fw-bold">
+        Profile
+    </h1>
+    <article class="p-5 my-5 shadow rounded bg-white">
+        <h2>
+            Profile Information
+        </h2>
+        <p>
+            Update your account's profile information.
+        </p>
+        <EditForm Model="profileInformationForm" OnValidSubmit="SaveProfileInformation">
+            <div class="mb-1 text-danger">
+                <small>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                </small>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <InputText @bind-Value="profileInformationForm.Name" id="name" class="form-control" />
+                <small class="text-danger"><ValidationMessage For="() => profileInformationForm.Name" /></small>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <InputText @bind-Value="profileInformationForm.Email" id="email" type="email" class="form-control" />
+                <small class="text-danger"><ValidationMessage For="() => profileInformationForm.Email" /></small>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </EditForm>
+    </article>
+    <article class="p-5 my-5 shadow rounded bg-white">
+        <h2>
+            Update Password
+        </h2>
+        <p>
+            Update your accounts current password.
+        </p>
+        <EditForm Model="passwordForm" OnValidSubmit="UpdatePassword">
+            <div class="mb-1 text-danger">
+                <small>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                </small>
+            </div>
+            <div class="mb-3">
+                <label for="current-password" class="form-label">Current Password</label>
+                <InputText @bind-Value="passwordForm.CurrentPassword" id="current-password" type="password" class="form-control" />
+                <small class="text-danger">
+                    <ValidationMessage For="() => passwordForm.CurrentPassword" />
+                    @if (!String.IsNullOrEmpty(passwordFormMessage))
+                    {
+                        @passwordFormMessage
+                    }
+                </small>
+            </div>
+            <div class="mb-3">
+                <label for="new-password" class="form-label">New Password</label>
+                <InputText @bind-Value="passwordForm.NewPassword" id="new-password" type="password" class="form-control" />
+                <small class="text-danger">
+                    <ValidationMessage For="() => passwordForm.NewPassword" />
+                </small>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <InputText @bind-Value="passwordForm.ConfirmPassword" id="confirm-password" type="password" class="form-control" />
+                <small class="text-danger">
+                    <ValidationMessage For="() => passwordForm.ConfirmPassword" />
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </EditForm>
+    </article>
+</section>
+//#endif
 @code {
     [CascadingParameter]
     public MainLayout? Layout { get; set; }

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.ComponentModel.DataAnnotations;
 using Spark.Templates.Blazor.Application.Models;
 using Spark.Templates.Blazor.Application.Services.Auth;
+using Spark.Library.Auth;
 
 namespace Spark.Templates.Blazor.Pages.Auth
 {
@@ -14,16 +15,16 @@ namespace Spark.Templates.Blazor.Pages.Auth
     {
         private readonly IConfiguration _configuration;
         private readonly UsersService _usersService;
-        private readonly AuthService _authService;
+        private readonly CookieService _cookieService;
 
         public LoginModel(
             UsersService usersService,
             IConfiguration configuration,
-            AuthService authService)
+            CookieService cookieService)
         {
             _usersService = usersService;
             _configuration = configuration;
-            _authService = authService;
+            _cookieService = cookieService;
         }
 
         [BindProperty]
@@ -54,7 +55,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
             }
 
             var cookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 30);
-            var cookieClaims = await _authService.CreateCookieClaims(user);
+            var cookieClaims = await _cookieService.CreateCookieClaims(user);
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,

@@ -25,7 +25,7 @@ namespace Spark.Library.Auth
             return services;
         }
 
-        public static IServiceCollection AddAuthentication<T>(this IServiceCollection services, IConfiguration config) where T : ICookieService
+        public static IServiceCollection AddAuthentication<T>(this IServiceCollection services, IConfiguration config) where T : IAuthService
         {
             services
                 .AddAuthentication(options =>
@@ -37,9 +37,9 @@ namespace Spark.Library.Auth
                 .AddCookie(options =>
                 {
                     options.SlidingExpiration = false;
-                    options.LoginPath = "/login";
-                    options.LogoutPath = "/logout";
-                    //options.AccessDeniedPath = new PathString("/Home/Forbidden/");
+                    options.LoginPath = config.GetValue<string>("Spark:Auth:LoginPath", "/login");
+                    options.LogoutPath = config.GetValue<string>("Spark:Auth:LogoutPath", "/logout");
+                    options.AccessDeniedPath = config.GetValue<string>("Spark:Auth:AccessDeniedPath", "/access-denied");
                     options.Cookie.Name = ".blazor.spark.cookie";
                     options.Cookie.HttpOnly = true;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;

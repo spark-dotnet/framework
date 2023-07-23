@@ -12,10 +12,39 @@ namespace Spark.Templates.Blazor.Application.Services.Auth
     public class UsersService
     {
         private readonly IDbContextFactory<DatabaseContext> _factory;
+        private readonly AuthenticationStateProvider _stateProvider;
 
-        public UsersService(IDbContextFactory<DatabaseContext> factory)
+        public UsersService(IDbContextFactory<DatabaseContext> factory, AuthenticationStateProvider stateProvider)
         {
             _factory = factory;
+            _stateProvider = stateProvider;
+        }
+
+        public async Task<User?> GetAuthenticatedUser()
+        {
+            var userId = await GetAuthenticatedUserId();
+            if (userId != null)
+            {
+                var id = userId ?? default(int);
+                return await this.FindUserAsync(id);
+            }
+            return null;
+        }
+
+        public async Task<int?> GetAuthenticatedUserId()
+        {
+            var authState = await _stateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity != null && user.Identity.IsAuthenticated)
+            {
+                var userIdString = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (!int.TryParse(userIdString, out var userId))
+                {
+                    return null;
+                }
+                return userId;
+            }
+            return null;
         }
 
         public async Task<User> FindUserAsync(int userId)
