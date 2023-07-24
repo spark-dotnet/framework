@@ -31,18 +31,13 @@ namespace Spark.Console.Commands.Services
 
         private bool CreateServiceFile(string appName, string serviceName)
         {
-            string content = $@"using Microsoft.EntityFrameworkCore;
-using {appName}.Application.Database;
-
-namespace {appName}.Application.Services
+            string content = $@"namespace {appName}.Application.Services
 {{
     public class {serviceName}
     {{
-        private readonly IDbContextFactory<DatabaseContext> _factory;
 
-        public {serviceName}(IDbContextFactory<DatabaseContext> factory)
+        public {serviceName}()
         {{
-            _factory = factory;
         }}
 
     }}

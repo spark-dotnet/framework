@@ -1,0 +1,26 @@
+﻿@{
+	ViewData["Title"] = "Access Denied";
+}﻿
+//#if (IsTailwind)
+<section class="mx-auto max-w-6xl mb-20">
+	<div class="my-20 px-6 py-12 sm:py-20 sm:px-12 text-center">
+		<p class="text-base sm:text-xl text-gray-600">
+			Sorry, you do not have access to this page.
+		</p>
+	</div>
+</section>
+//#endif
+//#if (IsPico)
+<p>
+	Sorry, you do not have access to this page.
+</p>
+//#endif
+﻿//#if (IsBootstrap)
+<section class="container py-5 my-5">
+	<article class="my-5 text-center">
+		<p>
+			Sorry, you do not have access to this page.
+		</p>
+	</article>
+</section>
+//#endif

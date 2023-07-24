@@ -25,7 +25,7 @@ namespace Spark.Library.Auth
             return services;
         }
 
-        public static IServiceCollection AddAuthentication<T>(this IServiceCollection services, IConfiguration config) where T : IAuthService
+        public static IServiceCollection AddAuthentication<T>(this IServiceCollection services, IConfiguration config) where T : IAuthValidator
         {
             services
                 .AddAuthentication(options =>

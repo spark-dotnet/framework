@@ -10,24 +10,25 @@ using Spark.Templates.Razor.Application.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spark.Templates.Razor.Pages.Auth
 {
 	[AllowAnonymous]
 	public class LoginModel : PageModel
 	{
-		private readonly RolesService _rolesService;
 		private readonly UsersService _usersService;
+		private readonly AuthService _authService;
 		private readonly IConfiguration _configuration;
 
 		[BindProperty]
 		public Login Login { set; get; }
 
-		public LoginModel(UsersService usersService, RolesService rolesService, IConfiguration configuration)
+		public LoginModel(UsersService usersService, IConfiguration configuration, AuthService authService)
 		{
 			_usersService = usersService;
-			_rolesService = rolesService;
 			_configuration = configuration;
+			_authService = authService;
 		}
 
 		public void OnGet()
@@ -53,8 +54,8 @@ namespace Spark.Templates.Razor.Pages.Auth
 				return new PageResult();
 			}
 
-			var loginCookieExpirationDays = _configuration.GetValue("LoginCookieExpirationDays", 30);
-			var cookieClaims = await createCookieClaimsAsync(user);
+			var loginCookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+			var cookieClaims = await _authService.CreateCookieClaims(user);
 
 			await HttpContext.SignInAsync(
 				CookieAuthenticationDefaults.AuthenticationScheme,
@@ -68,23 +69,18 @@ namespace Spark.Templates.Razor.Pages.Auth
 
 			return Redirect("/dashboard");
 		}
-
-		private async Task<ClaimsPrincipal> createCookieClaimsAsync(User user)
-		{
-			var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-			identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-            identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-            identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
-
-			// add roles
-			var roles = await _rolesService.FindUserRolesAsync(user.Id);
-			foreach (var role in roles)
-			{
-				identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
-			}
-
-			return new ClaimsPrincipal(identity);
-		}
 	}
+
+    public class Login
+    {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        public bool RememberMe { get; set; } = false;
+    }
 }

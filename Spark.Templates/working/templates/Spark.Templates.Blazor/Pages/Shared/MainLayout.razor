@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@inject UsersService userService
+@inject AuthService authService
 
 <PageTitle>@Env.Get("APP_NAME")</PageTitle>
 
@@ -33,7 +33,7 @@
 
         if (authState.User.Identity.IsAuthenticated)
         {
-            User = await userService.GetAuthenticatedUser();
+            User = await authService.GetAuthenticatedUser();
         }
     }
 }

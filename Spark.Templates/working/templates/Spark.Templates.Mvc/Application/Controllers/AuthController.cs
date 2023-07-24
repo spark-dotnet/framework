@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Spark.Templates.Mvc.Application.ViewModels;
 using Spark.Templates.Mvc.Application.Events;
 using Coravel.Events.Interfaces;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Spark.Templates.Mvc.Application.Controllers
 {
@@ -16,15 +17,17 @@ namespace Spark.Templates.Mvc.Application.Controllers
     {
         private readonly RolesService _rolesService;
         private readonly UsersService _usersService;
+        private readonly AuthService _authService;
         private readonly IConfiguration _configuration;
         private IDispatcher _dispatcher;
 
-        public AuthController(UsersService usersService, RolesService rolesService, IConfiguration configuration, IDispatcher dispatcher)
+        public AuthController(UsersService usersService, RolesService rolesService, IConfiguration configuration, IDispatcher dispatcher, AuthService authService)
         {
             _usersService = usersService;
             _rolesService = rolesService;
             _configuration = configuration;
             _dispatcher = dispatcher;
+            _authService = authService;
         }
 
         [HttpGet, AllowAnonymous]
@@ -55,8 +58,8 @@ namespace Spark.Templates.Mvc.Application.Controllers
                 return View();
             }
 
-            var loginCookieExpirationDays = _configuration.GetValue("LoginCookieExpirationDays", 30);
-            var cookieClaims = await createCookieClaimsAsync(user);
+            var loginCookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+            var cookieClaims = await _authService.CreateCookieClaims(user);
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
@@ -68,7 +71,7 @@ namespace Spark.Templates.Mvc.Application.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
                 });
 
-            return Redirect("~/dashboard");
+            return RedirectToAction("Dashboard", "Home");
         }
 
         [HttpGet, AllowAnonymous]
@@ -115,8 +118,8 @@ namespace Spark.Templates.Mvc.Application.Controllers
 
             var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
-            var loginCookieExpirationDays = 30;
-            var cookieClaims = await createCookieClaimsAsync(user);
+            var loginCookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+            var cookieClaims = await _authService.CreateCookieClaims(user);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 cookieClaims,
@@ -127,8 +130,8 @@ namespace Spark.Templates.Mvc.Application.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
                 });
 
-            return RedirectToAction("Index", "Home");
-        }
+			return RedirectToAction("Dashboard", "Home");
+		}
 
         [HttpPost]
         [Route("logout")]
@@ -139,24 +142,6 @@ namespace Spark.Templates.Mvc.Application.Controllers
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
             return RedirectToAction("Index", "Home");
-        }
-
-        private async Task<ClaimsPrincipal> createCookieClaimsAsync(User user)
-        {
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-            identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-            identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
-
-            // add roles
-            var roles = await _rolesService.FindUserRolesAsync(user.Id);
-            foreach (var role in roles)
-            {
-                identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
-            }
-
-            return new ClaimsPrincipal(identity);
         }
     }
 }

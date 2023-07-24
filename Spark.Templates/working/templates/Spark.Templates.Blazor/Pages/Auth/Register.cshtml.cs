@@ -16,8 +16,9 @@ namespace Spark.Templates.Blazor.Pages.Auth
 {
 	public class RegisterModel : PageModel
     {
+        private readonly IConfiguration _configuration;
         private readonly UsersService _usersService;
-        private readonly CookieService _cookieService;
+        private readonly AuthService _cookieService;
         private IDispatcher _dispatcher;
 
         [BindProperty]
@@ -25,10 +26,12 @@ namespace Spark.Templates.Blazor.Pages.Auth
         public string ReturnUrl { get; set; }
 
         public RegisterModel(
+            IConfiguration configuration,
             UsersService usersService,
-            CookieService cookieService,
+            AuthService cookieService,
             IDispatcher dispatcher)
         {
+            _configuration = configuration;
             _usersService = usersService;
             _cookieService = cookieService;
             _dispatcher = dispatcher;
@@ -74,7 +77,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
 
             var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
-            var loginCookieExpirationDays = 30;
+            var cookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
             var cookieClaims = await _cookieService.CreateCookieClaims(user);
 
             await HttpContext.SignInAsync(
@@ -84,7 +87,7 @@ namespace Spark.Templates.Blazor.Pages.Auth
                 {
                     IsPersistent = true,
                     IssuedUtc = DateTimeOffset.UtcNow,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(loginCookieExpirationDays)
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(cookieExpirationDays)
                 });
 
             return Redirect("~/");

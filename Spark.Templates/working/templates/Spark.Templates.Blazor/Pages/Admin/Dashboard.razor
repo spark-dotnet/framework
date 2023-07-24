@@ -1,6 +1,8 @@
 ﻿@page "/admin/dashboard"
 @attribute [Authorize]
 
+<PageTitle>Admin Dashboard</PageTitle>
+
 ﻿//#if (IsTailwind)
 <AuthorizeView Roles="@CustomRoles.Admin">
     <Authorized>

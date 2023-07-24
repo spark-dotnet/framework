@@ -1,6 +1,7 @@
 using Spark.Library.Environment;
 using Spark.Library.Config;
 using Spark.Templates.Razor.Application.Startup;
+using Spark.Templates.Razor.Application.Middleware;
 
 EnvManager.LoadConfig();
 
@@ -19,6 +20,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UsePageNotFoundMiddleware();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

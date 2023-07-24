@@ -6,7 +6,7 @@
 ﻿//#if (IsTailwind)
 <div class="sm:py-12">
 	<section class="w-full sm:max-w-md mx-auto py-20 flex flex-col justify-center items-center">
-		<a href="/">
+		<a asp-action="Index" asp-controller="Home">
 			<img src="/images/logo.png" class="h-20 w-auto" />
 		</a>
 		<h1 class="text-center mt-6 text-center text-3xl font-bold tracking-tight text-black">
@@ -17,31 +17,31 @@
 				@Html.ValidationSummary()
 			</div>
 			<div>
-				<label asp-for="@Model.Email" class="block font-medium text-sm text-gray-700">Email address</label>
+				<label asp-for="Email" class="block font-medium text-sm text-gray-700">Email address</label>
 				<div class="mt-1">
-					<input asp-for="@Model.Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
 					@Html.ValidationMessageFor(m => m.Email)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="@Model.Password" class="block font-medium text-sm text-gray-700">Password</label>
+				<label asp-for="Password" class="block font-medium text-sm text-gray-700">Password</label>
 				<div class="mt-1">
-					<input asp-for="@Model.Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
 					@Html.ValidationMessageFor(m => m.Password)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label for="remember_me" class="inline-flex items-center">
-					<input asp-for="@Model.RememberMe" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+				<label asp-for="RememberMe" class="inline-flex items-center">
+					<input asp-for="RememberMe" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
 					<span class="ml-2 text-sm text-gray-600">Remember me</span>
 				</label>
 			</div>
 			<div class="mt-8 flex justify-end items-center">
-				<a href="/register" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+				<a asp-action="Register" asp-controller="Auth" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 					Don't have an account? Sign up
 				</a>
 				<button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ml-3">
@@ -54,7 +54,7 @@
 //#endif
 ﻿//#if (IsPico)
 <section>
-	<a href="/" class="secondary">
+	<a asp-action="Index" asp-controller="Home" class="secondary">
 		← back to home page
 	</a>
 	<article>
@@ -62,23 +62,23 @@
 		<form asp-action="Login" asp-controller="Auth" method="post">
 			@Html.ValidationSummary()
 			<div>
-				<label asp-for="@Model.Email">
+				<label asp-for="Email">
 					Email address
 				</label>
-				<input asp-for="@Model.Email" type="email" autocomplete="email" required />
+				<input asp-for="Email" type="email" autocomplete="email" required />
 				<small>@Html.ValidationMessageFor(m => m.Email)</small>
 			</div>
 			<div>
-				<label asp-for="@Model.Password">
+				<label asp-for="Password">
 					Password
 				</label>
-				<input asp-for="@Model.Password" type="password" autocomplete="current-password" required />
+				<input asp-for="Password" type="password" autocomplete="current-password" required />
 				<small>@Html.ValidationMessageFor(m => m.Password)</small>
 			</div>
 			<fieldset>
-				<label asp-for="@Model.RememberMe" class="inline-flex items-center">
+				<label asp-for="RememberMe" class="inline-flex items-center">
 					Remember me
-					<input asp-for="@Model.RememberMe" role="switch" type="checkbox">
+					<input asp-for="RememberMe" role="switch" type="checkbox">
 				</label>
 			</fieldset>
 			<div class="grid">
@@ -88,7 +88,7 @@
 			</div>
 		</form>
 		<footer>
-			<a href="/register" class="secondary">
+			<a asp-action="Register" asp-controller="Auth" class="secondary">
 				Don't have an account? Sign up
 			</a>
 		</footer>
@@ -97,7 +97,7 @@
 //#endif
 ﻿//#if (IsBootstrap)
 <section class="container py-5 my-5">
-	<a href="/" class="text-secondary">
+	<a asp-action="Index" asp-controller="Home" class="text-secondary">
 		← back to home page
 	</a>
 	<article class="p-5 my-5 shadow rounded bg-white">
@@ -111,23 +111,23 @@
 				</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="@Model.Email" class="form-label">Email address</label>
-				<input asp-for="@Model.Email" type="email" class="form-control" required>
+				<label asp-for="Email" class="form-label">Email address</label>
+				<input asp-for="Email" type="email" class="form-control" required>
 				<small class="text-danger">@Html.ValidationMessageFor(m => m.Email)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="@Model.Password" class="form-label">Password</label>
-				<input asp-for="@Model.Password" type="password" autocomplete="current-password" class="form-control" required>
+				<label asp-for="Password" class="form-label">Password</label>
+				<input asp-for="Password" type="password" autocomplete="current-password" class="form-control" required>
 				<small class="text-danger">@Html.ValidationMessageFor(m => m.Password)</small>
 			</div>
 			<div class="mb-3 form-check">
-				<input asp-for="@Model.RememberMe" type="checkbox" class="form-check-input">
-				<label asp-for="@Model.RememberMe" class="form-check-label">Remember me</label>
+				<input asp-for="RememberMe" type="checkbox" class="form-check-input">
+				<label asp-for="RememberMe" class="form-check-label">Remember me</label>
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 		<div class="mt-5">
-			<a href="/register" class="text-secondary">
+			<a asp-action="Register" asp-controller="Auth" class="text-secondary">
 				Don't have an account? Sign up
 			</a>
 		</div>

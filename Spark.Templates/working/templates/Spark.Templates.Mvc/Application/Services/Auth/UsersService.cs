@@ -12,43 +12,13 @@ namespace Spark.Templates.Mvc.Application.Services.Auth
     public class UsersService
     {
         private readonly DatabaseContext _db;
-        private readonly AuthenticationStateProvider _stateProvider;
 
-        public UsersService(DatabaseContext db, AuthenticationStateProvider stateProvider)
+        public UsersService(DatabaseContext db)
         {
             _db = db;
-            _stateProvider = stateProvider;
         }
 
-        public async Task<User?> GetAuthenticatedUser()
-        {
-            var userId = await this.GetAuthenticatedUserId();
-            if (userId != null)
-            {
-                var id = userId ?? default(int);
-                return await this.FindUserAsync(id);
-            }
-            return null;
-        }
-
-        public async Task<int?> GetAuthenticatedUserId()
-        {
-            var authState = await _stateProvider.GetAuthenticationStateAsync();
-            var user = authState.User;
-            if (user.Identity != null && user.Identity.IsAuthenticated)
-            {
-                var test = user.Claims;
-                var userIdString = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (!int.TryParse(userIdString, out var userId))
-                {
-                    return null;
-                }
-                return userId;
-            }
-            return null;
-        }
-
-        public async Task<User> FindUserAsync(int userId)
+        public async Task<User?> FindUserAsync(int userId)
         {
             return await _db.Users.FindAsync(userId);
         }

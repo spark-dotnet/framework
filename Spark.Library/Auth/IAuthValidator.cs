@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Spark.Library.Auth
 {
-    public interface IAuthService
+    public interface IAuthValidator
     {
         Task ValidateAsync(CookieValidatePrincipalContext context);
     }

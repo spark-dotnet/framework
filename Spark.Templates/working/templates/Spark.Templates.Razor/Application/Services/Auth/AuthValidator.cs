@@ -1,15 +1,16 @@
-﻿using Spark.Templates.Mvc.Application.Services.Auth;
+﻿using Spark.Templates.Razor.Application.Services.Auth;
 using Spark.Library.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 
-namespace Spark.Templates.Mvc.Application.Services.Auth
+namespace Spark.Templates.Razor.Application.Services.Auth
 {
-    public class CookieService : ICookieService
+    public class AuthValidator : IAuthValidator
     {
         private readonly UsersService usersService;
-        public CookieService(UsersService usersService)
+
+        public AuthValidator(UsersService usersService)
         {
             this.usersService = usersService;
         }

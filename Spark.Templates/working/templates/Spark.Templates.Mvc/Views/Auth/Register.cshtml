@@ -6,7 +6,7 @@
 ﻿//#if (IsTailwind)
 <div class="sm:py-12">
 	<section class="w-full sm:max-w-md mx-auto py-20 flex flex-col justify-center items-center">
-		<a href="/">
+		<a asp-action="Index" asp-controller="Home">
 			<img src="/images/logo.png" class="h-20 w-auto" />
 		</a>
 		<h1 class="text-center mt-6 text-center text-3xl font-bold tracking-tight text-black">
@@ -17,43 +17,43 @@
 				@Html.ValidationSummary()
 			</div>
 			<div>
-				<label asp-for="@Model.Name" class="block font-medium text-sm text-gray-700">Name</label>
+				<label asp-for="Name" class="block font-medium text-sm text-gray-700">Name</label>
 				<div class="mt-1">
-					<input asp-for="@Model.Name" type="text" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Name" type="text" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
 					@Html.ValidationMessageFor(m => m.Name)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="@Model.Email" class="block font-medium text-sm text-gray-700">Email address</label>
+				<label asp-for="Email" class="block font-medium text-sm text-gray-700">Email address</label>
 				<div class="mt-1">
-					<input asp-for="@Model.Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
 					@Html.ValidationMessageFor(m => m.Email)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="@Model.Password" class="block font-medium text-sm text-gray-700">Password</label>
+				<label asp-for="Password" class="block font-medium text-sm text-gray-700">Password</label>
 				<div class="mt-1">
-					<input asp-for="@Model.Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
 					@Html.ValidationMessageFor(m => m.Password)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="@Model.ConfirmPassword" class="block text-sm font-medium text-gray-700">Comfirm password</label>
+				<label asp-for="ConfirmPassword" class="block text-sm font-medium text-gray-700">Comfirm password</label>
 				<div class="mt-1">
-					<input asp-for="@Model.ConfirmPassword" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="ConfirmPassword" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-300 text-sm">
 					@Html.ValidationMessageFor(m => m.ConfirmPassword)
 				</div>
 			</div>
 			<div class="mt-8 flex justify-end items-center">
-				<a href="/login" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+				<a asp-action="Login" asp-controller="Auth" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 					Already registered?
 				</a>
 				<button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ml-3">
@@ -66,7 +66,7 @@
 //#endif
 ﻿//#if (IsPico)
 <section>
-	<a href="/" class="secondary">
+	<a asp-action="Index" asp-controller="Home" class="secondary">
 		← back to home page
 	</a>
 	<article>
@@ -74,31 +74,31 @@
 		<form asp-action="Register" asp-controller="Auth" method="post">
 			@Html.ValidationSummary()
 			<div>
-				<label asp-for="@Model.Name">
+				<label asp-for="Name">
 					Name
 				</label>
-				<input asp-for="@Model.Name" type="text" required />
+				<input asp-for="Name" type="text" required />
 				<small>@Html.ValidationMessageFor(m => m.Name)</small>
 			</div>
 			<div>
-				<label asp-for="@Model.Email">
+				<label asp-for="Email">
 					Email address
 				</label>
-				<input asp-for="@Model.Email" type="email" autocomplete="email" required />
+				<input asp-for="Email" type="email" autocomplete="email" required />
 				<small>@Html.ValidationMessageFor(m => m.Email)</small>
 			</div>
 			<div>
-				<label asp-for="@Model.Password">
+				<label asp-for="Password">
 					Password
 				</label>
-				<input asp-for="@Model.Password" type="password" autocomplete="current-password" required />
+				<input asp-for="Password" type="password" autocomplete="current-password" required />
 				<small>@Html.ValidationMessageFor(m => m.Password)</small>
 			</div>
 			<div>
-				<label asp-for="@Model.ConfirmPassword">
+				<label asp-for="ConfirmPassword">
 					Comfirm Password
 				</label>
-				<input asp-for="@Model.ConfirmPassword" type="password" autocomplete="current-password" required />
+				<input asp-for="ConfirmPassword" type="password" autocomplete="current-password" required />
 				<small>@Html.ValidationMessageFor(m => m.ConfirmPassword)</small>
 			</div>
 			<div class="grid">
@@ -108,7 +108,7 @@
 			</div>
 		</form>
 		<footer>
-			<a href="/login" class="secondary">
+			<a asp-action="Login" asp-controller="Auth" class="secondary">
 				Already registered? Sign in
 			</a>
 		</footer>
@@ -117,7 +117,7 @@
 //#endif
 ﻿//#if (IsBootstrap)
 <section class="container py-5 my-5">
-	<a href="/" class="text-secondary">
+	<a asp-action="Index" asp-controller="Home" class="text-secondary">
 		← back to home page
 	</a>
 	<article class="p-4 my-5 shadow card">
@@ -131,29 +131,29 @@
 				</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="@Model.Name" class="form-label">Name</label>
-				<input asp-for="@Model.Name" type="text" class="form-control" required>
+				<label asp-for="Name" class="form-label">Name</label>
+				<input asp-for="Name" type="text" class="form-control" required>
 				<small class="text-danger">@Html.ValidationMessageFor(m => m.Name)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="@Model.Email" class="form-label">Email address</label>
-				<input asp-for="@Model.Email" type="email" class="form-control" required>
+				<label asp-for="Email" class="form-label">Email address</label>
+				<input asp-for="Email" type="email" class="form-control" required>
 				<small class="text-danger">@Html.ValidationMessageFor(m => m.Email)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="@Model.Password" class="form-label">Password</label>
-				<input asp-for="@Model.Password" type="password" autocomplete="current-password" class="form-control" required>
+				<label asp-for="Password" class="form-label">Password</label>
+				<input asp-for="Password" type="password" autocomplete="current-password" class="form-control" required>
 				<small class="text-danger">@Html.ValidationMessageFor(m => m.Password)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="@Model.ConfirmPassword" class="form-label">Confirm password</label>
-				<input asp-for="@Model.ConfirmPassword" type="password" autocomplete="current-password" class="form-control" required>
+				<label asp-for="ConfirmPassword" class="form-label">Confirm password</label>
+				<input asp-for="ConfirmPassword" type="password" autocomplete="current-password" class="form-control" required>
 				<small class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</small>
 			</div>
 			<button type="submit" class="btn btn-primary">Create account</button>
 		</form>
 		<div class="mt-5">
-			<a href="/login" class="text-secondary">
+			<a asp-action="Login" asp-controller="Auth" class="text-secondary">
 				Already registered? Sign in
 			</a>
 		</div>

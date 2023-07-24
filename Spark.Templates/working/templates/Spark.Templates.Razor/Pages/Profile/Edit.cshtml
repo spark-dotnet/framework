@@ -1,0 +1,224 @@
+﻿@page "/profile/edit"
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+//#if (IsTailwind)
+<section class="mx-auto max-w-6xl mb-20">
+    <h1 class="text-2xl text-gray-800 font-bold mb-4">
+        Profile
+    </h1>
+    <article class="bg-white shadow rounded-lg w-full my-12 p-6">
+        <h2 class="text-xl font-medium mb-2">
+            Profile Information
+        </h2>
+        <p class="text-gray-600">
+            Update your account's profile information.
+        </p>
+        <form method="post" asp-page-handler="UpdateInfo" class="max-w-2xl flex flex-col space-y-6">
+            <div class="mt-6">
+                <label asp-for="@Model.ProfileInfo.Name" class="block font-medium text-sm text-gray-700">Name</label>
+                <div class="mt-1">
+                    <input asp-for="@Model.ProfileInfo.Name" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+                </div>
+                <div class="mt-1 text-red-500 text-sm">
+                    @Html.ValidationMessageFor(m => m.ProfileInfo.Name)
+                </div>
+            </div>
+            <div>
+                <label asp-for="@Model.ProfileInfo.Email" class="block font-medium text-sm text-gray-700">Email address</label>
+                <div class="mt-1">
+                    <input asp-for="@Model.ProfileInfo.Email" required type="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+                </div>
+                <div class="mt-1 text-red-500 text-sm">
+                    @Html.ValidationMessageFor(m => m.ProfileInfo.Email)
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="text-left px-4 py-2 bg-indigo-700 hover:bg-indigo-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
+                    Save
+                </button>
+            </div>
+        </form>
+    </article>
+    <article class="bg-white shadow rounded-lg w-full my-12 p-6">
+        <h2 class="text-xl font-medium mb-2">
+            Update Password
+        </h2>
+        <p class="text-gray-600">
+            Update your accounts current password.
+        </p>
+        <form method="post" asp-page-handler="UpdatePassword" class="max-w-2xl flex flex-col space-y-6">
+            <div class="mt-6">
+                <label asp-for="@Model.ProfilePassword.CurrentPassword" class="block font-medium text-sm text-gray-700">Current Password</label>
+                <div class="mt-1">
+                    <input asp-for="@Model.ProfilePassword.CurrentPassword" type="password" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+                </div>
+                <div class="mt-1 text-red-500 text-sm">
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.CurrentPassword)
+                </div>
+            </div>
+            <div>
+                <label asp-for="@Model.ProfilePassword.NewPassword" class="block font-medium text-sm text-gray-700">New Password</label>
+                <div class="mt-1">
+                    <input asp-for="@Model.ProfilePassword.NewPassword" type="password" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+                </div>
+                <div class="mt-1 text-red-500 text-sm">
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.NewPassword)
+                </div>
+            </div>
+            <div>
+                <label asp-for="@Model.ProfilePassword.ConfirmPassword" class="block font-medium text-sm text-gray-700">Confirm Password</label>
+                <div class="mt-1">
+                    <input asp-for="@Model.ProfilePassword.ConfirmPassword" type="password" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+                </div>
+                <div class="mt-1 text-red-500 text-sm">
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.ConfirmPassword)
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="text-left px-4 py-2 bg-indigo-700 hover:bg-indigo-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
+                    Save
+                </button>
+            </div>
+        </form>
+    </article>
+</section>
+//#endif
+﻿//#if (IsPico)
+<section>
+    <h1>
+        Profile
+    </h1>
+    <article>
+        <h2>
+            Profile Information
+        </h2>
+        <p>
+            Update your account's profile information.
+        </p>
+        <form method="post" asp-page-handler="UpdateInfo">
+            <div>
+                <label asp-for="@Model.ProfileInfo.Name">Name</label>
+                <input asp-for="@Model.ProfileInfo.Name" required />
+                <small>
+                    @Html.ValidationMessageFor(m => m.ProfileInfo.Name)
+                </small>
+            </div>
+            <div>
+                <label asp-for="@Model.ProfileInfo.Email">Email</label>
+                <input asp-for="@Model.ProfileInfo.Email" type="email" required />
+                <small>
+                    @Html.ValidationMessageFor(m => m.ProfileInfo.Email)
+                </small>
+            </div>
+            <div class="grid">
+                <button type="submit">
+                    Save
+                </button>
+            </div>
+        </form>
+    </article>
+    <article>
+        <h2>
+            Update Password
+        </h2>
+        <p>
+            Update your accounts current password.
+        </p>
+        <form method="post" asp-page-handler="UpdatePassword">
+            <div>
+                <label asp-for="@Model.ProfilePassword.CurrentPassword">Current Password</label>
+                <input asp-for="@Model.ProfilePassword.CurrentPassword" type="password" required />
+                <small>
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.CurrentPassword)
+                </small>
+            </div>
+            <div>
+                <label asp-for="@Model.ProfilePassword.NewPassword">New Password</label>
+                <input asp-for="@Model.ProfilePassword.NewPassword" type="password" required />
+                <small>
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.NewPassword)
+                </small>
+            </div>
+            <div>
+                <label asp-for="@Model.ProfilePassword.ConfirmPassword">Confirm Password</label>
+                <input asp-for="@Model.ProfilePassword.ConfirmPassword" type="password" required />
+                <small>
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.ConfirmPassword)
+                </small>
+            </div>
+            <div class="grid">
+                <button type="submit">
+                    Save
+                </button>
+            </div>
+        </form>
+    </article>
+</section>
+//#endif
+﻿//#if (IsBootstrap)
+<section class="container py-5 my-5">
+    <h1 class="mb-5 fw-bold">
+        Profile
+    </h1>
+    <article class="p-5 my-5 shadow rounded bg-white">
+        <h2>
+            Profile Information
+        </h2>
+        <p>
+            Update your account's profile information.
+        </p>
+        <form method="post" asp-page-handler="UpdateInfo">
+            <div class="mb-3">
+                <label asp-for="@Model.ProfileInfo.Name" class="form-label">Name</label>
+                <input asp-for="@Model.ProfileInfo.Name" class="form-control" required />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(m => m.ProfileInfo.Name)
+                </small>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.ProfileInfo.Email" class="form-label">Email</label>
+                <input asp-for="@Model.ProfileInfo.Email" type="email" class="form-control" required />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(m => m.ProfileInfo.Email)
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </article>
+    <article class="p-5 my-5 shadow rounded bg-white">
+        <h2>
+            Update Password
+        </h2>
+        <p>
+            Update your accounts current password.
+        </p>
+        <form method="post" asp-page-handler="UpdatePassword">
+            <div class="mb-3">
+                <label asp-for="@Model.ProfilePassword.CurrentPassword" class="form-label">Current Password</label>
+                <input asp-for="@Model.ProfilePassword.CurrentPassword" type="password" required class="form-control" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.CurrentPassword)
+                </small>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.ProfilePassword.NewPassword" class="form-label">New Password</label>
+                <input asp-for="@Model.ProfilePassword.NewPassword" type="password" required class="form-control" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.NewPassword)
+                </small>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.ProfilePassword.ConfirmPassword" class="form-label">Confirm Password</label>
+                <input asp-for="@Model.ProfilePassword.ConfirmPassword" type="password" required class="form-control" />
+                <small class="text-danger">
+                    @Html.ValidationMessageFor(m => m.ProfilePassword.ConfirmPassword)
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </article>
+</section>
+//#endif

@@ -12,24 +12,28 @@ using Spark.Templates.Razor.Application.Services.Auth;
 using Spark.Templates.Razor.Application.ViewModels;
 using System.Threading.Tasks;
 using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Configuration;
 
 namespace Spark.Templates.Razor.Pages.Auth
 {
 	[AllowAnonymous]
 	public class RegisterModel : PageModel
 	{
-		private readonly RolesService _rolesService;
+		private readonly AuthService _authService;
 		private readonly UsersService _usersService;
+		private readonly IConfiguration _configuration;
 		private IDispatcher _dispatcher;
 
 		[BindProperty]
 		public Register Register { get; set; }
 
-		public RegisterModel(UsersService usersService, RolesService rolesService, IDispatcher dispatcher)
+		public RegisterModel(UsersService usersService, AuthService authService, IDispatcher dispatcher, IConfiguration configuration)
 		{
 			_usersService = usersService;
-			_rolesService = rolesService;
+			_authService = authService;
 			_dispatcher = dispatcher;
+			_configuration = configuration;
 		}
 
 		public void OnGet()
@@ -70,8 +74,8 @@ namespace Spark.Templates.Razor.Pages.Auth
 
 			var user = await _usersService.FindUserAsync(newUser.Email, newUser.Password);
 
-			var loginCookieExpirationDays = 30;
-			var cookieClaims = await createCookieClaimsAsync(user);
+			var loginCookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+			var cookieClaims = await _authService.CreateCookieClaims(user);
 			await HttpContext.SignInAsync(
 				CookieAuthenticationDefaults.AuthenticationScheme,
 				cookieClaims,
@@ -83,25 +87,23 @@ namespace Spark.Templates.Razor.Pages.Auth
 				});
 
 			return Redirect("/dashboard");
-
-		}
-
-		private async Task<ClaimsPrincipal> createCookieClaimsAsync(User user)
-		{
-			var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-			identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-            identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-            identity.AddClaim(new Claim(ClaimTypes.UserData, user.Id.ToString(CultureInfo.InvariantCulture)));
-
-			// add roles
-			var roles = await _rolesService.FindUserRolesAsync(user.Id);
-			foreach (var role in roles)
-			{
-				identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
-			}
-
-			return new ClaimsPrincipal(identity);
 		}
 	}
+
+    public class Register
+    {
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
+
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        [Required(ErrorMessage = "Email is required")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Password is required")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Confirm password is required")]
+        [Compare("Password", ErrorMessage = "The Password and Confirm Password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
 }

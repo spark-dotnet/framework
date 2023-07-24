@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Templates.Razor", "Spark.Templates.Razor.csproj", "{BF1045C8-32BD-46E1-BB48-FB931218EB1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Templates.Razor", "Spark.Templates.Razor.csproj", "{BF1045C8-32BD-46E1-BB48-FB931218EB1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
