@@ -1,9 +1,9 @@
 ﻿﻿//#if (IsTailwind)
-<nav class="relative w-full max-w-6xl mx-auto px-4" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
+<nav class="container w-full max-w-6xl mx-auto px-6" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
 	<div class="flex justify-between items-center">
 		<ul>
-			<li class="px-2 py-4">
-				<a href="/">
+			<li class="py-4">
+				<a asp-controller="Home" asp-action="Index">
 					@await Html.PartialAsync("_ApplicationLogo")
 				</a>
 			</li>
@@ -13,27 +13,40 @@
 			{
 				<div class="relative ml-3">
 					<div>
-						<button x-on:mouseover="desktopMenuOpen = true" type="button" class="flex rounded-full bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+						<button x-on:click="desktopMenuOpen = true" type="button" class="inline-flex items-center rounded-full bg-transparent" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
 							<span class="sr-only">Open user menu</span>
-							<img class="h-8 w-8 rounded-full" src="/images/anonymous-user.png" alt="User Avatar">
+							@User.Identity.Name
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
 						</button>
 					</div>
 					<div x-cloak x-on:click.outside="desktopMenuOpen = false" x-show="desktopMenuOpen" class="absolute right-0 z-50 mt-2 w-48 origin-top-right shadow-2xl bg-white py-1 border border-gray-600" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
 						<div>
-							<a href="/dashboard" class="block px-4 py-4 text-base text-gray-600 hover:text-black hover:bg-gray-100 font-semibold" role="menuitem">Dashboard</a>
-							<a href="/account" class="block px-4 py-4 text-base text-gray-600 hover:text-black hover:bg-gray-100 font-semibold" role="menuitem">Account</a>
+							<a asp-action="Dashboard" asp-controller="Home" class="block px-4 py-4 text-gray-600 hover:text-black hover:bg-gray-100" role="menuitem">
+								Dashboard
+							</a>
+							<a asp-action="Edit" asp-controller="Profile" class="block px-4 py-4 text-gray-600 hover:text-black hover:bg-gray-100" role="menuitem">
+								Profile
+							</a>
 							<form asp-action="Logout" asp-controller="Auth" method="post">
-								<button type="submit" class="block px-4 py-4 w-full text-left text-base text-gray-600 hover:text-black hover:bg-gray-100 font-semibold" role="menuitem">Logout</button>
+								<button type="submit" class="block px-4 py-4 w-full text-left text-gray-600 hover:text-black hover:bg-gray-100" role="menuitem">Logout</button>
 							</form>
-							<p class="text-sm p-2 border-t">@User.Identity.Name</p>
+							<p class="text-sm py-2 px-4 border-t">@User.Identity.Name</p>
 						</div>
 					</div>
 				</div>
 			}
 			else
 			{
-				<li class="px-2 py-4"><a class="text-lg font-medium text-indigo-600 hover:text-indigo-700" href="/login">Login</a></li>
-				<li class="px-2 py-4"><a class="px-3 py-4 text-lg bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium" href="/register">Register</a></li>
+				<li class="px-2 py-4">
+					<a asp-action="Login" asp-controller="Auth" class="text-lg font-medium text-indigo-600 hover:text-indigo-700">
+						Login
+					</a>
+				</li>
+				<li class="px-2 py-4">
+					<a asp-action="Register" asp-controller="Auth" class="px-3 py-4 text-lg bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium">
+						Register
+					</a>
+				</li>
 			}
 		</ul>
 		<div class="w-auto md:hidden">
@@ -51,8 +64,12 @@
 		<div class="py-3 space-y-1 px-4 md:px-12">
 			@if (User.Identity != null && User.Identity.IsAuthenticated)
 			{
-				<a class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/dashboard">Dashboard</a>
-				<a class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/account">Account</a>
+				<a asp-action="Dashboard" asp-controller="Home" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium">
+					Dashboard
+				</a>
+				<a asp-action="Edit" asp-controller="Profile" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium">
+					Profile
+				</a>
 				<form asp-action="Logout" asp-controller="Auth" method="post">
 					<button type="submit" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 w-full text-left font-medium">Logout</button>
 				</form>
@@ -60,8 +77,8 @@
 			}
 			else
 			{
-				<a class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/login">Login</a>
-				<a class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium" href="/register">Register</a>
+				<a asp-action="Login" asp-controller="Auth" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium">Login</a>
+				<a asp-action="Register" asp-controller="Auth" class="text-gray-600 hover:bg-gray-100 hover:text-black block px-4 py-2 font-medium">Register</a>
 			}
 		</div>
 	</div>
@@ -71,7 +88,7 @@
 <nav class="container" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
 	<ul>
 		<li>
-			<a class="contrast" href="/">
+			<a asp-action="Index" asp-controller="Home" class="contrast">
 				@await Html.PartialAsync("_ApplicationLogo")
 			</a>
 		</li>
@@ -83,8 +100,8 @@
 				<details role="list" dir="rtl">
 					<summary aria-haspopup="listbox" role="link">Account</summary>
 					<ul role="listbox">
-						<li><a href="/dashboard">Dashboard</a></li>
-						<li><a href="/account">Account</a></li>
+						<li><a asp-controller="Home" asp-action="Dashboard">Dashboard</a></li>
+						<li><a asp-controller="Profile" asp-action="Edit">Profile</a></li>
 						<li>
 							<form asp-action="Logout" asp-controller="Auth" method="post">
 								<button type="submit">Logout</button>
@@ -97,8 +114,8 @@
 		}
 		else
 		{
-			<li><a href="/login">Login</a></li>
-			<li><a href="/register" role="button">Register</a></li>
+			<li><a asp-action="Login" asp-controller="Auth">Login</a></li>
+			<li><a asp-action="Register" asp-controller="Auth" role="button">Register</a></li>
 		}
 	</ul>
 </nav>
@@ -116,8 +133,8 @@
 					Account
 				</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-					<li><a class="dropdown-item" href="/account">Account</a></li>
+					<li><a asp-action="Dashboard" asp-controller="Home" class="dropdown-item">Dashboard</a></li>
+					<li><a asp-action="Edit" asp-controller="Profile" class="dropdown-item">Profile</a></li>
 					<li>
 						<form asp-action="Logout" asp-controller="Auth" method="post">
 							<button type="submit" class="dropdown-item btn btn-link">Logout</button>
@@ -131,8 +148,8 @@
 		else
 		{
 			<div class="">
-				<a href="/login" class="me-3">Login</a>
-				<a href="/register" class="btn btn-primary">Register</a>
+				<a asp-action="Login" asp-controller="Auth" class="me-3">Login</a>
+				<a asp-action="Register" asp-controller="Auth" class="btn btn-primary">Register</a>
 			</div>
 		}
 	</div>

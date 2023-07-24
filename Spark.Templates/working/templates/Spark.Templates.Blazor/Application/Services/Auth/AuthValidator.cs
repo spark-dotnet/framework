@@ -1,17 +1,18 @@
-﻿using Spark.Templates.Razor.Application.Services.Auth;
-using Spark.Library.Auth;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Spark.Library.Auth;
 using System.Security.Claims;
 
-namespace Spark.Templates.Razor.Application.Services.Auth
+namespace Spark.Templates.Blazor.Application.Services.Auth
 {
-    public class CookieService : ICookieService
+    public class AuthValidator : IAuthValidator
     {
-        private readonly UsersService usersService;
-        public CookieService(UsersService usersService)
+
+        private readonly UsersService _usersService;
+
+        public AuthValidator(UsersService usersService)
         {
-            this.usersService = usersService;
+            _usersService = usersService;
         }
 
         public async Task ValidateAsync(CookieValidatePrincipalContext context)
@@ -31,7 +32,7 @@ namespace Spark.Templates.Razor.Application.Services.Auth
                 return;
             }
 
-            var user = await usersService.FindUserAsync(userId);
+            var user = await _usersService.FindUserAsync(userId);
             if (user == null)
             {
                 await handleUnauthorizedRequest(context);
@@ -44,5 +45,4 @@ namespace Spark.Templates.Razor.Application.Services.Auth
             return context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
-
 }

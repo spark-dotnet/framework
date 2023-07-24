@@ -9,11 +9,12 @@ namespace Spark.Templates.Blazor.Application.Services.Auth
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
-        public SparkAuthenticationStateProvider(ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory)
-            : base(loggerFactory) =>
-            _scopeFactory = scopeFactory ?? throw new ArgumentNullException(nameof(scopeFactory));
+        public SparkAuthenticationStateProvider(ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory) : base(loggerFactory)
+        {
+            _scopeFactory = scopeFactory;
+        }
 
-        protected override TimeSpan RevalidationInterval { get; } = TimeSpan.FromMinutes(30);
+        protected override TimeSpan RevalidationInterval { get; } = TimeSpan.FromMinutes(2);
 
         protected override async Task<bool> ValidateAuthenticationStateAsync(
             AuthenticationState authenticationState, CancellationToken cancellationToken)

@@ -1,12 +1,12 @@
 ﻿@inherits LayoutComponentBase
-@inject UsersService userService
+@inject AuthService authService
 
 <PageTitle>@Env.Get("APP_NAME")</PageTitle>
 
 <CascadingValue Value="this">
     <NavMenu />
     ﻿//#if (IsTailwind)
-    <main class="container px-6 mx-auto py-20">
+    <main class="container px-6 max-w-6xl mx-auto py-12">
         @Body
     </main>
     //#endif
@@ -20,14 +20,20 @@
         @Body
     </main>
     //#endif
-    <Footer />
 </CascadingValue>
 
 @code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
     public User? User = new User();
 
     protected override async Task OnInitializedAsync()
     {
-        User = await userService.GetAuthenticatedUser();
+        var authState = await AuthenticationStateTask;
+
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            User = await authService.GetAuthenticatedUser();
+        }
     }
 }

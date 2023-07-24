@@ -16,7 +16,7 @@ namespace Spark.Templates.Razor.Pages.Auth
 			{
 				await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 			}
-			return RedirectToPage("/Index");
+			return Redirect("/");
 		}
 	}
 }

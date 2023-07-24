@@ -12,12 +12,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Spark.Library" Version="0.6.0" />
+    <PackageReference Include="Spark.Library" Version="0.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Application\Database\Migrations\" />
-    <Folder Include="Application\Services\Auth\" />
 	<Folder Include="Storage\Logging\" />
   </ItemGroup>
 

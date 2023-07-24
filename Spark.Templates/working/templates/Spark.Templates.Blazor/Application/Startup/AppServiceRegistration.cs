@@ -23,7 +23,8 @@ namespace Spark.Templates.Blazor.Application.Startup
             services.AddDatabase<DatabaseContext>(config);
             services.AddLogger(config);
             services.AddAuthorization(config, new string[] { CustomRoles.Admin, CustomRoles.User });
-            services.AddAuthentication<ICookieService>(config);
+            services.AddAuthentication<IAuthValidator>(config);
+            services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
             services.AddTaskServices();
             services.AddScheduler();
             services.AddQueue();
@@ -38,10 +39,9 @@ namespace Spark.Templates.Blazor.Application.Startup
             // add custom services
             services.AddScoped<UsersService>();
             services.AddScoped<RolesService>();
-            services.AddScoped<IExampleService, ExampleService>();
-            services.AddScoped<ICookieService, CookieService>();
-            services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
-            return services;
+			services.AddScoped<IAuthValidator, AuthValidator>();
+			services.AddScoped<AuthService>();
+			return services;
         }
 
         private static IServiceCollection AddEventServices(this IServiceCollection services)

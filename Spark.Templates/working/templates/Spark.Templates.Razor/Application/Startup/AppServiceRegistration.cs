@@ -18,13 +18,14 @@ namespace Spark.Templates.Razor.Application.Startup
         public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddControllersWithViews();
-			services.AddCustomServices();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddCustomServices();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddDatabase<DatabaseContext>(config);
             services.AddLogger(config);
             services.AddAuthorization(config, new string[] { CustomRoles.Admin, CustomRoles.User });
-            services.AddAuthentication<ICookieService>(config);
+            services.AddAuthentication<IAuthValidator>(config);
             services.AddTaskServices();
             services.AddScheduler();
             services.AddQueue();
@@ -39,9 +40,8 @@ namespace Spark.Templates.Razor.Application.Startup
             // add custom services
             services.AddScoped<UsersService>();
             services.AddScoped<RolesService>();
-            services.AddScoped<IExampleService, ExampleService>();
-            services.AddScoped<ICookieService, CookieService>();
-            services.AddScoped<AuthenticationStateProvider, SparkAuthenticationStateProvider>();
+            services.AddScoped<IAuthValidator, AuthValidator>();
+            services.AddScoped<AuthService>();
             return services;
         }
 
