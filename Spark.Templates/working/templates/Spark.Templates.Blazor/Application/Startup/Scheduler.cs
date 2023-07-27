@@ -1,4 +1,4 @@
-﻿using Spark.Templates.Blazor.Application.Tasks;
+﻿using Spark.Templates.Blazor.Application.Jobs;
 using Coravel;
 
 namespace Spark.Templates.Blazor.Application.Startup
@@ -11,7 +11,7 @@ namespace Spark.Templates.Blazor.Application.Startup
             {
                 // example scheduled job
                 //scheduler
-                //    .Schedule<ExampleTask>()
+                //    .Schedule<ExampleJob>()
                 //    .EveryFiveMinutes();
             });
             return services;

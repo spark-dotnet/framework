@@ -8,7 +8,7 @@ using Spark.Library.Logging;
 using Coravel;
 using Microsoft.AspNetCore.Components.Authorization;
 using Spark.Library.Auth;
-using Spark.Templates.Razor.Application.Tasks;
+using Spark.Templates.Razor.Application.Jobs;
 using Spark.Library.Mail;
 
 namespace Spark.Templates.Razor.Application.Startup
@@ -55,7 +55,7 @@ namespace Spark.Templates.Razor.Application.Startup
         private static IServiceCollection AddTaskServices(this IServiceCollection services)
         {
             // add custom background tasks here
-            services.AddTransient<ExampleTask>();
+            services.AddTransient<ExampleJob>();
             return services;
         }
     }

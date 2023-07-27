@@ -1,11 +1,11 @@
 ﻿using Coravel.Invocable;
 
-namespace Spark.Templates.Razor.Application.Tasks
+namespace Spark.Templates.Blazor.Application.Jobs
 {
-    public class ExampleTask : IInvocable
+    public class ExampleJob : IInvocable
     {
 
-        public ExampleTask()
+        public ExampleJob()
         {
         }
 

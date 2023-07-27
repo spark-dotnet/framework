@@ -1,4 +1,4 @@
-﻿using Spark.Templates.Razor.Application.Tasks;
+﻿using Spark.Templates.Razor.Application.Jobs;
 using Coravel;
 
 namespace Spark.Templates.Razor.Application.Startup
@@ -9,11 +9,11 @@ namespace Spark.Templates.Razor.Application.Startup
         {
             services.UseScheduler(scheduler =>
             {
-                // example scheduled job
-                //scheduler
-                //    .Schedule<ExampleTask>()
-                //    .EveryFiveMinutes();
-            });
+				// example scheduled job
+				//scheduler
+				//    .Schedule<ExampleJob>()
+				//    .EveryFiveMinutes();
+			});
             return services;
         }
     }

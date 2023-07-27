@@ -6,7 +6,7 @@ using Spark.Console.Commands.Models;
 using Spark.Console.Commands.Pages;
 using Spark.Console.Commands.Project;
 using Spark.Console.Commands.Services;
-using Spark.Console.Commands.Tasks;
+using Spark.Console.Commands.Jobs;
 using Spark.Console.Shared;
 using McMaster.Extensions.CommandLineUtils;
 using System;
@@ -133,13 +133,13 @@ namespace Spark.Console
                     });
                 });
 
-                config.Command("task", taskConfig =>
+                config.Command("job", jobConfig =>
                 {
-                    taskConfig.Description = "Create a new Task.";
-                    var taskName = taskConfig.Argument<string>("taskName", "Name of the Task to generate.").IsRequired();
-                    taskConfig.OnExecute(() =>
+                    jobConfig.Description = "Create a new Job.";
+                    var jobName = jobConfig.Argument<string>("jobName", "Name of the Job to generate.").IsRequired();
+                    jobConfig.OnExecute(() =>
                     {
-                        new CreateTaskCommand().Execute(taskName.Value);
+                        new CreateJobCommand().Execute(jobName.Value);
                     });
                 });
 
