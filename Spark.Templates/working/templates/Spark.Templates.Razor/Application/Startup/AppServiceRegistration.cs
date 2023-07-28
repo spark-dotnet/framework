@@ -26,7 +26,7 @@ namespace Spark.Templates.Razor.Application.Startup
             services.AddLogger(config);
             services.AddAuthorization(config, new string[] { CustomRoles.Admin, CustomRoles.User });
             services.AddAuthentication<IAuthValidator>(config);
-            services.AddTaskServices();
+            services.AddJobServices();
             services.AddScheduler();
             services.AddQueue();
             services.AddEventServices();
@@ -52,7 +52,7 @@ namespace Spark.Templates.Razor.Application.Startup
             return services;
         }
 
-        private static IServiceCollection AddTaskServices(this IServiceCollection services)
+        private static IServiceCollection AddJobServices(this IServiceCollection services)
         {
             // add custom background tasks here
             services.AddTransient<ExampleJob>();
