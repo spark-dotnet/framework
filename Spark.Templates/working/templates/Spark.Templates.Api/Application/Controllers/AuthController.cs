@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Spark.Templates.Api.Application.Services.Auth;
 using Spark.Templates.Api.Application.Events;
 using Coravel.Events.Interfaces;
-using Spark.Templates.Api.Application.ViewModels;
 using Spark.Templates.Api.Application.Models;
+using Spark.Templates.Api.Application.ViewModels;
 
 namespace Spark.Templates.Api.Application.Controllers
 {
