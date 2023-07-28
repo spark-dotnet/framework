@@ -20,14 +20,14 @@ namespace Spark.Templates.Api.Application.Controllers
 		[Route("")]
         public IActionResult Index()
 		{
-			return Ok();
+			return Ok("Welcome to Spark Api");
         }
 
         [HttpGet, Authorize]
 		[Route("dashboard")]
         public IActionResult Dashboard()
         {
-            return Ok("dashboard api");
+            return Ok("Dashboard api");
 		}
     }
 }

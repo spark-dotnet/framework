@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Spark.Templates.Api.Application.Services.Auth;
-using Spark.Templates.Api.Application.ViewModels;
 using Spark.Templates.Api.Application.Events;
 using Coravel.Events.Interfaces;
-using User = Spark.Templates.Api.Application.Models.User;
+using Spark.Templates.Api.Application.ViewModels;
+using Spark.Templates.Api.Application.Models;
 
 namespace Spark.Templates.Api.Application.Controllers
 {
     public class AuthController : Controller
     {        
         private readonly UsersService _usersService;
-		private readonly TokenService _tokenService;
+		private readonly AuthService _authService;
         private IDispatcher _dispatcher;
 
         public AuthController(UsersService usersService, 
-            IDispatcher dispatcher, 
-            TokenService tokenService)
+            IDispatcher dispatcher,
+			AuthService authService)
         {
             _usersService = usersService;
             _dispatcher = dispatcher;
-			_tokenService = tokenService;
+			_authService = authService;
 		}
 
         [HttpPost, AllowAnonymous]
@@ -43,14 +43,9 @@ namespace Spark.Templates.Api.Application.Controllers
                 return View();
             }
             
-            var token = await _tokenService.CreateJwtToken(user);
+            var token = await _authService.CreateJwtToken(user);
 
-			return Ok(new
-			{
-                Name = user.Name,
-				Username = user.Email,				
-				Token = token,
-			});
+			return Ok(new { user.Name, user.Email, token });
         }
 
         [HttpPost, AllowAnonymous]
