@@ -1,9 +1,8 @@
 ﻿using Spark.Library.Mail;
 
-namespace Spark.Templates.Blazor.Application.Mail
+namespace Spark.Templates.Blazor.Application.Mail;
+
+public class GenericMailable : Mailable<string>
 {
-    public class GenericMailable : Mailable<string>
-    {
-        public override void Build() { }
-    }
+    public override void Build() { }
 }

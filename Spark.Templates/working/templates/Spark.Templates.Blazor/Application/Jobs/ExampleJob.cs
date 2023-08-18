@@ -1,18 +1,17 @@
 ﻿using Coravel.Invocable;
 
-namespace Spark.Templates.Blazor.Application.Jobs
+namespace Spark.Templates.Blazor.Application.Jobs;
+
+public class ExampleJob : IInvocable
 {
-    public class ExampleJob : IInvocable
+
+    public ExampleJob()
     {
+    }
 
-        public ExampleJob()
-        {
-        }
-
-        public Task Invoke()
-        {
-            Console.WriteLine("Do something in the background.");
-            return Task.CompletedTask;
-        }
+    public Task Invoke()
+    {
+        Console.WriteLine("Do something in the background.");
+        return Task.CompletedTask;
     }
 }

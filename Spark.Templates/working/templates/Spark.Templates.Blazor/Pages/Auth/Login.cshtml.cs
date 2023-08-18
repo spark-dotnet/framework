@@ -9,79 +9,78 @@ using Spark.Templates.Blazor.Application.Models;
 using Spark.Templates.Blazor.Application.Services.Auth;
 using Spark.Library.Auth;
 
-namespace Spark.Templates.Blazor.Pages.Auth
+namespace Spark.Templates.Blazor.Pages.Auth;
+
+public class Login : PageModel
 {
-	public class LoginModel : PageModel
+    private readonly IConfiguration _configuration;
+    private readonly UsersService _usersService;
+    private readonly AuthService _cookieService;
+
+    public Login(
+        UsersService usersService,
+        IConfiguration configuration,
+        AuthService cookieService)
     {
-        private readonly IConfiguration _configuration;
-        private readonly UsersService _usersService;
-        private readonly AuthService _cookieService;
+        _usersService = usersService;
+        _configuration = configuration;
+        _cookieService = cookieService;
+    }
 
-        public LoginModel(
-            UsersService usersService,
-            IConfiguration configuration,
-            AuthService cookieService)
+    [BindProperty]
+    public LoginModel Model { get; set; }
+
+    public void OnGet()
+    {
+
+    }
+
+    public async Task<IActionResult> OnPost()
+    {
+
+        if (!ModelState.IsValid)
+            return Page();
+
+        if (Model == null)
         {
-            _usersService = usersService;
-            _configuration = configuration;
-            _cookieService = cookieService;
+            return BadRequest("user is not set.");
         }
 
-        [BindProperty]
-        public LoginForm Input { get; set; }
+        var user = await _usersService.FindUserAsync(Model.Email, _usersService.GetSha256Hash(Model.Password));
 
-        public void OnGet()
+        if (user == null)
         {
-
+            ModelState.AddModelError("FailedLogin", "Login Failed: Your email or password was incorrect");
+            return Page();
         }
 
-        public async Task<IActionResult> OnPost()
-        {
+        var cookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+        var cookieClaims = await _cookieService.CreateCookieClaims(user);
 
-            if (!ModelState.IsValid)
-                return Page();
-
-            if (Input == null)
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            cookieClaims,
+            new AuthenticationProperties
             {
-                return BadRequest("user is not set.");
-            }
+                IsPersistent = Model.RememberMe,
+                IssuedUtc = DateTimeOffset.UtcNow,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(cookieExpirationDays)
+            });
 
-            var user = await _usersService.FindUserAsync(Input.Email, _usersService.GetSha256Hash(Input.Password));
+        return Redirect("~/dashboard");
+    }
 
-            if (user == null)
-            {
-                ModelState.AddModelError("FailedLogin", "Login Failed: Your email or password was incorrect");
-                return Page();
-            }
+    public class LoginModel
+    {
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Please enter a valid email address")]
+        public string Email { get; set; }
 
-            var cookieExpirationDays = _configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
-            var cookieClaims = await _cookieService.CreateCookieClaims(user);
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Invalid password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        public bool RememberMe { get; set; } = false;
 
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                cookieClaims,
-                new AuthenticationProperties
-                {
-                    IsPersistent = Input.RememberMe,
-                    IssuedUtc = DateTimeOffset.UtcNow,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(cookieExpirationDays)
-                });
-
-            return Redirect("~/dashboard");
-        }
-
-        public class LoginForm
-        {
-            [Display(Name = "Email")]
-            [Required(ErrorMessage = "Please enter a valid email address")]
-            public string Email { get; set; }
-
-            [Display(Name = "Password")]
-            [Required(ErrorMessage = "Invalid password")]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-            public bool RememberMe { get; set; } = false;
-
-        }
     }
 }

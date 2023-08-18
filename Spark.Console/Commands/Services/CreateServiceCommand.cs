@@ -5,44 +5,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Commands.Services
+namespace Spark.Console.Commands.Services;
+
+public class CreateServiceCommand
 {
-    public class CreateServiceCommand
+    private readonly static string ServicePath = $"./Application/Services";
+
+    public void Execute(string serviceName)
     {
-        private readonly static string ServicePath = $"./Application/Services";
+        string appName = UserApp.GetAppName();
 
-        public void Execute(string serviceName)
+        ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new service" });
+
+        bool wasGenerated = CreateServiceFile(appName, serviceName);
+
+        if (!wasGenerated)
         {
-            string appName = UserApp.GetAppName();
-
-            ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new service" });
-
-            bool wasGenerated = CreateServiceFile(appName, serviceName);
-
-            if (!wasGenerated)
-            {
-                ConsoleOutput.WarningAlert(new List<string>() { $"{ServicePath}/{serviceName}.cs already exists. Nothing done." });
-            }
-            else
-            {
-                ConsoleOutput.SuccessAlert(new List<string>() { $"{ServicePath}/{serviceName}.cs generated!" });
-            }
+            ConsoleOutput.WarningAlert(new List<string>() { $"{ServicePath}/{serviceName}.cs already exists. Nothing done." });
         }
-
-        private bool CreateServiceFile(string appName, string serviceName)
+        else
         {
-            string content = $@"namespace {appName}.Application.Services
+            ConsoleOutput.SuccessAlert(new List<string>() { $"{ServicePath}/{serviceName}.cs generated!" });
+        }
+    }
+
+    private bool CreateServiceFile(string appName, string serviceName)
+    {
+        string content = $@"namespace {appName}.Application.Services;
+
+public class {serviceName}
 {{
-    public class {serviceName}
+
+    public {serviceName}()
     {{
-
-        public {serviceName}()
-        {{
-        }}
-
     }}
+
 }}";
-            return Files.WriteFileIfNotCreatedYet(ServicePath, serviceName + ".cs", content);
-        }
+        return Files.WriteFileIfNotCreatedYet(ServicePath, serviceName + ".cs", content);
     }
 }

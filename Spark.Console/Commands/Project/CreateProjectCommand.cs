@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Commands.Project
+namespace Spark.Console.Commands.Project;
+
+public class CreateProjectCommand
 {
-    public class CreateProjectCommand
-    {
-        private readonly static string ProjectPath = $"./";
+    private readonly static string ProjectPath = $"./";
 
         public void Execute(string projectName, string cssFramework, string projectType)
         {

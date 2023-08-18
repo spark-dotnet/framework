@@ -6,15 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Commands
+namespace Spark.Console.Commands;
+
+public class UpdateSparkCommand
 {
-    public class UpdateSparkCommand
+    public void Execute()
     {
-        public void Execute()
-        {
-            ConsoleOutput.StartAlert(new List<string>() { "Updating Spark Templates" });
-            Process.Start("dotnet", "new install Spark.Templates").WaitForExit();
-            ConsoleOutput.SuccessAlert(new List<string>() { "Spark Templates successfully updated" });
-        }
+        ConsoleOutput.StartAlert(new List<string>() { "Updating Spark Templates" });
+        Process.Start("dotnet", "new install Spark.Templates").WaitForExit();
+        ConsoleOutput.SuccessAlert(new List<string>() { "Spark Templates successfully updated" });
     }
 }

@@ -1,8 +1,5 @@
 ﻿@page "/profile/edit"
 @attribute [Authorize]
-@inject IDbContextFactory<DatabaseContext> factory
-@inject NavigationManager _navManager
-@inject UsersService _usersService
 
 <PageTitle>Edit Profile</PageTitle>
 
@@ -264,85 +261,3 @@
     </article>
 </section>
 //#endif
-@code {
-    [CascadingParameter]
-    public MainLayout? Layout { get; set; }
-    private User? user => Layout.User;
-    private ProfileInformationForm profileInformationForm { get; set; } = new();
-    private string profileFormMessage = "";
-    private PasswordForm passwordForm { get; set; } = new();
-    private string passwordFormMessage = "";
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        // get user profile
-        profileInformationForm.Name = user.Name;
-        profileInformationForm.Email = user.Email;
-    }
-
-    private async Task SaveProfileInformation()
-    {
-        using var db = factory.CreateDbContext();
-        var currentUser = db.Users.Find(user.Id);
-
-        if (currentUser != null)
-        {
-            var existingUser = await _usersService.FindUserByEmailAsync(profileInformationForm.Email);
-
-            if (existingUser != null && user.Id != existingUser.Id)
-            {
-                profileFormMessage = "Email already in use.";
-                return;
-            }
-
-            currentUser.Email = profileInformationForm.Email;
-            currentUser.Name = profileInformationForm.Name;
-
-            db.Users.Save(currentUser);
-            StateHasChanged();
-            _navManager.NavigateTo("profile/edit", true);
-        }
-    }
-
-    private async Task UpdatePassword()
-    {
-        using var db = factory.CreateDbContext();
-        var existingUser = await _usersService.FindUserAsync(user.Email, _usersService.GetSha256Hash(passwordForm.CurrentPassword));
-
-        if (existingUser == null)
-        {
-            passwordFormMessage = "Current password was incorrect.";
-            return;
-        }
-
-        existingUser.Password = _usersService.GetSha256Hash(passwordForm.NewPassword);
-
-        db.Users.Save(existingUser);
-        StateHasChanged();
-        _navManager.NavigateTo("profile/edit", true);
-    }
-
-    public class ProfileInformationForm
-    {
-        [Required]
-        public string Name { get; set; }
-
-        [EmailAddress(ErrorMessage = "Invalid email address.")]
-        [Required(ErrorMessage = "Please enter a valid email address")]
-        public string Email { get; set; }
-    }
-
-    public class PasswordForm
-    {
-        [Required(ErrorMessage = "Current Password is required")]
-        public string CurrentPassword { get; set; }
-
-        [Required(ErrorMessage = "New Password is required")]
-        public string NewPassword { get; set; }
-
-        [Required(ErrorMessage = "Confirm password is required")]
-        [Compare("NewPassword", ErrorMessage = "The New Password and Confirm Password do not match.")]
-        public string ConfirmPassword { get; set; }
-    }
-}

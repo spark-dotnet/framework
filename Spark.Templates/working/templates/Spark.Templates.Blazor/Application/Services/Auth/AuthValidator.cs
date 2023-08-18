@@ -3,46 +3,45 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Spark.Library.Auth;
 using System.Security.Claims;
 
-namespace Spark.Templates.Blazor.Application.Services.Auth
+namespace Spark.Templates.Blazor.Application.Services.Auth;
+
+public class AuthValidator : IAuthValidator
 {
-    public class AuthValidator : IAuthValidator
+
+    private readonly UsersService _usersService;
+
+    public AuthValidator(UsersService usersService)
     {
+        _usersService = usersService;
+    }
 
-        private readonly UsersService _usersService;
-
-        public AuthValidator(UsersService usersService)
+    public async Task ValidateAsync(CookieValidatePrincipalContext context)
+    {
+        var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
+        if (claimsIdentity?.Claims == null || !claimsIdentity.Claims.Any())
         {
-            _usersService = usersService;
+            // this is not our issued cookie
+            await handleUnauthorizedRequest(context);
+            return;
         }
 
-        public async Task ValidateAsync(CookieValidatePrincipalContext context)
+        var userIdString = claimsIdentity.FindFirst(ClaimTypes.UserData).Value;
+        if (!int.TryParse(userIdString, out int userId))
         {
-            var claimsIdentity = context.Principal.Identity as ClaimsIdentity;
-            if (claimsIdentity?.Claims == null || !claimsIdentity.Claims.Any())
-            {
-                // this is not our issued cookie
-                await handleUnauthorizedRequest(context);
-                return;
-            }
-
-            var userIdString = claimsIdentity.FindFirst(ClaimTypes.UserData).Value;
-            if (!int.TryParse(userIdString, out int userId))
-            {
-                await handleUnauthorizedRequest(context);
-                return;
-            }
-
-            var user = await _usersService.FindUserAsync(userId);
-            if (user == null)
-            {
-                await handleUnauthorizedRequest(context);
-            }
+            await handleUnauthorizedRequest(context);
+            return;
         }
 
-        private Task handleUnauthorizedRequest(CookieValidatePrincipalContext context)
+        var user = await _usersService.FindUserAsync(userId);
+        if (user == null)
         {
-            context.RejectPrincipal();
-            return context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await handleUnauthorizedRequest(context);
         }
+    }
+
+    private Task handleUnauthorizedRequest(CookieValidatePrincipalContext context)
+    {
+        context.RejectPrincipal();
+        return context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 }

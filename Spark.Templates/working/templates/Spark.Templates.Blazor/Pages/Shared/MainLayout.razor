@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@inject AuthService authService
 
-<PageTitle>@Env.Get("APP_NAME")</PageTitle>
+<PageTitle>@AppName</PageTitle>
 
 <CascadingValue Value="this">
     <NavMenu />
@@ -21,19 +20,3 @@
     </main>
     //#endif
 </CascadingValue>
-
-@code {
-    [CascadingParameter]
-    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
-    public User? User = new User();
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateTask;
-
-        if (authState.User.Identity.IsAuthenticated)
-        {
-            User = await authService.GetAuthenticatedUser();
-        }
-    }
-}
