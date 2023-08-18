@@ -35,7 +35,5 @@ namespace Spark.Console.Shared
             string restOfString = value[1..];
             return firstChar + restOfString;
         }
-
-
     }
 }
