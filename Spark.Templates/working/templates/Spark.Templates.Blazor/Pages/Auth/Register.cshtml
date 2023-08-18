@@ -1,5 +1,5 @@
 ﻿@page "/register"
-@model Spark.Templates.Blazor.Pages.Auth.RegisterModel
+@model Register
 @{
 	Layout = "_AuthLayout";
 	ViewData["Title"] = "Register";
@@ -18,39 +18,39 @@
 				@Html.ValidationSummary()
 			</div>
 			<div>
-				<label asp-for="Input.Name" class="block font-medium text-sm text-gray-700">Name</label>
+				<label asp-for="Model.Name" class="block font-medium text-sm text-gray-700">Name</label>
 				<div class="mt-1">
-					<input asp-for="Input.Name" type="text" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Model.Name" type="text" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
-					@Html.ValidationMessageFor(m => m.Input.Name)
+					@Html.ValidationMessageFor(m => m.Model.Name)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="Input.Email" class="block font-medium text-sm text-gray-700">Email address</label>
+				<label asp-for="Model.Email" class="block font-medium text-sm text-gray-700">Email address</label>
 				<div class="mt-1">
-					<input asp-for="Input.Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Model.Email" type="email" autocomplete="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
-					@Html.ValidationMessageFor(m => m.Input.Email)
+					@Html.ValidationMessageFor(m => m.Model.Email)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="Input.Password" class="block font-medium text-sm text-gray-700">Password</label>
+				<label asp-for="Model.Password" class="block font-medium text-sm text-gray-700">Password</label>
 				<div class="mt-1">
-					<input asp-for="Input.Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Model.Password" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-500 text-sm">
-					@Html.ValidationMessageFor(m => m.Input.Password)
+					@Html.ValidationMessageFor(m => m.Model.Password)
 				</div>
 			</div>
 			<div class="mt-8">
-				<label asp-for="Input.ConfirmPassword" class="block text-sm font-medium text-gray-700">Comfirm password</label>
+				<label asp-for="Model.ConfirmPassword" class="block text-sm font-medium text-gray-700">Comfirm password</label>
 				<div class="mt-1">
-					<input asp-for="Input.ConfirmPassword" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
+					<input asp-for="Model.ConfirmPassword" type="password" autocomplete="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
 				</div>
 				<div class="mt-1 text-red-300 text-sm">
-					@Html.ValidationMessageFor(m => m.Input.ConfirmPassword)
+					@Html.ValidationMessageFor(m => m.Model.ConfirmPassword)
 				</div>
 			</div>
 			<div class="mt-8 flex justify-end items-center">
@@ -75,32 +75,32 @@
 		<form method="post">
 			@Html.ValidationSummary()
 			<div>
-				<label asp-for="Input.Name">
+				<label asp-for="Model.Name">
 					Name
 				</label>
-				<input asp-for="Input.Name" type="text" required />
-				<small>@Html.ValidationMessageFor(m => m.Input.Name)</small>
+				<input asp-for="Model.Name" type="text" required />
+				<small>@Html.ValidationMessageFor(m => m.Model.Name)</small>
 			</div>
 			<div>
-				<label asp-for="Input.Email">
+				<label asp-for="Model.Email">
 					Email address
 				</label>
-				<input asp-for="Input.Email" type="email" autocomplete="email" required />
-				<small>@Html.ValidationMessageFor(m => m.Input.Email)</small>
+				<input asp-for="Model.Email" type="email" autocomplete="email" required />
+				<small>@Html.ValidationMessageFor(m => m.Model.Email)</small>
 			</div>
 			<div>
-				<label asp-for="Input.Password">
+				<label asp-for="Model.Password">
 					Password
 				</label>
-				<input asp-for="Input.Password" type="password" autocomplete="current-password" required />
-				<small>@Html.ValidationMessageFor(m => m.Input.Password)</small>
+				<input asp-for="Model.Password" type="password" autocomplete="current-password" required />
+				<small>@Html.ValidationMessageFor(m => m.Model.Password)</small>
 			</div>
 			<div>
-				<label asp-for="Input.ConfirmPassword">
+				<label asp-for="Model.ConfirmPassword">
 					Comfirm Password
 				</label>
-				<input asp-for="Input.ConfirmPassword" type="password" autocomplete="current-password" required />
-				<small>@Html.ValidationMessageFor(m => m.Input.ConfirmPassword)</small>
+				<input asp-for="Model.ConfirmPassword" type="password" autocomplete="current-password" required />
+				<small>@Html.ValidationMessageFor(m => m.Model.ConfirmPassword)</small>
 			</div>
 			<div class="grid">
 				<button type="submit">
@@ -132,24 +132,24 @@
 				</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="Input.Name" class="form-label">Name</label>
-				<input asp-for="Input.Name" type="text" class="form-control" required>
-				<small class="text-danger">@Html.ValidationMessageFor(m => m.Input.Name)</small>
+				<label asp-for="Model.Name" class="form-label">Name</label>
+				<input asp-for="Model.Name" type="text" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.Name)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="Input.Email" class="form-label">Email address</label>
-				<input asp-for="Input.Email" type="email" class="form-control" required>
-				<small class="text-danger">@Html.ValidationMessageFor(m => m.Input.Email)</small>
+				<label asp-for="Model.Email" class="form-label">Email address</label>
+				<input asp-for="Model.Email" type="email" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.Email)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="Input.Password" class="form-label">Password</label>
-				<input asp-for="Input.Password" type="password" autocomplete="current-password" class="form-control" required>
-				<small class="text-danger">@Html.ValidationMessageFor(m => m.Input.Password)</small>
+				<label asp-for="Model.Password" class="form-label">Password</label>
+				<input asp-for="Model.Password" type="password" autocomplete="current-password" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.Password)</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="Input.ConfirmPassword" class="form-label">Confirm password</label>
-				<input asp-for="Input.ConfirmPassword" type="password" autocomplete="current-password" class="form-control" required>
-				<small class="text-danger">@Html.ValidationMessageFor(m => m.Input.ConfirmPassword)</small>
+				<label asp-for="Model.ConfirmPassword" class="form-label">Confirm password</label>
+				<input asp-for="Model.ConfirmPassword" type="password" autocomplete="current-password" class="form-control" required>
+				<small class="text-danger">@Html.ValidationMessageFor(m => m.Model.ConfirmPassword)</small>
 			</div>
 			<button type="submit" class="btn btn-primary">Create account</button>
 		</form>

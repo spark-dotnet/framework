@@ -1,16 +1,15 @@
 ﻿using Spark.Templates.Blazor.Application.Models;
 using Coravel.Events.Interfaces;
 
-namespace Spark.Templates.Blazor.Application.Events
+namespace Spark.Templates.Blazor.Application.Events;
+
+
+public class UserCreated : IEvent
 {
+    public User User { get; set; }
 
-    public class UserCreated : IEvent
+    public UserCreated(User user)
     {
-        public User User { get; set; }
-
-        public UserCreated(User user)
-        {
-            this.User = user;
-        }
+        this.User = user;
     }
 }

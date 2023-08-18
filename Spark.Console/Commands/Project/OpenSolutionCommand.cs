@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Commands.Project
+namespace Spark.Console.Commands.Project;
+
+internal class OpenSolutionCommand
 {
-    internal class OpenSolutionCommand
+    public void Execute()
     {
-        public void Execute()
-        {
-            string appName = UserApp.GetAppName();
-            char dirSep = Path.DirectorySeparatorChar;
-            Process.Start(new ProcessStartInfo($@"{Directory.GetCurrentDirectory()}{dirSep}{appName}.sln") { UseShellExecute = true });
-        }
+        string appName = UserApp.GetAppName();
+        char dirSep = Path.DirectorySeparatorChar;
+        Process.Start(new ProcessStartInfo($@"{Directory.GetCurrentDirectory()}{dirSep}{appName}.sln") { UseShellExecute = true });
     }
 }

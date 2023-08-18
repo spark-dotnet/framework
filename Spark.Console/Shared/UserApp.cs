@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Shared
-{
-    public class UserApp
-    {
-        public static string GetAppName() =>
-            Directory.GetCurrentDirectory().Replace("/", "\\").Split('\\').Last();
+namespace Spark.Console.Shared;
 
-        public static string FindSolutionName()
-        {
-            var currentDir = Directory.GetCurrentDirectory();
-            return "";
-        }
+public class UserApp
+{
+    public static string GetAppName() =>
+        Directory.GetCurrentDirectory().Replace("/", "\\").Split('\\').Last();
+
+    public static string FindSolutionName()
+    {
+        var currentDir = Directory.GetCurrentDirectory();
+        return "";
     }
 }

@@ -39,8 +39,3 @@
     </article>
 </section>
 //#endif
-@code {
-    [CascadingParameter]
-    public MainLayout? Layout { get; set; }
-    private User? user => Layout.User;
-}

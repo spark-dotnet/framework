@@ -29,22 +29,21 @@ namespace Spark.Console.Commands.Jobs
         {
             string content = $@"using Coravel.Invocable;
 
-namespace {appName}.Application.Jobs
+namespace {appName}.Application.Jobs;
+
+public class {jobName} : IInvocable
 {{
-    public class {jobName} : IInvocable
+
+    public {jobName}()
     {{
-
-        public {jobName}()
-        {{
-        }}
-
-        public Task Invoke()
-        {{
-            Console.WriteLine(""Do something in the background."");
-            return Task.CompletedTask;
-        }}
-
     }}
+
+    public Task Invoke()
+    {{
+        Console.WriteLine(""Do something in the background."");
+        return Task.CompletedTask;
+    }}
+
 }}";
             return Files.WriteFileIfNotCreatedYet(JobPath, jobName + ".cs", content);
         }

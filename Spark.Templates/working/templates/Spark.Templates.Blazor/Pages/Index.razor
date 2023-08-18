@@ -1,5 +1,4 @@
 ﻿@page "/"
-@inject ILogger logger
 
 <PageTitle>Home page</PageTitle>
 
@@ -48,10 +47,3 @@
     </article>
 </section>
 //#endif
-@code {
-
-    protected override async Task OnInitializedAsync()
-    {
-        logger.Information($"Initialized at {DateTime.Now}");
-    }
-}

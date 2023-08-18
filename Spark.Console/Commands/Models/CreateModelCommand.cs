@@ -5,41 +5,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Commands.Models
+namespace Spark.Console.Commands.Models;
+
+public class CreateModelCommand
 {
-    public class CreateModelCommand
+    private readonly static string ModelPath = $"./Application/Models";
+    public void Execute(string modelName)
     {
-        private readonly static string ModelPath = $"./Application/Models";
-        public void Execute(string modelName)
+        string appName = UserApp.GetAppName();
+
+        ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new model" });
+
+        bool wasGenerated = CreateModelFile(appName, modelName);
+
+        if (!wasGenerated)
         {
-            string appName = UserApp.GetAppName();
-
-            ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new model" });
-
-            bool wasGenerated = CreateModelFile(appName, modelName);
-
-            if (!wasGenerated)
-            {
-                ConsoleOutput.WarningAlert(new List<string>() { $"{ModelPath}/{modelName}.cs already exists. Nothing done." });
-            }
-            else
-            {
-                ConsoleOutput.SuccessAlert(new List<string>() { $"{ModelPath}/{modelName}.cs generated!" });
-            }
+            ConsoleOutput.WarningAlert(new List<string>() { $"{ModelPath}/{modelName}.cs already exists. Nothing done." });
         }
-
-        private bool CreateModelFile(string appName, string modelName)
+        else
         {
-            string content = $@"using Spark.Library.Database;
+            ConsoleOutput.SuccessAlert(new List<string>() { $"{ModelPath}/{modelName}.cs generated!" });
+        }
+    }
 
-namespace {appName}.Application.Models
+    private bool CreateModelFile(string appName, string modelName)
+    {
+        string content = $@"using Spark.Library.Database;
+
+namespace {appName}.Application.Models;
+
+public class {modelName} : BaseModel
 {{
-    public class {modelName} : BaseModel
-    {{
 
-    }}
 }}";
-            return Files.WriteFileIfNotCreatedYet(ModelPath, modelName + ".cs", content);
-        }
+        return Files.WriteFileIfNotCreatedYet(ModelPath, modelName + ".cs", content);
     }
 }

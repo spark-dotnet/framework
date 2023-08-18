@@ -8,6 +8,11 @@
 }
 //#endif
 
+.validation-message {
+	color: red;
+	font-size: .9rem;
+}
+
 #blazor-error-ui {
 	background: lightyellow;
 	bottom: 0;

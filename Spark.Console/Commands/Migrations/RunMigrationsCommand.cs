@@ -6,15 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spark.Console.Commands.Migrations
+namespace Spark.Console.Commands.Migrations;
+
+public class RunMigrationsCommand
 {
-    public class RunMigrationsCommand
+    public void Execute()
     {
-        public void Execute()
-        {
-            ConsoleOutput.StartAlert(new List<string>() { "Running Blazor Spark migrations" });
-            Process.Start("dotnet", "ef database update").WaitForExit();
-            ConsoleOutput.SuccessAlert(new List<string>() { "Blazor Spark migrations ran" });
-        }
+        ConsoleOutput.StartAlert(new List<string>() { "Running Spark migrations" });
+        Process.Start("dotnet", "ef database update").WaitForExit();
+        ConsoleOutput.SuccessAlert(new List<string>() { "Spark migrations ran" });
     }
 }

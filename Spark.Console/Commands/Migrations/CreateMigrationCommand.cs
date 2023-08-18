@@ -7,18 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Spark.Console.Commands.Migrations
+namespace Spark.Console.Commands.Migrations;
+
+public class CreateMigrationCommand
 {
-    public class CreateMigrationCommand
+    private readonly static string MigrationPath = $"./Application/Database/Migrations";
+    public void Execute(string migrationName)
     {
-        private readonly static string MigrationPath = $"./Application/Database/Migrations";
-        public void Execute(string migrationName)
-        {
-            ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new migration" });
-            Process.Start("dotnet", $"ef migrations add {migrationName} -o {MigrationPath}").WaitForExit();
-            ConsoleOutput.SuccessAlert(new List<string>() {
-                $"Blazor Spark migration {migrationName} created",
-            });
-        }
+        ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new migration" });
+        Process.Start("dotnet", $"ef migrations add {migrationName} -o {MigrationPath}").WaitForExit();
+        ConsoleOutput.SuccessAlert(new List<string>() {
+            $"Spark migration {migrationName} created",
+        });
     }
 }
