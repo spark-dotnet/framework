@@ -93,12 +93,12 @@ public class CreatePagesCommand
 
 <h1 class=""font-bold text-xl"">All {pluralModel}</h1>
 
-<a href=""/{lowerPluralModel}/create"" class=""text-blue-500 hover:underline"">Create →</a>
+<a href=""/{pageKebab}/create"" class=""text-blue-500 hover:underline"">Create →</a>
 <ul class=""space-y-2 list-disc list-inside mt-6"">
     @foreach (var {lowerSingularModel} in Model)
     {{
         <li>
-            (<a class=""text-blue-500 hover:underline"" href=""/{lowerPluralModel}/@{lowerSingularModel}.Id"">View</a> · <a class=""text-blue-500 hover:underline"" href=""/{lowerPluralModel}/@{lowerSingularModel}.Id/edit"">Edit</a>)
+            (<a class=""text-blue-500 hover:underline"" href=""/{pageKebab}/@{lowerSingularModel}.Id"">View</a> · <a class=""text-blue-500 hover:underline"" href=""/{pageKebab}/@{lowerSingularModel}.Id/edit"">Edit</a>)
         </li>
     }}
 </ul>
@@ -162,7 +162,7 @@ public class {indexModelName}
 <EditForm Model=""Model"" OnValidSubmit=""Store"" class=""mt-4 space-y-4 max-w-sm"">
 	<DataAnnotationsValidator />
 	<div class=""flex justify-between"">
-		<a href=""/{lowerPluralModel}"" class=""px-2 py-1 text-black bg-gray-300"">Cancel</a>
+		<a href=""/{pageKebab}"" class=""px-2 py-1 text-black bg-gray-300"">Cancel</a>
 		<button type=""submit"" class=""px-2 py-1 text-white bg-blue-500"">Save</button>
 	</div>
 </EditForm>
@@ -205,7 +205,7 @@ public partial class Create
         var {lowerSingularModel} = new {modelName}();
         mapper.Map(Model, {lowerSingularModel});
         db.{pluralModel}.Save({lowerSingularModel});
-        NavigationManager.NavigateTo(""/{lowerPluralModel}"");
+        NavigationManager.NavigateTo(""/{pageKebab}"");
     }}
 
 }}
@@ -233,7 +233,7 @@ public class {createModelName}
 <EditForm Model=""Model"" OnValidSubmit=""Update"" class=""mt-4 space-y-4 max-w-sm"">
 	<DataAnnotationsValidator />
 	<div class=""flex justify-between"">
-		<a href=""/{lowerPluralModel}"" class=""px-2 py-1 text-black bg-gray-300"">Cancel</a>
+		<a href=""/{pageKebab}"" class=""px-2 py-1 text-black bg-gray-300"">Cancel</a>
 		<button type=""submit"" class=""px-2 py-1 text-white bg-blue-500"">Update</button>
 	</div>
 </EditForm>
@@ -281,7 +281,7 @@ public partial class Edit
         var {lowerSingularModel} = db.{pluralModel}.Find(Model.Id);
         mapper.Map(Model, {lowerSingularModel});
         db.{pluralModel}.Save({lowerSingularModel});
-        NavigationManager.NavigateTo(""/{lowerPluralModel}"");
+        NavigationManager.NavigateTo(""/{pageKebab}"");
     }}
 
 }}
@@ -308,7 +308,7 @@ public class {editModelName}
 <PageTitle>{modelName} @Model.Id</PageTitle>
 
 <h1 class=""font-bold text-xl"">{modelName} @Model.Id</h1>
-<a href=""/{lowerPluralModel}"" class=""text-blue-500 hover:underline"">back to all →</a>
+<a href=""/{pageKebab}"" class=""text-blue-500 hover:underline"">back to all →</a>
 
 <button @onclick=""Delete"" class=""px-2 py-1 text-white bg-blue-500 mt-2"">Delete</button>
 ";
@@ -354,7 +354,7 @@ public partial class Show
         using var db = Factory.CreateDbContext();
         var {lowerSingularModel} = db.{pluralModel}.Find(Id);
         db.{pluralModel}.Delete({lowerSingularModel});
-        NavigationManager.NavigateTo(""/{lowerPluralModel}"");
+        NavigationManager.NavigateTo(""/{pageKebab}"");
     }}
 
 }}
