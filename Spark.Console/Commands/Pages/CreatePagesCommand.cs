@@ -5,17 +5,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Spark.Console.Commands.Pages;
 
 public class CreatePagesCommand
 {
     private readonly static string PagePath = $"./Pages";
-
+    private readonly static string ModelPath = $"./Application/Models";
     public void Execute(string modelName)
     {
         string appName = UserApp.GetAppName();
+        // Get the class name and properties from the model
+        ModelInfo modelInfo = ModelExtractor.ExtractModelInfo($"{ModelPath}/{modelName}.cs");
 
         ConsoleOutput.GenerateAlert(new List<string>() { $"Creating pages for {modelName}" });
 
