@@ -1,8 +1,3 @@
 ﻿{
     "$schema": "http://json.schemastore.org/dotnetcli.host",
-    "symbolInfo": {
-        "Css": {
-            "longName": "css"
-        }
-    }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Spark.Library.Auth;
 using Spark.Templates.Blazor.Application.Jobs;
 using Spark.Library.Mail;
+using Vite.AspNetCore.Extensions;
 
 namespace Spark.Templates.Blazor.Application.Startup;
 
@@ -18,6 +19,7 @@ public static class AppServiceRegistration
     public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddCustomServices();
+        services.AddViteServices();
         services.AddRazorPages();
         services.AddServerSideBlazor();
         services.AddDatabase<DatabaseContext>(config);
@@ -40,9 +42,9 @@ public static class AppServiceRegistration
         // add custom services
         services.AddScoped<UsersService>();
         services.AddScoped<RolesService>();
-			services.AddScoped<IAuthValidator, AuthValidator>();
-			services.AddScoped<AuthService>();
-			return services;
+		services.AddScoped<IAuthValidator, AuthValidator>();
+		services.AddScoped<AuthService>();
+		return services;
     }
 
     private static IServiceCollection AddEventServices(this IServiceCollection services)
