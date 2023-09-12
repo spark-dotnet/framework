@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageTags>Blazor, MVC, Razor, Templates, Framework, UI</PackageTags>
-    <PackageVersion>0.8.1</PackageVersion>
+    <PackageTags>Blazor, API, Templates, Framework, UI</PackageTags>
+    <PackageVersion>0.9.0</PackageVersion>
     <PackageId>Spark.Templates</PackageId>
     <Title>Spark.NET Templates</Title>
     <Authors>Weston Walker</Authors>
@@ -30,11 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="templates\Spark.Templates.Mvc\.env.example" />
-    <None Remove="templates\Spark.Templates.Mvc\README.md" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\Media\icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -54,6 +49,7 @@
 
   <ItemGroup>
     <Folder Include="templates\Spark.Templates.Api\Application\Database\Migrations\" />
+    <Folder Include="templates\Spark.Templates.Blazor\Application\Database\Migrations\" />
   </ItemGroup>
 
 </Project>

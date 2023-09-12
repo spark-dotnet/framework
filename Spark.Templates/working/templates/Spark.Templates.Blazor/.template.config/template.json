@@ -11,44 +11,17 @@
         "language": "C#",
         "type": "project"
     },
-    "symbols": {
-        "Css": {
-            "type": "parameter",
-            "datatype": "choice",
-            "defaultValue": "Tailwind",
-            "choices": [
-                {
-                    "choice": "Tailwind",
-                    "description": "Tailwind CSS"
-                },
-                {
-                    "choice": "Bootstrap",
-                    "description": "Bootstrap CSS"
-                },
-                {
-                    "choice": "Pico",
-                    "description": "Pico"
-                }
-            ]
-        },
-        "IsTailwind": {
-            "type": "computed",
-            "value": "(Css == \"Tailwind\")"
-        },
-        "IsBootstrap": {
-            "type": "computed",
-            "value": "(Css == \"Bootstrap\")"
-        },
-        "IsPico": {
-            "type": "computed",
-            "value": "(Css == \"Pico\")"
-        }
-    },
     "sources": [
         {
             "modifiers": [
                 {
                     "exclude": [ ".vs/**" ]
+                },
+                {
+                    "exclude": [ "node_modules/**" ]
+                },
+                {
+                    "exclude": [ ".idea/**" ]
                 }
             ]
         }

@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://spark-framework.net/</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/spark-dotnet/framework</RepositoryUrl>
-	<PackageVersion>0.7.0</PackageVersion>
+	<PackageVersion>0.9.0</PackageVersion>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>

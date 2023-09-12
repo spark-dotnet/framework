@@ -1,5 +1,4 @@
-﻿﻿//#if (IsTailwind)
-<nav class="container w-full max-w-6xl mx-auto px-6" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
+﻿<nav class="container w-full max-w-6xl mx-auto px-6" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
 	<div class="flex justify-between items-center">
 		<ul>
 			<li class="py-4">
@@ -64,67 +63,3 @@
 		</div>
 	</div>
 </nav>
-//#endif
-﻿//#if (IsPico)
-<nav class="container" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
-	<ul>
-		<li>
-			<a href="/" class="contrast">
-				<ApplicationLogo />
-			</a>
-		</li>
-	</ul>
-	<ul>
-		<AuthorizeView>
-			<Authorized>
-				<li>
-					<details role="list" dir="rtl">
-						<summary aria-haspopup="listbox" role="link">Account</summary>
-						<ul role="listbox">
-							<li><a href="/dashboard">Dashboard</a></li>
-							<li><a href="/profile/edit">Profile</a></li>
-							<li><a href="/logout">Logout</a></li>
-							<li><small>@user.Name</small></li>
-						</ul>
-					</details>
-				</li>
-			</Authorized>
-			<NotAuthorized>
-				<li><a href="/login">Login</a></li>
-				<li><a href="/register" role="button">Register</a></li>
-			</NotAuthorized>
-		</AuthorizeView>
-	</ul>
-</nav>
-//#endif
-﻿//#if (IsBootstrap)
-<nav class="navbar container">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="/">
-			<ApplicationLogo />
-		</a>
-		<AuthorizeView>
-			<Authorized>
-				<div class="btn-group dropstart">
-					<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-						Account
-					</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-						<li><a class="dropdown-item" href="/profile/edit">Profile</a></li>
-						<li><a class="dropdown-item" href="/logout">Logout</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li class=""><small class="p-2">@user.Name</small></li>
-					</ul>
-				</div>
-			</Authorized>
-			<NotAuthorized>
-				<div class="">
-					<a href="/login" class="me-3">Login</a>
-					<a href="/register" class="btn btn-primary">Register</a>
-				</div>
-			</NotAuthorized>
-		</AuthorizeView>
-	</div>
-</nav>
-//#endif

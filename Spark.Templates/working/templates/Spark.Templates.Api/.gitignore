@@ -5,6 +5,8 @@
 
 *.db
 *.env
+wwwroot/build/*
+.idea/
 
 # User-specific files
 *.rsuser

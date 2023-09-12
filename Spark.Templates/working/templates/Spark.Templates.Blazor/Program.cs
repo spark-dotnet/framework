@@ -1,12 +1,12 @@
 using Spark.Library.Environment;
 using Spark.Library.Config;
 using Spark.Templates.Blazor.Application.Startup;
+using Vite.AspNetCore.Extensions;
 
 EnvManager.LoadConfig();
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetupSparkConfig();
-
 
 // Add all services to the container.
 builder.Services.AddAppServices(builder.Configuration);
@@ -24,6 +24,7 @@ if (!app.Environment.IsDevelopment())
 if (app.Environment.IsDevelopment())
 {
 	// Do something only in dev environments
+	app.UseViteDevMiddleware();
 }
 
 app.UseHttpsRedirection();
