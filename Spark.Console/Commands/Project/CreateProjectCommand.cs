@@ -13,7 +13,7 @@ public class CreateProjectCommand
 {
 	private readonly static string ProjectPath = $"./";
 
-	public void Execute(string projectName, string cssFramework, string projectType)
+	public void Execute(string projectName, string projectType)
 	{
 		if (String.IsNullOrEmpty(projectName))
 		{
@@ -25,21 +25,12 @@ public class CreateProjectCommand
 		{
 			if (!ProjectTypes.IsValid(projectType))
 			{
-				ConsoleOutput.ErrorAlert(new List<string>() { $"Invalid project type. Valid values: blazor, mvc, razor, api" });
+				ConsoleOutput.ErrorAlert(new List<string>() { $"Invalid project type. Valid values: blazor, api" });
 				return;
 			}
 			template = ProjectTypes.TranslateProjectTypeToTemplate(projectType);
 		}
 		var command = $"new {template} -n {projectName} -o {projectName}";
-		if (!String.IsNullOrEmpty(cssFramework))
-		{
-			if (!CssFrameworks.IsValid(cssFramework))
-			{
-				ConsoleOutput.ErrorAlert(new List<string>() { $"Invalid css framework. Valid values: tailwind, bootstrap, pico" });
-				return;
-			}
-			command += $" --Css {cssFramework}";
-		}
 		ConsoleOutput.StartAlert(new List<string>() { $"Creating a Spark project at \"./{projectName}\"" });
 		Process.Start("dotnet", command).WaitForExit();
 		ConsoleOutput.SuccessAlert(new List<string>() {
