@@ -40,7 +40,7 @@ namespace Spark.Templates.Api.Application.Controllers
             if (user == null)
             {
                 ModelState.AddModelError("FailedLogin", "Login Failed: Your email or password was incorrect");
-                return View();
+                return BadRequest(ModelState);
             }
             
             var token = await _authService.CreateJwtToken(user);
