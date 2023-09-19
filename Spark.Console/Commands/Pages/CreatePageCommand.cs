@@ -13,22 +13,63 @@ public class CreatePageCommand
 {
     private readonly static string PagePath = $"./Pages";
 
-    public void Execute(string pageName)
+    public void Execute(string pageName, bool isInline = false)
     {
         string appName = UserApp.GetAppName();
 
         ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new Page" });
-
-        bool wasGenerated = CreatePageFile(appName, pageName);
-
-        if (!wasGenerated)
+        bool wasGenerated;
+        if (isInline)
         {
-            ConsoleOutput.WarningAlert(new List<string>() { $"{PagePath}/{pageName}.razor already exists. Nothing done." });
+            wasGenerated = CreatePageFileInline(appName, pageName);
+            if (!wasGenerated)
+            {
+                ConsoleOutput.WarningAlert(new List<string>() { $"{PagePath}/{pageName}.razor already exists. Nothing done." });
+            }
+            else
+            {
+                ConsoleOutput.SuccessAlert(new List<string>() { $"{PagePath}/{pageName}.razor generated!" });
+            }
         }
         else
         {
-            ConsoleOutput.SuccessAlert(new List<string>() { $"{PagePath}/{pageName}.razor and {PagePath}/{pageName}.razor.cs generated!" });
+            wasGenerated = CreatePageFile(appName, pageName);
+            if (!wasGenerated)
+            {
+                ConsoleOutput.WarningAlert(new List<string>() { $"{PagePath}/{pageName}.razor already exists. Nothing done." });
+            }
+            else
+            {
+                ConsoleOutput.SuccessAlert(new List<string>() { $"{PagePath}/{pageName}.razor and {PagePath}/{pageName}.cs generated!" });
+            }
         }
+    }
+    
+    
+    private bool CreatePageFileInline(string appName, string pageFilePath)
+    {
+        var paths = pageFilePath.Split('/');
+        var fileName = paths.Last();
+        var finalPath = PagePath;
+        if (paths.Count() > 1)
+        {
+            var justFolders = pageFilePath.Replace($"/{fileName}", "");
+            finalPath += $"/{justFolders}";
+        }
+        var pageKebab = pageFilePath.PascalToKebabCase();
+
+        string content = $@"@page ""/{pageKebab}""
+
+<h1>My Page</h1>
+
+@code {{
+    protected override void OnInitialized()
+    {{
+        
+    }}
+}}
+";
+        return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".razor", content);
     }
 
     private bool CreatePageFile(string appName, string pageFilePath)
@@ -63,6 +104,6 @@ public partial class {fileName.ToUpperFirst()}
 
 }}
 ";
-        return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".razor.cs", codeBehindContent);
+        return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".cs", codeBehindContent);
     }
 }
