@@ -1,0 +1,39 @@
+﻿<CascadingValue Value="@PageState">
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layouts.MainLayout)"/>
+        </Found>
+    </Router>
+</CascadingValue>
+
+@code {
+
+    [CascadingParameter]
+    public HttpContext Context { get; set; }
+    public PageState PageState = new();
+
+    private User? User = new();
+    private string AppName = "";
+
+    [Inject]
+    public AuthService AuthService { get; set; } = default!;
+
+    [Inject]
+    public IConfiguration Config { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Context!.User.Identity!.IsAuthenticated)
+        {
+            User = await AuthService.GetAuthenticatedUser(Context!.User);
+            if (User != null)
+            {
+                User.IsAuthenticated = Context.User.Identity.IsAuthenticated;
+            }
+
+            PageState.User = User;
+        }
+
+        AppName = Config.GetValue<string>("Spark:App:Name")!;
+    }
+}

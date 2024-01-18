@@ -1,0 +1,52 @@
+﻿@code {
+
+	[CascadingParameter] public PageState PageState { get; set; } = default!;
+
+}
+
+<nav class="navbar px-4 sm:px-12 max-w-6xl mx-auto" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
+	<div class="flex-1">
+		<a href="/">
+			<ApplicationLogo/>
+		</a>
+	</div>
+	<div class="flex-none">
+		<ul class="menu menu-horizontal px-1">
+			@if (PageState.User.IsAuthenticated)
+			{
+				<li>
+					<details>
+						<summary>
+							@PageState.User.Name
+						</summary>
+						<ul class="p-2 bg-base-100 rounded-t-none z-10">
+							<li>
+								<a href="/dashboard">Dashboard</a>
+							</li>
+							<li>
+								<a href="/profile/edit" >Profile</a>
+							</li>
+							<li>
+			                    <form action="/logout" method="post" hx-boost="false">
+			                        <AntiforgeryToken />
+			                        <button type="submit">
+				                        Logout
+			                        </button>
+			                    </form>
+							</li>
+						</ul>
+					</details>
+				</li>
+			}
+			else
+			{
+				<li>
+					<a href="/login">Login</a>
+				</li>
+				<li>
+					<a href="/register">Register</a>
+				</li>
+			}
+		</ul>
+	</div>
+</nav>

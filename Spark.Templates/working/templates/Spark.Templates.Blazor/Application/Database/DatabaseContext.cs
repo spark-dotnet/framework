@@ -1,6 +1,5 @@
 ﻿using Spark.Templates.Blazor.Application.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace Spark.Templates.Blazor.Application.Database;
 

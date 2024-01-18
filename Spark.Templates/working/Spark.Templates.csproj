@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageTags>Blazor, API, Templates, Framework, UI</PackageTags>
-    <PackageVersion>0.9.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <PackageId>Spark.Templates</PackageId>
     <Title>Spark.NET Templates</Title>
     <Authors>Weston Walker</Authors>
@@ -48,7 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="templates\Spark.Templates.Api\Application\Database\Migrations\" />
     <Folder Include="templates\Spark.Templates.Blazor\Application\Database\Migrations\" />
   </ItemGroup>
 

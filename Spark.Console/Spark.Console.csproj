@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 	<PackAsTool>true</PackAsTool>
 	<ToolCommandName>spark</ToolCommandName>
 	<PackageOutputPath>./nupkg</PackageOutputPath>
-	<PackageVersion>0.9.1</PackageVersion>
+	<PackageVersion>1.0.2</PackageVersion>
 	<PackageId>Spark.CLI</PackageId>
 	<Title>Spark.NET CLI</Title>
 	<Authors>Weston Walker</Authors>

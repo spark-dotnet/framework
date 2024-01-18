@@ -1,30 +1,28 @@
 ﻿using Spark.Templates.Blazor.Application.Database;
 using Spark.Templates.Blazor.Application.Models;
-using Spark.Templates.Blazor.Application.Startup; 
+using Spark.Templates.Blazor.Application.Startup;
 using Microsoft.EntityFrameworkCore;
 
 namespace Spark.Templates.Blazor.Application.Services.Auth;
 
 public class RolesService
 {
-    private readonly IDbContextFactory<DatabaseContext> _factory;
+    private readonly DatabaseContext _db;
 
-    public RolesService(IDbContextFactory<DatabaseContext> factory)
+    public RolesService(DatabaseContext db)
     {
-        _factory = factory;
+        _db = db;
     }
 
     public async Task<List<Role>> FindUserRolesAsync(int userId)
     {
-        using var context = _factory.CreateDbContext();
-        var roles = await context.Roles.Where(role => role.UserRoles.Any(x => x.UserId == userId)).ToListAsync();
+        var roles = await _db.Roles.Where(role => role.UserRoles.Any(x => x.UserId == userId)).ToListAsync();
         return roles;
     }
 
     public async Task<bool> IsUserInRole(int userId, string roleName)
     {
-        using var context = _factory.CreateDbContext();
-        var userRolesQuery = from role in context.Roles
+        var userRolesQuery = from role in _db.Roles
                              where role.Name == roleName
                              from user in role.UserRoles
                              where user.UserId == userId
@@ -35,12 +33,11 @@ public class RolesService
 
     public async Task<List<User>> FindUsersInRoleAsync(string roleName)
     {
-        using var context = _factory.CreateDbContext();
-        var roleUserIdsQuery = from role in context.Roles
+        var roleUserIdsQuery = from role in _db.Roles
                                where role.Name == roleName
                                from user in role.UserRoles
                                select user.UserId;
-        return await context.Users.Where(user => roleUserIdsQuery.Contains(user.Id))
+        return await _db.Users.Where(user => roleUserIdsQuery.Contains(user.Id))
             .ToListAsync();
     }
 }

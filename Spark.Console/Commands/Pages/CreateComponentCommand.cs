@@ -11,40 +11,23 @@ namespace Spark.Console.Commands.Pages;
 
 public class CreateComponentCommand
 {
-    private readonly static string ComponentPath = $"./Pages/Shared";
+    private readonly static string ComponentPath = $"./Pages/Components";
 
-    public void Execute(string componentName, bool isInline = false)
+    public void Execute(string componentName)
     {
         string appName = UserApp.GetAppName();
 
         ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new Blazor Component" });
 
-        bool wasGenerated;
-        if (isInline)
-        {
-            wasGenerated = CreateComponentFileInline(appName, componentName);
+        bool wasGenerated = CreateComponentFileInline(appName, componentName);
 
-            if (!wasGenerated)
-            {
-                ConsoleOutput.WarningAlert(new List<string>() { $"{ComponentPath}/{componentName}.razor already exists. Nothing done." });
-            }
-            else
-            {
-                ConsoleOutput.SuccessAlert(new List<string>() { $"{ComponentPath}/{componentName}.razor generated!" });
-            }
+        if (!wasGenerated)
+        {
+            ConsoleOutput.WarningAlert(new List<string>() { $"{ComponentPath}/{componentName}.razor already exists. Nothing done." });
         }
         else
         {
-            wasGenerated = CreateComponentFile(appName, componentName);
-
-            if (!wasGenerated)
-            {
-                ConsoleOutput.WarningAlert(new List<string>() { $"{ComponentPath}/{componentName}.razor already exists. Nothing done." });
-            }
-            else
-            {
-                ConsoleOutput.SuccessAlert(new List<string>() { $"{ComponentPath}/{componentName}.razor and {ComponentPath}/{componentName}.cs generated!" });
-            }
+            ConsoleOutput.SuccessAlert(new List<string>() { $"{ComponentPath}/{componentName}.razor generated!" });
         }
         
     }
@@ -60,49 +43,16 @@ public class CreateComponentCommand
             finalPath += $"/{justFolders}";
         }
 
-        string content = $@"<div>
-</div>
-
-@code {{
+        string content = $@"@code {{
     protected override void OnInitialized()
     {{
         
     }}
 }}
+<div>
+</div>
 ";
         return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".razor", content);
     }
     
-    private bool CreateComponentFile(string appName, string componentFilePath)
-    {
-        var paths = componentFilePath.Split('/');
-        var fileName = paths.Last();
-        var finalPath = ComponentPath;
-        if (paths.Count() > 1)
-        {
-            var justFolders = componentFilePath.Replace($"/{fileName}", "");
-            finalPath += $"/{justFolders}";
-        }
-
-        string content = $@"<div>
-</div>
-";
-        var success = Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".razor", content);
-        
-        if (!success) return false;
-        
-        string namespacePath = finalPath.Replace(".", "").Replace("/", ".");
-        string codeBehindContent = $@"namespace {appName}{namespacePath};
-
-public partial class {fileName.ToUpperFirst()}
-{{
-
-	protected override void OnInitialized()
-	{{
-	}}
-
-}}
-";
-        return Files.WriteFileIfNotCreatedYet($"{finalPath}", fileName.ToUpperFirst() + ".cs", codeBehindContent);
-    }
 }

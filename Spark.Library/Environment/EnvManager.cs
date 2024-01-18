@@ -1,10 +1,9 @@
-﻿namespace Spark.Library.Environment
+﻿namespace Spark.Library.Environment;
+
+public static class EnvManager
 {
-    public static class EnvManager
+    public static void LoadConfig()
     {
-        public static void LoadConfig()
-        {
-            DotNetEnv.Env.Load();
-        }
+        DotNetEnv.Env.Load();
     }
 }
