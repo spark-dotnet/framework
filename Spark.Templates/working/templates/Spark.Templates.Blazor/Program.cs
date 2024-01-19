@@ -1,41 +1,54 @@
-using Spark.Library.Environment;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
 using Spark.Library.Config;
+using Spark.Library.Environment;
+using Spark.Library.Routing;
+using Spark.Templates.Blazor.Application.Database;
 using Spark.Templates.Blazor.Application.Startup;
+using Spark.Templates.Blazor.Pages;
 using Vite.AspNetCore.Extensions;
+
 
 EnvManager.LoadConfig();
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.SetupSparkConfig();
-
-// Add all services to the container.
+builder.Configuration.SetupAppConfig();
 builder.Services.AddAppServices(builder.Configuration);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    db.Database.Migrate();
+}
+
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+    app.UseHsts();
 }
 
 if (app.Environment.IsDevelopment())
 {
-	// Do something only in dev environments
-	app.UseViteDevMiddleware();
+    app.UseViteDevMiddleware();
 }
 
+app.UseSerilogRequestLogging();
+app.UseStatusCodePagesWithRedirects("/status-code/{0}");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
-app.UseRouting();
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
+app.UseSession();
+app.UseAntiforgery();
+app.MapRazorComponents<PageRoutes>();
+app.MapMinimalApis<Program>();
 
-app.Services.RegisterScheduledJobs();
-app.Services.RegisterEvents();
+app.Services.SetupScheduledJobs();
+app.Services.SetupEvents();
 
 app.Run();

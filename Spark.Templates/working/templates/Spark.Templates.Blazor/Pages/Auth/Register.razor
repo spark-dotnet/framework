@@ -1,0 +1,171 @@
+﻿@page "/register"
+@layout AuthLayout
+@code {
+	[Inject] public IConfiguration Configuration { get; set; } = default!;
+	[Inject] public UsersService UsersService { get; set; } = default!;
+	[Inject] public AuthService AuthService { get; set; } = default!;
+	[Inject] public NavigationManager NavigationManager { get; set; } = default!;
+	[Inject] public IDispatcher Dispatcher { get; set; } = default!;
+	
+	// Coming in RC2 [CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
+	[CascadingParameter] HttpContext HttpContext { get; set; } = default!;
+
+	[SupplyParameterFromForm]
+	private RegisterForm Form { get; set; } = new();
+	
+	private string _userExistsMessage = "";
+
+	private async Task RegisterUser()
+	{
+		var existingUser = await UsersService.FindUserByEmailAsync(Form.Email);
+
+		if (existingUser != null)
+		{
+			_userExistsMessage = "Email already in use by another account.";
+			return;
+		}
+
+		var userForm = new User()
+		{
+			Name = Form.Name,
+			Email = Form.Email,
+			Password = UsersService.GetSha256Hash(Form.Password),
+			CreatedAt = DateTime.UtcNow
+		};
+
+		var newUser = await UsersService.CreateUserAsync(userForm);
+
+		// Broadcast user created event. Sends welcome email
+		var userCreated = new UserCreated(newUser);
+		await Dispatcher.Broadcast(userCreated);
+
+		var user = await UsersService.FindUserByCredsAsync(newUser.Email, newUser.Password);
+
+		var cookieExpirationDays = Configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+		var cookieClaims = await AuthService.CreateCookieClaims(user);
+
+		await HttpContext.SignInAsync(
+			CookieAuthenticationDefaults.AuthenticationScheme,
+			cookieClaims,
+			new AuthenticationProperties
+			{
+				IsPersistent = true,
+				IssuedUtc = DateTimeOffset.UtcNow,
+				ExpiresUtc = DateTimeOffset.UtcNow.AddDays(cookieExpirationDays)
+			});
+
+		NavigationManager.NavigateTo("dashboard");
+	}
+
+	public class RegisterForm
+	{
+		public string Name { get; set; } = String.Empty;
+		public string Email { get; set; } = String.Empty;
+		public string Password { get; set; } = String.Empty;
+		public string ConfirmPassword { get; set; } = String.Empty;
+	}
+
+	public class RegisterFormValidator : AbstractValidator<RegisterForm>
+	{
+		private readonly IConfiguration _config;
+		
+		public RegisterFormValidator(IConfiguration config)
+		{
+			_config = config;
+			var minPasswordLength = _config.GetValue<int>("Spark:Auth:Password:MinimumLength", 8);
+			var maxPasswordLength = _config.GetValue<int>("Spark:Auth:Password:MaximumLength", 32);
+			var requireDigit = _config.GetValue<bool>("Spark:Auth:Password:RequireDigit", false);
+			var requireUpper = _config.GetValue<bool>("Spark:Auth:Password:RequireUppercase", false);
+			var requireNonAlphanumeric = _config.GetValue<bool>("Spark:Auth:Password:RequireNonAlphanumeric", false);
+			
+			RuleFor(p => p.Name)
+				.NotEmpty().WithMessage("Name is required");
+			
+			RuleFor(p => p.Email)
+				.NotEmpty().WithMessage("Email address is required")
+				.EmailAddress().WithMessage("Please enter a valid email address");
+			
+			RuleFor(p => p.Password)
+				.NotEmpty().WithMessage("Password is required")
+				.MinimumLength(minPasswordLength).WithMessage($"Password length must be at least {minPasswordLength}.")
+				.MaximumLength(maxPasswordLength).WithMessage($"Password length must not exceed {maxPasswordLength}.");
+
+			if (requireDigit)
+			{
+				RuleFor(p => p.Password)
+					.Matches(@"[0-9]+").WithMessage("Password must contain at least one number.");
+			}
+			if (requireUpper)
+			{
+				RuleFor(p => p.Password)
+					.Matches(@"[A-Z]").WithMessage("Password must contain at least one uppercase letter.");
+			}
+			if (requireNonAlphanumeric)
+			{
+				RuleFor(p => p.Password)
+					.Matches(@"[^a-zA-Z0-9]").WithMessage("Password must contain at least one non-alphanumeric character.");
+			}
+			
+			RuleFor(p => p.ConfirmPassword)
+				.NotEmpty().WithMessage("Confirm password is required")
+				.Equal(model => model.Password).WithMessage("The Password and Confirm Password do not match.");
+		}
+	}
+}
+
+<PageTitle>Register</PageTitle>
+
+<div class="sm:py-12 px-4">
+	<section class="w-full sm:max-w-md mx-auto py-20 flex flex-col justify-center items-center space-y-6">
+		<a href="/">
+			<img src="/images/logo.png" class="h-20 w-auto" />
+		</a>
+		<h1 class="text-center text-3xl font-bold">
+			Create your account
+		</h1>
+		<EditForm Model="Form" OnValidSubmit="@RegisterUser" FormName="RegisterForm" method="post" Enhance class="grid grid-cols-1 gap-y-6 p-6 bg-white mx-auto w-full max-w-md shadow-sm border rounded-md">
+        	<FluentValidationValidator />
+			@if (!String.IsNullOrEmpty(_userExistsMessage))
+			{
+				<div class="mb-1 validation-message">
+					<span>@_userExistsMessage</span>
+				</div>
+			}
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text font-medium">Name</span>
+				</div>
+				<InputText @bind-Value="Form.Name" class="input input-bordered w-full" />
+				<ValidationMessage For="() => Form.Name" />
+            </label>
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text font-medium">Email</span>
+				</div>
+				<InputText @bind-Value="Form.Email" type="email" autocomplete="email" class="input input-bordered w-full" />
+				<ValidationMessage For="() => Form.Email" />
+            </label>
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text font-medium">Password</span>
+				</div>
+				<InputText @bind-Value="Form.Password" type="password" class="input input-bordered w-full" />
+				<ValidationMessage For="() => Form.Password" />
+            </label>
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text font-medium">Confrim Password</span>
+				</div>
+				<InputText @bind-Value="Form.ConfirmPassword" type="password" class="input input-bordered w-full" />
+				<ValidationMessage For="() => Form.ConfirmPassword" />
+            </label>
+            <div class="flex justify-between items-center">
+	            <a href="/login" class="link text-sm mr-2">Already registered?</a>
+	            <button type="submit" class="btn btn-neutral">
+				    <span class="loading loading-spinner loading-xs htmx-indicator"></span>
+				    Create account
+	            </button>
+            </div>
+		</EditForm>
+	</section>
+</div>

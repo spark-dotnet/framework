@@ -47,6 +47,12 @@ class Program
             )
         );
 
+        app.Command("dev", config =>
+            config.OnExecute(() =>
+                new DevCommand().Execute()
+            )
+        );
+
         app.Command("new", config =>
         {
             config.OnExecute(() =>
@@ -145,42 +151,21 @@ class Program
             config.Command("page", pageConfig =>
             {
                 
-                // var projectType = config.Option("--type", "Projec type of the new Spark project", CommandOptionType.SingleValue);
-                // config.OnExecute(() =>
-                // {
-                //     string project = projectName.Value ?? null;
-                //     new CreateProjectCommand().Execute(project, projectType.Value());
-                // });
-                
                 pageConfig.Description = "Create a new Blazor Page.";
                 var pageName = pageConfig.Argument<string>("pageName", "Name of the Page to generate.").IsRequired();
-                var inline = pageConfig.Option("-i|--inline", "Create a inline component", CommandOptionType.NoValue);
                 pageConfig.OnExecute(() =>
                 {
-                    var isInline = inline.Values.Count > 0 ? true : false;
-                    new CreatePageCommand().Execute(pageName.Value, isInline);
+                    new CreatePageCommand().Execute(pageName.Value);
                 });
             });
-
-            // config.Command("pages", pageConfig =>
-            // {
-            //     pageConfig.Description = "Create new Blazor Pages for a Model.";
-            //     var modelName = pageConfig.Argument<string>("modelName", "Name of the model to generate pages for.").IsRequired();
-            //     pageConfig.OnExecute(() =>
-            //     {
-            //         new CreatePagesCommand().Execute(modelName.Value);
-            //     });
-            // });
 
             config.Command("component", componentConfig =>
             {
                 componentConfig.Description = "Create a new Blazor Component.";
                 var componentName = componentConfig.Argument<string>("pageName", "Name of the Component to generate.").IsRequired();
-                var inline = componentConfig.Option("-i|--inline", "Create a inline component", CommandOptionType.NoValue);
                 componentConfig.OnExecute(() =>
                 {
-                    var isInline = inline.Values.Count > 0 ? true : false;
-                    new CreateComponentCommand().Execute(componentName.Value, isInline);
+                    new CreateComponentCommand().Execute(componentName.Value);
                 });
             });
         });

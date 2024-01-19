@@ -3,99 +3,25 @@
 
 <PageTitle>Edit Profile</PageTitle>
 
-<section class="mx-auto max-w-6xl mb-20">
-    <h1 class="text-2xl text-gray-800 font-bold mb-4">
-        Profile
-    </h1>
-    <article class="bg-white shadow rounded-lg w-full my-12 p-6">
-        <h2 class="text-xl font-medium mb-2">
-            Profile Information
-        </h2>
-        <p class="text-gray-600">
-            Update your account's profile information.
-        </p>
-        <EditForm Model="profileInformationForm" OnValidSubmit="SaveProfileInformation" class="max-w-2xl flex flex-col space-y-6">
-            <div class="mb-1 text-red-500 text-sm">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-            </div>
-            <div>
-                <label for="name" class="block font-medium text-sm text-gray-700">Name</label>
-                <div class="mt-1">
-                    <InputText @bind-Value="profileInformationForm.Name" id="name" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
-                </div>
-                <div class="mt-1 text-red-500 text-sm">
-                    <ValidationMessage For="() => profileInformationForm.Name" />
-                </div>
-            </div>
-            <div>
-                <label for="email" class="block font-medium text-sm text-gray-700">Email address</label>
-                <div class="mt-1">
-                    <InputText @bind-Value="profileInformationForm.Email" type="email" id="email" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
-                </div>
-                <div class="mt-1 text-red-500 text-sm">
-                    <ValidationMessage For="() => profileInformationForm.Email" />
-                    @if (!String.IsNullOrEmpty(profileFormMessage))
-                    {
-                        @profileFormMessage
-                    }
-                </div>
-            </div>
-            <div>
-                <button type="submit" class="text-left px-4 py-2 bg-indigo-700 hover:bg-indigo-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
-                    Save
-                </button>
-            </div>
-        </EditForm>
-    </article>
-    <article class="bg-white shadow rounded-lg w-full my-12 p-6">
-        <h2 class="text-xl font-medium mb-2">
-            Update Password
-        </h2>
-        <p class="text-gray-600">
-            Update your accounts current password.
-        </p>
-        <EditForm Model="passwordForm" OnValidSubmit="UpdatePassword" class="max-w-2xl flex flex-col space-y-6">
-            <div class="mb-1 text-red-500 text-sm">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-            </div>
-            <div>
-                <label for="current-password" class="block font-medium text-sm text-gray-700">Current Password</label>
-                <div class="mt-1">
-                    <InputText @bind-Value="passwordForm.CurrentPassword" type="password" id="current-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
-                </div>
-                <div class="mt-1 text-red-500 text-sm">
-                    <ValidationMessage For="() => passwordForm.CurrentPassword" />
-                    @if (!String.IsNullOrEmpty(passwordFormMessage))
-                    {
-                        @passwordFormMessage
-                    }
-                </div>
-            </div>
-            <div>
-                <label for="new-password" class="block font-medium text-sm text-gray-700">New Password</label>
-                <div class="mt-1">
-                    <InputText @bind-Value="passwordForm.NewPassword" type="password" id="new-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
-                </div>
-                <div class="mt-1 text-red-500 text-sm">
-                    <ValidationMessage For="() => passwordForm.NewPassword" />
-                </div>
-            </div>
-            <div>
-                <label for="confirm-password" class="block font-medium text-sm text-gray-700">Confirm Password</label>
-                <div class="mt-1">
-                    <InputText @bind-Value="passwordForm.ConfirmPassword" type="password" id="confirm-password" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" />
-                </div>
-                <div class="mt-1 text-red-500 text-sm">
-                    <ValidationMessage For="() => passwordForm.ConfirmPassword" />
-                </div>
-            </div>
-            <div>
-                <button type="submit" class="text-left px-4 py-2 bg-indigo-700 hover:bg-indigo-800 rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
-                    Save
-                </button>
-            </div>
-        </EditForm>
-    </article>
+<section>
+	<article class="space-y-4">
+		<h1 class="text-3xl font-bold">
+			Edit Profile
+		</h1>
+		<p>Update your account's profile information</p>
+		<div class="space-y-12">
+			<div class="card bg-base-100 shadow-xl">
+				<div class="card-body">
+					<h2 class="text-xl font-bold">Profile Info</h2>
+					<UpdateProfileForm />
+				</div>
+			</div>
+			<div class="card bg-base-100 shadow-xl">
+				<div class="card-body">
+					<h2 class="text-xl font-bold">Update Password</h2>
+					<UpdatePasswordForm />
+				</div>
+			</div>
+		</div>
+	</article>
 </section>

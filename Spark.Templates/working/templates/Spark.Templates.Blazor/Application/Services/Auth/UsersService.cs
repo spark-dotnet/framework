@@ -11,46 +11,41 @@ namespace Spark.Templates.Blazor.Application.Services.Auth;
 
 public class UsersService
 {
-    private readonly IDbContextFactory<DatabaseContext> _factory;
+    private readonly DatabaseContext _db;
 
-    public UsersService(IDbContextFactory<DatabaseContext> factory)
+    public UsersService(DatabaseContext db)
     {
-        _factory = factory;
+        _db = db;
     }
 
     public async Task<User?> FindUserAsync(int userId)
     {
-        using var context = _factory.CreateDbContext();
-        return await context.Users.FindAsync(userId);
+        return await _db.Users.FindAsync(userId);
     }
 
-    public async Task<User?> FindUserAsync(string username, string password)
+    public async Task<User?> FindUserByCredsAsync(string email, string password)
     {
-        using var context = _factory.CreateDbContext();
-        return await context.Users.FirstOrDefaultAsync(x => x.Email == username && x.Password == password);
+        return await _db.Users.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
     }
 
     public async Task<User?> FindUserByEmailAsync(string email)
     {
-        using var context = _factory.CreateDbContext();
-        return await context.Users.FirstOrDefaultAsync(x => x.Email == email);
+        return await _db.Users.FirstOrDefaultAsync(x => x.Email == email);
     }
 
     public async Task<User> CreateUserAsync(User user)
     {
-        using var context = _factory.CreateDbContext();
-        var addedUser = await context.Users.AddAsync(user);
-        await context.SaveChangesAsync();
+        var addedUser = await _db.Users.AddAsync(user);
+        await _db.SaveChangesAsync();
 
-        await context.UserRoles.AddAsync(new UserRole { RoleId = 1, User = user });
-        await context.SaveChangesAsync();
+        await _db.UserRoles.AddAsync(new UserRole { RoleId = 1, User = user });
+        await _db.SaveChangesAsync();
         return addedUser.Entity;
     }
 
     public async Task<List<User>> GetAllUsersAsync()
     {
-        using var context = _factory.CreateDbContext();
-        return await context.Users
+        return await _db.Users
                 .ToListAsync();
     }
 

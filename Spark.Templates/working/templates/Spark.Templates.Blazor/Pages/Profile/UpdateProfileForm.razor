@@ -1,0 +1,103 @@
+﻿@page "/profile/edit/profile"
+@layout EmptyLayout
+@attribute [Authorize]
+@code {
+	[CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm]
+    public Form ProfileForm { get; set; }
+    private string customMessage = "";
+
+    [Inject] DatabaseContext Db { get; set; } = default!;
+    [Inject] NavigationManager NavManager { get; set; } = default!;
+    [Inject] UsersService UsersService { get; set; } = default!;
+    [Inject] AuthService AuthService { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProfileForm ??= await Setup();
+    }
+
+    private async Task<Form> Setup()
+    {
+	    var currentUser = await AuthService.GetAuthenticatedUser(HttpContext.User);
+	    Form info = new()
+	    {
+		    Name = currentUser.Name,
+		    Email = currentUser.Email
+	    };
+	    return info;
+    }
+
+    private async Task OnSubmit()
+    {
+        var currentUser = await AuthService.GetAuthenticatedUser(HttpContext.User);
+
+        // Verify another user isn't using the new email address
+        var existingUser = await UsersService.FindUserByEmailAsync(ProfileForm.Email);
+        if (existingUser != null && currentUser.Id != existingUser.Id)
+        {
+            customMessage = "Email already in use.";
+            return;
+        }
+		// update user info
+        currentUser.Email = ProfileForm.Email;
+        currentUser.Name = ProfileForm.Name;
+        Db.Users.Save(currentUser);
+        
+        // re-login user so cookie info reflects updated values
+        var cookieClaims = await AuthService.CreateCookieClaims(currentUser);
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            cookieClaims,
+            new AuthenticationProperties
+            {
+	            IsPersistent = true,
+	            IssuedUtc = DateTimeOffset.UtcNow,
+	            ExpiresUtc = DateTimeOffset.UtcNow.AddDays(5)
+            }
+        );
+        HttpContext.SetFlash("success", "Profile info updated.");
+        NavManager.XRedirect(HttpContext, "profile/edit");
+    }
+
+    public class Form
+    {
+        [Required]
+        public string Name { get; set; } = default!;
+
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        [Required(ErrorMessage = "Please enter a valid email address")]
+        public string Email { get; set; } = default!;
+    }
+}
+
+<EditForm Model="ProfileForm" OnValidSubmit="OnSubmit" FormName="ProfileInfoForm" hx-post="/profile/edit/profile" hx-swap="outerHTML" method="post" class="max-w-2xl grid grid-cols-1 gap-y-6">
+    <DataAnnotationsValidator />
+	<label class="form-control w-full">
+		<div class="label">
+			<span class="label-text font-medium">Name</span>
+		</div>
+		<InputText @bind-Value="ProfileForm.Name" class="input input-bordered w-full" />
+		<ValidationMessage For="() => ProfileForm.Name" />
+    </label>
+    <label class="form-control w-full">
+        <div class="label">
+            <span class="label-text font-medium">Email address</span>
+        </div>
+        <InputText @bind-Value="ProfileForm.Email" type="email" class="input input-bordered w-full" />
+        <ValidationMessage For="() => ProfileForm.Email" />
+        @if (!String.IsNullOrEmpty(customMessage))
+        {
+            <div class="mt-1 text-red-500 text-sm">
+	            @customMessage
+            </div>
+        }
+    </label>
+    <div class="flex justify-end">
+	    <button type="submit" class="btn btn-neutral">
+		    <span class="loading loading-spinner loading-xs htmx-indicator"></span>
+		    Save
+	    </button>
+    </div>
+</EditForm>

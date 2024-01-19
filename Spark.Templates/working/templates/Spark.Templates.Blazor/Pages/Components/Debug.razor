@@ -1,0 +1,58 @@
+﻿@inject IWebHostEnvironment Env
+
+@if (Env.IsDevelopment())
+{
+    <script>
+        document.body.addEventListener('htmx:configRequest', function (evt) {
+            evt.detail.headers["accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
+        });
+        const hide = function () {
+            modal.outerHTML = ''
+            modal = null
+            document.body.style.overflow = 'visible'
+            document.removeEventListener('keydown', listener)
+        }
+        const hideOnEscape = function (e) {
+            if (e.keyCode === 27) {
+                hide()
+            }
+        }
+        let listener = null;
+        let modal = null;
+        document.addEventListener("htmx:beforeOnLoad", function (event) {
+            const xhr = event.detail.xhr;
+            if (xhr.status == 500) {
+                modal = document.createElement('div')
+                modal.style.position = 'fixed'
+                modal.style.width = '100vw'
+                modal.style.height = '100vh'
+                modal.style.padding = '50px'
+                modal.style.boxSizing = 'border-box'
+                modal.style.backgroundColor = 'rgba(0, 0, 0, .6)'
+                modal.style.zIndex = 200000
+                modal.addEventListener('click', hide)
+
+                const iframe = document.createElement('iframe')
+                iframe.style.backgroundColor = 'white'
+                iframe.style.borderRadius = '5px'
+                iframe.style.width = '100%'
+                iframe.style.height = '100%'
+                modal.appendChild(iframe)
+
+                document.body.prepend(modal)
+                document.body.style.overflow = 'hidden'
+                if (!iframe.contentWindow) {
+                    throw new Error('iframe not yet ready.')
+                }
+                iframe.contentWindow.document.open()
+                iframe.contentWindow.document.write(xhr.response)
+                iframe.contentWindow.document.close()
+
+                listener = hideOnEscape;
+                document.addEventListener('keydown', listener)
+            }
+        });
+    </script>
+    <div id="error_modal">
+    </div>
+}

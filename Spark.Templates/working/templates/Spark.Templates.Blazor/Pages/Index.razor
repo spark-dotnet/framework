@@ -1,17 +1,27 @@
 ﻿@page "/"
+@code {
+    protected override void OnInitialized()
+    {
+        Log.Information("This is the homepage.");
+    }
+}
 
-<PageTitle>Home page</PageTitle>
+<PageTitle>Home</PageTitle>
 
-<section class="mx-auto max-w-6xl bg-white mb-20">
-    <article class="my-6 sm:my-20 px-6 py-12 sm:py-20 sm:px-12 shadow-lg rounded-lg text-left">
-        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-20">
-            Build something beautiful
-        </h1>
-        <p class="text-base sm:text-xl text-gray-600 mb-6">
-            Spark picks up where ASP.NET leaves off. Build production ready, full-stack web applications fast.
-        </p>
-        <p class="text-base sm:text-xl text-gray-600 mb-6">
-            View the <a class="text-indigo-600 font-semibold hover:underline" href="https://spark-framework.net" target="_blank">documentation →</a>
-        </p>
+<section>
+    <article>
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body space-y-6">
+                <h1 class="text-3xl font-bold">
+                    Build something beautiful
+                </h1>
+                <p>
+                    Spark picks up where ASP.NET leaves off. Build production ready, full-stack web applications fast.
+                </p>
+                <p>
+                    View the <a class="link" href="https://spark-framework.net" target="_blank">documentation →</a>
+                </p>
+            </div>
+        </div>
     </article>
 </section>

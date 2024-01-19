@@ -1,4 +1,5 @@
 ﻿using Spark.Library.Database;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spark.Templates.Blazor.Application.Models;
 
@@ -20,4 +21,7 @@ public class User : BaseModel
     public DateTime? EmailVerifiedAt { get; set; }
 
     public virtual ICollection<UserRole> UserRoles { get; set; }
+
+    [NotMapped]
+    public bool IsAuthenticated { get; set; }
 }

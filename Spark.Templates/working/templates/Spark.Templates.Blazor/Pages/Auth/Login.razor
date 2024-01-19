@@ -1,0 +1,107 @@
+﻿@page "/login"
+@layout AuthLayout
+@code {
+	[Inject] public IConfiguration Configuration { get; set; } = default!;
+	[Inject] public UsersService UsersService { get; set; } = default!;
+	[Inject] public AuthService AuthService { get; set; } = default!;
+	[Inject] public NavigationManager NavigationManager { get; set; } = default!;
+	[CascadingParameter] HttpContext HttpContext { get; set; } = default!;
+
+	[SupplyParameterFromForm]
+	public LoginForm Form { get; set; } = new();
+	
+	private string _loginFailedMessage = "";
+
+	private async Task LoginUser()
+	{
+		var user = await UsersService.FindUserByCredsAsync(Form.Email, UsersService.GetSha256Hash(Form.Password));
+		if (user == null)
+		{
+			_loginFailedMessage = "Login Failed: Your email or password was incorrect";
+			return;
+		}
+
+		var cookieExpirationDays = Configuration.GetValue("Spark:Auth:CookieExpirationDays", 5);
+		var cookieClaims = await AuthService.CreateCookieClaims(user);
+
+		await HttpContext.SignInAsync(
+			CookieAuthenticationDefaults.AuthenticationScheme,
+			cookieClaims,
+			new AuthenticationProperties
+			{
+				IsPersistent = Form.RememberMe,
+				IssuedUtc = DateTimeOffset.UtcNow,
+				ExpiresUtc = DateTimeOffset.UtcNow.AddDays(cookieExpirationDays)
+			});
+		
+		NavigationManager.NavigateTo("dashboard");
+	}
+
+	public class LoginForm
+	{
+		public string Email { get; set; } = String.Empty;
+		public string Password { get; set; } = String.Empty;
+		public bool RememberMe { get; set; }
+	}
+
+	public class LoginFormValidator : AbstractValidator<LoginForm>
+	{
+		public LoginFormValidator()
+		{
+			RuleFor(p => p.Email)
+				.EmailAddress().WithMessage("Please enter a valid email address");
+		
+			RuleFor(p => p.Password)
+				.NotEmpty().WithMessage("Password is required");
+		}
+	}
+}
+
+<PageTitle>Login</PageTitle>
+
+<div class="sm:py-12 px-4">
+	<section class="w-full sm:max-w-md mx-auto py-20 flex flex-col justify-center items-center space-y-6">
+		<a href="/">
+			<img src="/images/logo.png" class="h-20 w-auto" />
+		</a>
+		<h1 class="text-center text-3xl font-bold">
+			Login to your account
+		</h1>
+		<EditForm Model="Form" OnValidSubmit="@LoginUser" FormName="LoginForm" method="post" Enhance class="grid grid-cols-1 gap-y-6 p-6 bg-white mx-auto w-full max-w-md shadow-sm border rounded-md">
+        	<FluentValidationValidator />
+			@if (!String.IsNullOrEmpty(_loginFailedMessage))
+			{
+				<div class="mb-1 validation-message">
+					<span>@_loginFailedMessage</span>
+				</div>
+			}
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text font-medium">Email</span>
+				</div>
+				<InputText @bind-Value="Form.Email" type="email" autocomplete="email" class="input input-bordered w-full" />
+				<ValidationMessage For="() => Form.Email" />
+            </label>
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text font-medium">Password</span>
+				</div>
+				<InputText @bind-Value="Form.Password" type="password" class="input input-bordered w-full" />
+				<ValidationMessage For="() => Form.Password" />
+            </label>
+			<div class="form-control">
+              <label class="label cursor-pointer justify-start">
+                <InputCheckbox @bind-Value="Form.RememberMe" class="checkbox mr-2" />
+                <span class="label-text">Remember me</span>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+	            <a href="/register" class="link text-sm mr-2">Don't have an account? Sign up</a>
+	            <button type="submit" class="btn btn-neutral">
+				    <span class="loading loading-spinner loading-xs htmx-indicator"></span>
+				    Login
+	            </button>
+            </div>
+		</EditForm>
+	</section>
+</div>

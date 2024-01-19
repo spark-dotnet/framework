@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Library", "Spark.Libr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Tests", "Spark.Tests\Spark.Tests.csproj", "{2161116D-BBFD-45A7-81B4-D62DD0371EA4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Templates.Blazor", "Spark.Templates\working\templates\Spark.Templates.Blazor\Spark.Templates.Blazor.csproj", "{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +35,10 @@ Global
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE8063C1-7C7A-4B2B-B2F9-B17A20CEE897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

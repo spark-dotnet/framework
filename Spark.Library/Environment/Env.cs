@@ -1,10 +1,9 @@
-﻿namespace Spark.Library.Environment
+﻿namespace Spark.Library.Environment;
+
+public static class Env
 {
-    public static class Env
+    public static string? Get(string name)
     {
-        public static string? Get(string name)
-        {
-            return System.Environment.GetEnvironmentVariable(name);
-        }
+        return System.Environment.GetEnvironmentVariable(name);
     }
 }

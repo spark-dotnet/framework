@@ -1,11 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["**/*.razor", "**/*.cshtml", "**/*.html"],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
+    content: ["Pages/**/*.razor"],
+    theme: {
+        extend: {},
+    },
+    daisyui: {
+        themes: ["light"],
+    },
+    plugins: [require("@tailwindcss/typography"), require("daisyui")],
 }
 

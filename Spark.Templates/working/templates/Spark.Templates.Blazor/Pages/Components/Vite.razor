@@ -1,0 +1,14 @@
+﻿@using Microsoft.Extensions.Hosting;
+@inject IWebHostEnvironment Env
+
+@if (Env.IsDevelopment())
+{
+    <script type="module" src="/@@vite/client"></script>
+    <link rel="stylesheet" href="/Assets/Css/app.css">
+    <script type="module" src="/Assets/Js/app.js"></script>
+}
+else
+{
+    <link rel="stylesheet" href="/assets/app.css" />
+    <script type="module" src="/assets/app.js"></script>
+}

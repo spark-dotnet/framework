@@ -12,7 +12,13 @@ public class CreateModelCommand
     private readonly static string ModelPath = $"./Application/Models";
     public void Execute(string modelName)
     {
-        string appName = UserApp.GetAppName();
+        string appName = UserApp.GetProjectName();
+
+        if (appName == null)
+        {
+            ConsoleOutput.ErrorAlert(new List<string>() { "Could not find .csproj file in current directory." });
+            return;
+        }
 
         ConsoleOutput.GenerateAlert(new List<string>() { $"Creating a new model" });
 
