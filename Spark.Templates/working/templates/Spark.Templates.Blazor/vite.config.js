@@ -12,7 +12,7 @@ const baseFolder =
         : `${process.env.HOME}/.aspnet/https`;
 
 // Generate the certificate name using the NPM package name
-const certificateName = process.env.npm_package_name;
+const certificateName = process.env.APP_NAME;
 
 // Define certificate filepath
 const certFilePath = path.join(baseFolder, `${certificateName}.pem`);
