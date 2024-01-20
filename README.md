@@ -6,7 +6,7 @@ Welcome to Spark.NET, a robust, open-source web application framework built on t
 
 ## Requirements
 Before creating your first Spark project, you should ensure that your local machine has:
-- [.NET 7](https://dotnet.microsoft.com/download)
+- [.NET 8](https://dotnet.microsoft.com/download)
 - [Entity Framework Core tools](https://learn.microsoft.com/en-us/ef/core/cli/)
 
 ## Quick Start
