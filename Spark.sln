@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Library", "Spark.Libr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Tests", "Spark.Tests\Spark.Tests.csproj", "{2161116D-BBFD-45A7-81B4-D62DD0371EA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Templates.Blazor", "Spark.Templates\working\templates\Spark.Templates.Blazor\Spark.Templates.Blazor.csproj", "{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Templates.Razor", "Spark.Templates\working\templates\Spark.Templates.Razor\Spark.Templates.Razor.csproj", "{B344AFF3-33AA-4F3D-BB17-DC40A5257D8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spark.Templates.Blazor", "Spark.Templates\working\templates\Spark.Templates.Blazor\Spark.Templates.Blazor.csproj", "{32A62401-E9E5-4F6C-8475-BD4E745F1247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +37,14 @@ Global
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2161116D-BBFD-45A7-81B4-D62DD0371EA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1391F9AA-C83B-44F8-8E11-CC51BEAAD2F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B344AFF3-33AA-4F3D-BB17-DC40A5257D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B344AFF3-33AA-4F3D-BB17-DC40A5257D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B344AFF3-33AA-4F3D-BB17-DC40A5257D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B344AFF3-33AA-4F3D-BB17-DC40A5257D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A62401-E9E5-4F6C-8475-BD4E745F1247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A62401-E9E5-4F6C-8475-BD4E745F1247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A62401-E9E5-4F6C-8475-BD4E745F1247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A62401-E9E5-4F6C-8475-BD4E745F1247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

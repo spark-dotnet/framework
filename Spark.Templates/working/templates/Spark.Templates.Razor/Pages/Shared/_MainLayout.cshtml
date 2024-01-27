@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <partial name="_Vite" />
+    <link rel="icon" type="image/png" href="~/favicon.png" />
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <partial name="_NavBar" />
+    <main class="container py-20 px-4 md:px-12 max-w-6xl w-full mx-auto">
+        @RenderBody()
+    </main>
+    <partial name="_FlashMessages" />
+</body>
+</html>

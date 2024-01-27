@@ -1,0 +1,46 @@
+﻿@page "/login"
+@model Login
+@{
+	ViewData["Title"] = "Login";
+	Layout = "_AuthLayout";
+}
+<div class="sm:py-12 px-4">
+	<section class="w-full sm:max-w-md mx-auto py-20 flex flex-col justify-center items-center space-y-6">
+		<a href="/">
+			<img src="/images/logo.png" class="h-20 w-auto" />
+		</a>
+		<h1 class="text-center text-3xl font-bold">
+			Login to your account
+		</h1>
+		<form method="post" class="grid grid-cols-1 gap-y-6 p-6 bg-white mx-auto w-full max-w-md shadow-sm border rounded-md">
+			@if (!String.IsNullOrEmpty(Model.LoginFailedMessage))
+			{
+				<div class="mb-1 validation-message">
+					<span>@Model.LoginFailedMessage</span>
+				</div>
+			}
+			<label class="form-control w-full">
+				<label asp-for="Form.Email" class="label label-text font-medium"></label>
+				<input asp-for="Form.Email" type="email" autocomplete="email" class="input input-bordered w-full" />
+				<span asp-validation-for="Form.Email" class="validation-message"></span>
+			</label>
+			<label class="form-control w-full">
+				<label asp-for="Form.Password" class="label label-text font-medium"></label>
+				<input asp-for="Form.Password" type="password" class="input input-bordered w-full" />
+				<span asp-validation-for="Form.Password" class="validation-message"></span>
+			</label>
+			<div class="form-control">
+				<label class="label cursor-pointer justify-start">
+					<input asp-for="Form.RememberMe" class="checkbox mr-2" />
+					<span class="label-text">Remember me</span>
+				</label>
+			</div>
+			<div class="flex justify-between items-center">
+				<a href="/register" class="link text-sm mr-2">Don't have an account? Sign up</a>
+				<button type="submit" class="btn btn-neutral">
+					Login
+				</button>
+			</div>
+		</form>
+	</section>
+</div>

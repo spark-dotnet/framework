@@ -9,7 +9,7 @@
 
 	[SupplyParameterFromForm]
 	public LoginForm Form { get; set; } = new();
-	
+
 	private string _loginFailedMessage = "";
 
 	private async Task LoginUser()
@@ -98,7 +98,6 @@
             <div class="flex justify-between items-center">
 	            <a href="/register" class="link text-sm mr-2">Don't have an account? Sign up</a>
 	            <button type="submit" class="btn btn-neutral">
-				    <span class="loading loading-spinner loading-xs htmx-indicator"></span>
 				    Login
 	            </button>
             </div>

@@ -1,0 +1,76 @@
+﻿@page "/profile/edit"
+@model Edit
+@{
+	ViewData["Title"] = "Edit Profile";
+}
+<section>
+	<article class="space-y-4">
+		<h1 class="text-3xl font-bold">
+			Edit Profile
+		</h1>
+		<p>Update your account's profile information</p>
+		<div class="space-y-12">
+			<div class="card bg-base-100 shadow-xl">
+				<div class="card-body">
+					<h2 class="text-xl font-bold">Profile Info</h2>
+					<form asp-page-handler="profile" method="post" class="max-w-2xl grid grid-cols-1 gap-y-6">
+						<label class="form-control w-full">
+							<label asp-for="ProfileForm.Name" class="label label-text font-medium"></label>
+							<input asp-for="ProfileForm.Name" class="input input-bordered w-full" />
+							<span asp-validation-for="ProfileForm.Name" class="validation-message"></span>
+						</label>
+						<label class="form-control w-full">
+							<label asp-for="ProfileForm.Email" class="label label-text font-medium"></label>
+							<input asp-for="ProfileForm.Email" type="email" class="input input-bordered w-full" />
+							<span asp-validation-for="ProfileForm.Email" class="validation-message"></span>
+							@if (!String.IsNullOrEmpty(Model.ProfileErrorMessage))
+							{
+								<div class="mt-1 text-red-500 text-sm">
+									@Model.ProfileErrorMessage
+								</div>
+							}
+						</label>
+						<div class="flex justify-end">
+							<button type="submit" class="btn btn-neutral">
+								Save
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="card bg-base-100 shadow-xl">
+				<div class="card-body">
+					<h2 class="text-xl font-bold">Update Password</h2>
+					<form asp-page-handler="password" method="post" class="max-w-2xl grid grid-cols-1 gap-y-6">
+						<label class="form-control w-full">
+							<label asp-for="PasswordForm.CurrentPassword" class="label label-text font-medium"></label>
+							<input asp-for="PasswordForm.CurrentPassword" type="password" class="input input-bordered w-full" />
+							<span asp-validation-for="PasswordForm.CurrentPassword" class="validation-message"></span>
+							@if (!String.IsNullOrEmpty(Model.PasswordErrorMessage))
+							{
+								<div class="mt-1 text-red-500 text-sm">
+									@Model.PasswordErrorMessage
+								</div>
+							}
+						</label>
+						<label class="form-control w-full">
+							<label asp-for="PasswordForm.NewPassword" class="label label-text font-medium"></label>
+							<input asp-for="PasswordForm.NewPassword" type="password" class="input input-bordered w-full" />
+							<span asp-validation-for="PasswordForm.NewPassword" class="validation-message"></span>
+						</label>
+						<label class="form-control w-full">
+							<label asp-for="PasswordForm.ConfirmPassword" class="label label-text font-medium"></label>
+							<input asp-for="PasswordForm.ConfirmPassword" type="password" class="input input-bordered w-full" />
+							<span asp-validation-for="PasswordForm.ConfirmPassword" class="validation-message"></span>
+						</label>
+						<div class="flex justify-end">
+							<button type="submit" class="btn btn-neutral">
+								Save
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</article>
+</section>
