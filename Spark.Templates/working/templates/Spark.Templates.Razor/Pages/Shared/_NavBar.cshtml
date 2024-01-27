@@ -1,0 +1,45 @@
+﻿<nav class="navbar px-4 md:px-12 max-w-6xl mx-auto">
+	<div class="flex-1">
+		<a href="/">
+			<partial name="_ApplicationLogo" />
+		</a>
+	</div>
+	<div class="flex-none">
+		<ul class="menu menu-horizontal px-1">
+			@if (User.Identity!.IsAuthenticated)
+			{
+				<li>
+					<details>
+						<summary>
+							@User.Identity.Name
+						</summary>
+						<ul class="p-2 bg-base-100 rounded-t-none z-10 right-0">
+							<li>
+								<a href="/dashboard">Dashboard</a>
+							</li>
+							<li>
+								<a href="/profile/edit">Profile</a>
+							</li>
+							<li>
+								<form action="/logout" method="post" class="p-0 w-full" hx-boost="false">
+									<button type="submit" class="px-4 py-2 w-full">
+										Logout
+									</button>
+								</form>
+							</li>
+						</ul>
+					</details>
+				</li>
+			}
+			else
+			{
+				<li>
+					<a href="/login">Login</a>
+				</li>
+				<li>
+					<a href="/register">Register</a>
+				</li>
+			}
+		</ul>
+	</div>
+</nav>

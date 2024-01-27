@@ -1,0 +1,32 @@
+﻿@if (Context.HasKey("success"))
+{
+    <div class="toast">
+        <div class="alert alert-success">
+            <span>@Context.GetFlash("success")</span>
+        </div>
+    </div>
+}
+@if (Context.HasKey("info"))
+{
+    <div class="toast">
+        <div class="alert alert-info">
+            <span>@Context.GetFlash("info")</span>
+        </div>
+    </div>
+}
+@if (Context.HasKey("warning"))
+{
+    <div class="toast">
+        <div class="alert alert-warning">
+            <span>@Context.GetFlash("warning")</span>
+        </div>
+    </div>
+}
+@if (Context.HasKey("error"))
+{
+    <div class="toast">
+        <div class="alert alert-error">
+            <span>@Context.GetFlash("error")</span>
+        </div>
+    </div>
+}

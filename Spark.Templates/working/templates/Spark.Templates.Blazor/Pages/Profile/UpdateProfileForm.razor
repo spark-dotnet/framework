@@ -1,10 +1,7 @@
-﻿@page "/profile/edit/profile"
-@layout EmptyLayout
-@attribute [Authorize]
-@code {
-	[CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
+﻿@code {
+    [CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
 
-    [SupplyParameterFromForm]
+    [SupplyParameterFromForm(Name = "ProfileForm")]
     public Form ProfileForm { get; set; }
     private string customMessage = "";
 
@@ -20,13 +17,13 @@
 
     private async Task<Form> Setup()
     {
-	    var currentUser = await AuthService.GetAuthenticatedUser(HttpContext.User);
-	    Form info = new()
+        var currentUser = await AuthService.GetAuthenticatedUser(HttpContext.User);
+        Form info = new()
 	    {
 		    Name = currentUser.Name,
 		    Email = currentUser.Email
 	    };
-	    return info;
+        return info;
     }
 
     private async Task OnSubmit()
@@ -40,11 +37,11 @@
             customMessage = "Email already in use.";
             return;
         }
-		// update user info
+        // update user info
         currentUser.Email = ProfileForm.Email;
         currentUser.Name = ProfileForm.Name;
         Db.Users.Save(currentUser);
-        
+
         // re-login user so cookie info reflects updated values
         var cookieClaims = await AuthService.CreateCookieClaims(currentUser);
         await HttpContext.SignInAsync(
@@ -58,7 +55,7 @@
             }
         );
         HttpContext.SetFlash("success", "Profile info updated.");
-        NavManager.XRedirect(HttpContext, "profile/edit");
+        NavManager.NavigateTo("/profile/edit");
     }
 
     public class Form
@@ -72,7 +69,7 @@
     }
 }
 
-<EditForm Model="ProfileForm" OnValidSubmit="OnSubmit" FormName="ProfileInfoForm" hx-post="/profile/edit/profile" hx-swap="outerHTML" method="post" class="max-w-2xl grid grid-cols-1 gap-y-6">
+<EditForm Model="ProfileForm" OnValidSubmit="OnSubmit" FormName="ProfileForm" method="post" Enhance class="max-w-2xl grid grid-cols-1 gap-y-6">
     <DataAnnotationsValidator />
 	<label class="form-control w-full">
 		<div class="label">

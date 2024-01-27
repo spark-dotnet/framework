@@ -6,17 +6,15 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<base href="/" />
-	<script src="https://unpkg.com/htmx.org@1.9.9"></script>
-	<script src="https://unpkg.com/htmx.org/dist/ext/remove-me.js"></script>
 	<link rel="icon" type="image/png" href="favicon.png" />
 	<Vite />
 	<HeadOutlet />
 </head>
 
-<body hx-boost="true" hx-ext="remove-me" class="bg-gray-100 flex flex-col min-h-screen">
+<body class="bg-gray-100 flex flex-col min-h-screen">
 	<main>
 		@Body
 	</main>
-	<Debug />
+	<script src="_framework/blazor.web.js"></script>
 </body>
 </html>

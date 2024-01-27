@@ -1,0 +1,127 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Weston Walker",
+    "classifications": [ "Razor Pages", "Web", "Spark" ],
+    "identity": "Spark.Razor",
+    "name": "Spark.NET Web App (Razor Pages)",
+    "description": "A project template for creating a Spark web app with Razor Pages. Provides a starting point for Razor Pages apps with database and user auth out of the box.",
+    "shortName": "sparkrazor",
+    "sourceName": "Spark.Templates.Razor",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [ ".vs/**" ]
+                },
+                {
+                    "exclude": [ "node_modules/**" ]
+                },
+                {
+                    "exclude": [ ".idea/**" ]
+                }
+            ]
+        }
+    ],
+    "SpecialCustomOperations": {
+        "**/*.razor": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.html": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.cshtml": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        },
+        "**/*.css": {
+            "operations": [
+                {
+                    "type": "conditional",
+                    "configuration": {
+                        "if": [
+                            "//#if"
+                        ],
+                        "else": [
+                            "//#else"
+                        ],
+                        "elseif": [
+                            "//#elseif"
+                        ],
+                        "endif": [
+                            "//#endif"
+                        ],
+                        "trim": true,
+                        "wholeLine": true,
+                        "evaluator": "C++"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -7,7 +7,6 @@
 	[Inject] public NavigationManager NavigationManager { get; set; } = default!;
 	[Inject] public IDispatcher Dispatcher { get; set; } = default!;
 	
-	// Coming in RC2 [CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
 	[CascadingParameter] HttpContext HttpContext { get; set; } = default!;
 
 	[SupplyParameterFromForm]
@@ -162,7 +161,6 @@
             <div class="flex justify-between items-center">
 	            <a href="/login" class="link text-sm mr-2">Already registered?</a>
 	            <button type="submit" class="btn btn-neutral">
-				    <span class="loading loading-spinner loading-xs htmx-indicator"></span>
 				    Create account
 	            </button>
             </div>

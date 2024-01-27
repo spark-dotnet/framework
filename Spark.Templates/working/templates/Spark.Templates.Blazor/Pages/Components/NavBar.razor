@@ -4,7 +4,7 @@
 
 }
 
-<nav class="navbar px-4 sm:px-12 max-w-6xl mx-auto" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
+<nav class="navbar px-4 md:px-12 max-w-6xl mx-auto" x-data="{ desktopMenuOpen: false, mobileMenuOpen: false }">
 	<div class="flex-1">
 		<a href="/">
 			<ApplicationLogo/>
@@ -27,9 +27,8 @@
 								<a href="/profile/edit" >Profile</a>
 							</li>
 							<li>
-			                    <form action="/logout" method="post" hx-boost="false">
-			                        <AntiforgeryToken />
-			                        <button type="submit">
+			                    <form action="/logout" method="post" class="p-0 w-full">
+			                        <button type="submit" class="px-4 py-2 w-full">
 				                        Logout
 			                        </button>
 			                    </form>
