@@ -23,6 +23,32 @@ public class DevCommand
         //var pNpmRunDist = Process.Start(psiNpmRunDist);
         //pNpmRunDist.StandardInput.WriteLine("npx.cmd tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
         //pNpmRunDist.WaitForExit();
-        Process.Start("npx.cmd", "tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
+        if (Where("npx.cmd") != null)
+        {
+            Process.Start("npx.cmd", "tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
+        } 
+        else if (Where("npx") != null)
+        {
+            Process.Start("npx", "tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
+        }
+        else
+        {
+            Console.Error.WriteLine("Command npx or npx.cmd is not found in the environment PATH"); 
+        }
     }
+
+    private string? Where(string executableName)
+    {
+        var directories = (Environment.GetEnvironmentVariable("PATH") ?? ".").Split(Path.DirectorySeparatorChar);
+        foreach (var directory in directories)
+        {
+            var fileName = Path.Combine(Path.GetFullPath(directory), executableName);
+            if (File.Exists(fileName))
+            {
+                return fileName;
+            }
+        }
+        return null;
+    }
+
 }
