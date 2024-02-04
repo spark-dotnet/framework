@@ -23,14 +23,15 @@ public class DevCommand
         //var pNpmRunDist = Process.Start(psiNpmRunDist);
         //pNpmRunDist.StandardInput.WriteLine("npx.cmd tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
         //pNpmRunDist.WaitForExit();
-        if (Where("npx.cmd") != null)
+        
+        string? npx = Where("npx.cmd") != null ? "npx.cmd" 
+                    : Where("npx") != null     ? "npx"
+                    : null;
+        
+        if (npx != null)
         {
-            Process.Start("npx.cmd", "tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
+            Process.Start(npx, "tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
         } 
-        else if (Where("npx") != null)
-        {
-            Process.Start("npx", "tailwindcss -i ./Assets/input.css -o ./wwwroot/output.css --watch");
-        }
         else
         {
             Console.Error.WriteLine("Command npx or npx.cmd is not found in the environment PATH"); 
