@@ -14,3 +14,13 @@
 		</div>
 	</article>
 </section>
+
+@code
+{
+	[CascadingParameter] HttpContext HttpContext { get; set; } = default!;
+
+	protected override void OnInitialized()
+	{
+		HttpContext.Response.StatusCode = 404;
+	}
+}
